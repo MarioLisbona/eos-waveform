@@ -3,6 +3,8 @@ export type TestSegmentProps = {
   startTime: number;
   endTime: number;
   duration: number;
+  color: string;
+  labelText: string;
   customAttribute: string;
 };
 
@@ -12,6 +14,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 100.046625,
     endTime: 105.046625,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 1 for audio track EOS-test",
   },
   {
@@ -19,6 +23,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 366.837625,
     endTime: 371.837625,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 2 for audio track EOS-test",
   },
   {
@@ -26,6 +32,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 372.608,
     endTime: 377.608,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 3 for audio track EOS-test",
   },
   {
@@ -33,6 +41,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 528.023854,
     endTime: 533.023854,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 4 for audio track EOS-test",
   },
   {
@@ -40,6 +50,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 789.256708,
     endTime: 794.256708,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 5 for audio track EOS-test",
   },
   {
@@ -47,6 +59,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 1044.931415,
     endTime: 1049.931415,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 6 for audio track EOS-test",
   },
   {
@@ -54,6 +68,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 1484.024937,
     endTime: 1489.024937,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 7 for audio track EOS-test",
   },
   {
@@ -61,6 +77,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 1806.397395,
     endTime: 1811.397395,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 8 for audio track EOS-test",
   },
   {
@@ -68,6 +86,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 3101.445375,
     endTime: 3106.445375,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 9 for audio track EOS-test",
   },
   {
@@ -75,6 +95,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 3746.190291,
     endTime: 3751.190291,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 10 for audio track EOS-test",
   },
   {
@@ -82,6 +104,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 4618.819187,
     endTime: 4623.819187,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 11 for audio track EOS-test",
   },
   {
@@ -89,6 +113,8 @@ export const testSegments: TestSegmentProps[] = [
     startTime: 5474.773645,
     endTime: 5479.773645,
     duration: 5,
+    color: "#1E1541",
+    labelText: "This is some label text - maybe File Name?",
     customAttribute: "This is segment 12 for audio track EOS-test",
   },
 ];
