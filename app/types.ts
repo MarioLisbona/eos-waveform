@@ -16,6 +16,11 @@ export type TestSegmentProps = {
   customAttribute: unknown;
 };
 
+export type StartTimesProps = {
+  idx: number;
+  startTime: number;
+};
+
 export type OverviewOptionsConfigProps = (
   overviewWaveformRef: React.RefObject<HTMLDivElement>
 ) => {

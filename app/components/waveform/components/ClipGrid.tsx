@@ -11,8 +11,9 @@ import {
   Box,
 } from "@chakra-ui/react";
 import format from "format-duration";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { deleteSingleSegment } from "@/app/lib/waveform-utils";
+import { StartTimesProps } from "@/app/types";
 
 export default function ClipGrid({
   segments,
@@ -24,6 +25,19 @@ export default function ClipGrid({
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
   console.log("in ClipGrid", segments);
+
+  const [clipStartTimes, setClipStartTimes] = useState<StartTimesProps[]>([]);
+
+  useEffect(() => {
+    const startTimes = segments.map((seg, idx) => ({
+      idx: idx,
+      startTime: seg.startTime,
+    }));
+
+    setClipStartTimes(startTimes);
+  }, []);
+
+  console.log("ClipGrid after useEffect", clipStartTimes);
   return (
     <>
       {segments.length > 0 &&
