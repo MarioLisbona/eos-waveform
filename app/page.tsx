@@ -7,20 +7,11 @@ import WaveForm from "./components/waveform";
 import { AudioDataProps } from "./types";
 
 export default function Home() {
-  const data: AudioDataProps = {
-    audioUrl: "EOS-test.mp3",
-    audioContentType: "audio/mpeg",
-    waveformDataUrl: "EOS-test.dat",
-  };
   return (
     <SectionContainer>
       <Flex direction={"column"} align={"center"}>
         <Text textStyle={"subheading"}>EOS Waveform Prototype</Text>
-        <WaveForm
-          audioUrl={data.audioUrl}
-          audioContentType={data.audioContentType}
-          waveformDataUrl={data.waveformDataUrl}
-        />
+        <WaveForm />
       </Flex>
     </SectionContainer>
   );

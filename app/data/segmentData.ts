@@ -1,4 +1,12 @@
-export const testSegments = [
+export type TestSegmentProps = {
+  id: string;
+  startTime: number;
+  endTime: number;
+  duration: number;
+  customAttribute: string;
+};
+
+export const testSegments: TestSegmentProps[] = [
   {
     id: "segment-1-EOS-test",
     startTime: 100.046625,

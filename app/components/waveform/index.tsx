@@ -9,13 +9,16 @@ import {
   zoomviewOptionsConfig,
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
+import { testSegments } from "@/app/data/segmentData";
 
-export default function WaveForm({
-  audioUrl,
-  audioContentType,
-  waveformDataUrl,
-}: AudioDataProps) {
-  console.log(audioUrl, audioContentType, waveformDataUrl);
+export default function WaveForm() {
+  const data: AudioDataProps = {
+    audioUrl: "EOS-test.mp3",
+    audioContentType: "audio/mpeg",
+    waveformDataUrl: "EOS-test.dat",
+  };
+
+  console.log("inside waveform", testSegments);
 
   //create ref's to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -36,11 +39,11 @@ export default function WaveForm({
       audioElementRef,
       overviewOptionsConfig,
       zoomviewOptionsConfig,
-      waveformDataUrl
+      data.waveformDataUrl
     );
 
     //assigning the source for the audio element
-    audioElementRef.current!.src = audioUrl;
+    audioElementRef.current!.src = data.audioUrl;
 
     //If there is an existing peaks instance, call destroy method and set undefined for myPeaks
     if (myPeaks) {
@@ -92,7 +95,7 @@ export default function WaveForm({
         <OverviewContainer ref={overviewWaveformRef}></OverviewContainer>
 
         <audio ref={audioElementRef} hidden>
-          <source src={audioUrl} type={audioContentType} />
+          <source src={data.audioUrl} type={data.audioContentType} />
           Your browser does not support the audio element.
         </audio>
       </Flex>
@@ -109,33 +112,7 @@ export default function WaveForm({
           <Button variant={"waveformBlue"}>Delete All</Button>
         </Flex>
       </Flex>
-      <Flex
-        px={"3rem"}
-        h={"50px"}
-        w={"100%"}
-        direction={"column"}
-        align={"center"}
-      >
-        <Grid templateColumns="repeat(8, 1fr)" gap={6} w={"100%"} mb={"1rem"}>
-          <GridItem colStart={1} colEnd={3}>
-            <Text textStyle={"smBold"} fontSize={"16px"}>
-              File Name
-            </Text>
-          </GridItem>
-          <GridItem colStart={3} colEnd={5}>
-            <Text textStyle={"smBold"} fontSize={"16px"}>
-              Start Time
-            </Text>
-          </GridItem>
-          <GridItem colStart={5} colEnd={7}>
-            <Text textStyle={"smBold"} fontSize={"16px"}>
-              End Time
-            </Text>
-          </GridItem>
-        </Grid>
-
-        <ClipGrid />
-      </Flex>
+      <ClipGrid testSegments={testSegments} />
     </>
   );
 }
