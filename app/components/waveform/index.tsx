@@ -1,5 +1,5 @@
 import { AudioDataProps } from "@/app/types";
-import { Flex, Button, Text } from "@chakra-ui/react";
+import { Flex, Button, Text, Grid, GridItem, Input } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
 import Peaks, { PeaksInstance, PeaksOptions, Segment } from "peaks.js";
@@ -8,6 +8,7 @@ import {
   overviewOptionsConfig,
   zoomviewOptionsConfig,
 } from "@/app/lib/waveform-config";
+import ClipGrid from "./components/ClipGrid";
 
 export default function WaveForm({
   audioUrl,
@@ -78,21 +79,63 @@ export default function WaveForm({
   }, []);
 
   return (
-    <Flex
-      justify={"center"}
-      align={"center"}
-      width={"100%"}
-      direction={"column"}
-      p={"1rem"}
-    >
-      <ZoomviewContainer ref={zoomviewWaveformRef}></ZoomviewContainer>
+    <>
+      <Flex
+        justify={"center"}
+        align={"center"}
+        width={"100%"}
+        direction={"column"}
+        p={"1rem"}
+      >
+        <ZoomviewContainer ref={zoomviewWaveformRef}></ZoomviewContainer>
 
-      <OverviewContainer ref={overviewWaveformRef}></OverviewContainer>
+        <OverviewContainer ref={overviewWaveformRef}></OverviewContainer>
 
-      <audio ref={audioElementRef} hidden>
-        <source src={audioUrl} type={audioContentType} />
-        Your browser does not support the audio element.
-      </audio>
-    </Flex>
+        <audio ref={audioElementRef} hidden>
+          <source src={audioUrl} type={audioContentType} />
+          Your browser does not support the audio element.
+        </audio>
+      </Flex>
+      <Flex mb={"3rem"} px={"3rem"} w={"100%"} justify={"space-between"}>
+        <Flex>
+          <Text textStyle={"subheading"} fontSize={"20px"}>
+            Segments
+          </Text>
+        </Flex>
+        <Flex>
+          <Button variant={"waveformBlue"} me={"1rem"}>
+            Create All
+          </Button>
+          <Button variant={"waveformBlue"}>Delete All</Button>
+        </Flex>
+      </Flex>
+      <Flex
+        px={"3rem"}
+        h={"50px"}
+        w={"100%"}
+        direction={"column"}
+        align={"center"}
+      >
+        <Grid templateColumns="repeat(8, 1fr)" gap={6} w={"100%"} mb={"1rem"}>
+          <GridItem colStart={1} colEnd={3}>
+            <Text textStyle={"smBold"} fontSize={"16px"}>
+              File Name
+            </Text>
+          </GridItem>
+          <GridItem colStart={3} colEnd={5}>
+            <Text textStyle={"smBold"} fontSize={"16px"}>
+              Start Time
+            </Text>
+          </GridItem>
+          <GridItem colStart={5} colEnd={7}>
+            <Text textStyle={"smBold"} fontSize={"16px"}>
+              End Time
+            </Text>
+          </GridItem>
+        </Grid>
+
+        <ClipGrid />
+      </Flex>
+    </>
   );
 }

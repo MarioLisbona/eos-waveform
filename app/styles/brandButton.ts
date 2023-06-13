@@ -30,6 +30,38 @@ const brandPrimaryMobileNav = defineStyle({
   },
 });
 
+const waveformBlue = defineStyle({
+  background: "brandBlue",
+  p: "10px 12px",
+  color: "white",
+  fontSize: { base: "6px", lg: "12px" },
+  h: { base: "16px", lg: "32px" },
+  minW: { base: "100%", sm: "fit-content", lg: "130px" },
+  fontWeight: { base: "500", lg: "600" },
+  lineHeight: "1",
+  borderRadius: "100",
+  transition: "background 0.5s ease",
+  _hover: {
+    background: "red.500",
+  },
+});
+
+const waveformOutlined = defineStyle({
+  fontSize: { base: "16px", lg: "14px" },
+  h: "37px",
+  minW: { base: "100%", sm: "fit-content", lg: "105px" },
+  fontWeight: { base: "500", lg: "600" },
+  lineHeight: "1",
+  border: "1px solid rgba(0, 0, 0, 0.6)",
+  transition: "color 0.5s ease",
+  _hover: {
+    color: "brandRed",
+    borderColor: "brandRed",
+  },
+  borderRadius: "4px",
+  mx: "1rem",
+});
+
 const brandOutlined = defineStyle({
   colorScheme: "brandRed",
   // textStyle: 'context',
@@ -76,6 +108,8 @@ export const brandButton = defineStyleConfig({
   variants: {
     brandPrimary,
     brandPrimaryMobileNav,
+    waveformBlue,
+    waveformOutlined,
     brandOutlined,
     brandClear,
     brandFooter,
