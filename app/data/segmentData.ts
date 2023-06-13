@@ -1,12 +1,4 @@
-export type TestSegmentProps = {
-  id: string;
-  startTime: number;
-  endTime: number;
-  duration: number;
-  color: string;
-  labelText: string;
-  customAttribute: string;
-};
+import { TestSegmentProps } from "../types";
 
 export const testSegments: TestSegmentProps[] = [
   {

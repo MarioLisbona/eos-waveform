@@ -1,4 +1,6 @@
 import { TestSegmentProps } from "@/app/data/segmentData";
+import { PeaksInstance, Segment } from "peaks.js";
+
 import {
   Grid,
   GridItem,
@@ -10,12 +12,18 @@ import {
 } from "@chakra-ui/react";
 import format from "format-duration";
 import { useState } from "react";
+import { deleteSingleSegment } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
   segments,
+  setSegments,
+  myPeaks,
 }: {
   segments: TestSegmentProps[];
+  myPeaks: PeaksInstance | undefined;
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
+  console.log("in ClipGrid", segments);
   return (
     <>
       {segments.length > 0 &&
@@ -46,7 +54,14 @@ export default function ClipGrid({
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
                 <Button variant={"waveformOutlined"}>Create</Button>
-                <Button variant={"waveformOutlined"}>Delete</Button>
+                <Button
+                  variant={"waveformOutlined"}
+                  onClick={() =>
+                    deleteSingleSegment(myPeaks, seg.id, segments, setSegments)
+                  }
+                >
+                  Delete
+                </Button>
               </Flex>
             </GridItem>
           </Grid>

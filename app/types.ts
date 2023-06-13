@@ -4,13 +4,13 @@ export type AudioDataProps = {
   waveformDataUrl: string;
 };
 
-export type SelectAudioProps = (evt: string) => void;
-
-export type SegmentProps = {
+export type TestSegmentProps = {
   id: string;
   startTime: number;
   endTime: number;
+  duration: number;
   color: string;
+  labelText: string;
   customAttribute: string;
 };
 

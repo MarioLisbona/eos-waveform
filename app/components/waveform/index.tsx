@@ -10,7 +10,7 @@ import {
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
-import { TestSegmentProps } from "@/app/data/segmentData";
+import { TestSegmentProps } from "@/app/types";
 import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
@@ -88,7 +88,10 @@ export default function WaveForm() {
   myPeaks?.segments.add(segments);
 
   useEffect(() => {
+    //create the segments based on the pre-loaded cuts
+    //at the moment this is the segments state - which is assigned the testSegments array on component mount
     // modifying the array of segment objects in segments state\
+    myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
   }, [segments]);
 
@@ -133,7 +136,11 @@ export default function WaveForm() {
         </Flex>
       </Flex>
       {segments.length != 0 ? <ClipGridHeader /> : "There are no clips loaded"}
-      <ClipGrid segments={segments} />
+      <ClipGrid
+        segments={segments}
+        setSegments={setSegments}
+        myPeaks={myPeaks}
+      />
     </>
   );
 }
