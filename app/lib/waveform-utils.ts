@@ -27,18 +27,18 @@ export const deleteSingleSegment = (
 ) => {
   console.log({ id });
   peaks?.segments.removeById(id);
-  console.log(peaks?.segments.getSegments());
+  const updatedSegments = peaks!.segments.getSegments().map((segment, idx) => ({
+    id: segment.id,
+    startTime: segment.startTime,
+    endTime: segment.endTime,
+    duration: segment.endTime - segment.startTime,
+    color: segment.color,
+    labelText: segment.labelText,
+    customAttribute: segment.customAttribute,
+  }));
   peaks?.segments.removeAll();
 
-  setSegments([
-    {
-      id: "segment-1-EOS-test",
-      startTime: 100.046625,
-      endTime: 105.046625,
-      duration: 5,
-      color: "#1E1541",
-      labelText: "This is some label text - maybe File Name?",
-      customAttribute: "This is segment 1 for audio track EOS-test",
-    },
-  ]);
+  console.log(updatedSegments);
+
+  setSegments(updatedSegments);
 };
