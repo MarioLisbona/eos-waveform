@@ -11,7 +11,7 @@ import {
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
 import { TestSegmentProps } from "@/app/data/segmentData";
-import { DeleteAllSegments } from "@/app/lib/waveform-utils";
+import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
 
 export default function WaveForm() {
   const data: AudioDataProps = {
@@ -28,8 +28,6 @@ export default function WaveForm() {
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
   const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
-
-  console.log("waveform Component", segments);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
@@ -87,8 +85,9 @@ export default function WaveForm() {
   myPeaks?.segments.add(segments);
 
   useEffect(() => {
-    // Adding the array of segment objects in testSegments
-    myPeaks?.segments.add(segments);
+    // modifying the array of segment objects in segments state\
+    myPeaks?.segments.getSegments().length === 0 &&
+      myPeaks?.segments.add(segments);
   }, [segments]);
 
   return (
@@ -116,12 +115,16 @@ export default function WaveForm() {
           </Text>
         </Flex>
         <Flex>
-          <Button variant={"waveformBlue"} me={"1rem"}>
+          <Button
+            variant={"waveformBlue"}
+            me={"1rem"}
+            onClick={() => createAllSegments(myPeaks, setSegments, segments)}
+          >
             Create All
           </Button>
           <Button
             variant={"waveformBlue"}
-            onClick={() => DeleteAllSegments(myPeaks, setSegments)}
+            onClick={() => deleteAllSegments(myPeaks, setSegments)}
           >
             Delete All
           </Button>

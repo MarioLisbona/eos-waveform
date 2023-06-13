@@ -57,10 +57,17 @@ export default function ClipGrid({
               <Input value={seg.id}></Input>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
-              <Input value={format(seg.startTime * 1000)}></Input>
+              <Input
+                value={format(seg.startTime * 1000, {
+                  leading: true,
+                  ms: true,
+                })}
+              ></Input>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
-              <Input value={format(seg.endTime * 1000)}></Input>
+              <Input
+                value={format(seg.endTime * 1000, { leading: true, ms: true })}
+              ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
