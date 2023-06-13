@@ -36,11 +36,11 @@ export default function ClipGrid({
             mb={"1rem"}
           >
             <GridItem colStart={1} colEnd={3}>
-              <Input defaultValue={seg.id}></Input>
+              <Input value={seg.id}></Input>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
-                defaultValue={format(seg.startTime * 1000, {
+                value={format(seg.startTime * 1000, {
                   leading: true,
                   ms: true,
                 })}
@@ -48,10 +48,7 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
               <Input
-                defaultValue={format(seg.endTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
+                value={format(seg.endTime * 1000, { leading: true, ms: true })}
               ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
