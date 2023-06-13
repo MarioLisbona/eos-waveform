@@ -6,7 +6,7 @@ export const ZoomviewContainer = styled.div`
   -webkit-box-shadow: 3px 3px 20px #919191;
   margin: 24px 0 24px 0;
   line-height: 0;
-  height: 150px;
+  height: 266px;
   width: 100%;
 `;
 
@@ -16,6 +16,6 @@ export const OverviewContainer = styled.div`
   -webkit-box-shadow: 3px 3px 20px #919191;
   margin: 0 0 24px 0;
   line-height: 0;
-  height: 100px;
+  height: 129px;
   width: 100%;
 `;
