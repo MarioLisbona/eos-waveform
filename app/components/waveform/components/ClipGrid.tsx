@@ -1,4 +1,4 @@
-import { TestSegmentProps } from "@/app/data/segmentData";
+import { TestSegmentProps } from "@/app/types";
 import { PeaksInstance, Segment } from "peaks.js";
 
 import {
