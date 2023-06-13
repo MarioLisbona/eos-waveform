@@ -1,5 +1,6 @@
 import { TestSegmentProps } from "@/app/data/segmentData";
 import { Grid, GridItem, Input, Button, Flex, Text } from "@chakra-ui/react";
+import format from "format-duration";
 
 export default function ClipGrid({
   testSegments,
@@ -43,10 +44,10 @@ export default function ClipGrid({
                 <Input value={seg.id}></Input>
               </GridItem>
               <GridItem colStart={3} colEnd={5}>
-                <Input value={seg.startTime}></Input>
+                <Input value={format(seg.startTime * 1000)}></Input>
               </GridItem>
               <GridItem colStart={5} colEnd={7}>
-                <Input value={seg.endTime}></Input>
+                <Input value={format(seg.endTime * 1000)}></Input>
               </GridItem>
               <GridItem colStart={7} colEnd={9}>
                 <Flex w={"100%"} justify={"flex-end"}>

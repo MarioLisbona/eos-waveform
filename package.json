@@ -19,6 +19,7 @@
     "add": "^2.0.6",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
+    "format-duration": "^3.0.2",
     "framer-motion": "^10.12.16",
     "konva": "^9.2.0",
     "next": "13.4.5",
