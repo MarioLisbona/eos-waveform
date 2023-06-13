@@ -21,12 +21,12 @@ export const createAllSegments = (
 
 export const deleteSingleSegment = (
   peaks: PeaksInstance | undefined,
-  id: string,
+  id: string | undefined,
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
   console.log({ id });
-  peaks?.segments.removeById(id);
+  peaks?.segments.removeById(id!);
   const updatedSegments = peaks!.segments.getSegments().map((segment, idx) => ({
     id: segment.id,
     startTime: segment.startTime,
