@@ -10,6 +10,8 @@ import {
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
+import { TestSegmentProps } from "@/app/data/segmentData";
+import { DeleteAllSegments } from "@/app/lib/waveform-utils";
 
 export default function WaveForm() {
   const data: AudioDataProps = {
@@ -18,8 +20,6 @@ export default function WaveForm() {
     waveformDataUrl: "EOS-test.dat",
   };
 
-  console.log("inside waveform", testSegments);
-
   //create ref's to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
   const overviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -27,6 +27,9 @@ export default function WaveForm() {
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
+  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
+
+  console.log("waveform Component", segments);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
@@ -81,7 +84,12 @@ export default function WaveForm() {
     }
   }, []);
 
-  myPeaks?.segments.add(testSegments);
+  myPeaks?.segments.add(segments);
+
+  useEffect(() => {
+    // Adding the array of segment objects in testSegments
+    myPeaks?.segments.add(segments);
+  }, [segments]);
 
   return (
     <>
@@ -111,10 +119,15 @@ export default function WaveForm() {
           <Button variant={"waveformBlue"} me={"1rem"}>
             Create All
           </Button>
-          <Button variant={"waveformBlue"}>Delete All</Button>
+          <Button
+            variant={"waveformBlue"}
+            onClick={() => DeleteAllSegments(myPeaks, setSegments)}
+          >
+            Delete All
+          </Button>
         </Flex>
       </Flex>
-      <ClipGrid testSegments={testSegments} />
+      <ClipGrid segments={segments} />
     </>
   );
 }
