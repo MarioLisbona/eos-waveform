@@ -81,6 +81,8 @@ export default function WaveForm() {
     }
   }, []);
 
+  myPeaks?.segments.add(testSegments);
+
   return (
     <>
       <Flex
