@@ -1,4 +1,6 @@
-import { TestSegmentProps } from "@/app/data/segmentData";
+import { TestSegmentProps } from "@/app/types";
+import { PeaksInstance, Segment } from "peaks.js";
+
 import {
   Grid,
   GridItem,
@@ -10,40 +12,20 @@ import {
 } from "@chakra-ui/react";
 import format from "format-duration";
 import { useState } from "react";
+import { deleteSingleSegment } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
   segments,
+  setSegments,
+  myPeaks,
 }: {
   segments: TestSegmentProps[];
+  myPeaks: PeaksInstance | undefined;
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
+  console.log("in ClipGrid", segments);
   return (
     <>
-      <Flex
-        px={"3rem"}
-        h={"50px"}
-        w={"100%"}
-        direction={"column"}
-        align={"center"}
-      >
-        <Grid templateColumns="repeat(8, 1fr)" gap={6} w={"100%"} mb={"1rem"}>
-          <GridItem colStart={1} colEnd={3}>
-            <Text textStyle={"smBold"} fontSize={"16px"}>
-              File Name
-            </Text>
-          </GridItem>
-          <GridItem colStart={3} colEnd={5}>
-            <Text textStyle={"smBold"} fontSize={"16px"}>
-              Start Time
-            </Text>
-          </GridItem>
-          <GridItem colStart={5} colEnd={7}>
-            <Text textStyle={"smBold"} fontSize={"16px"}>
-              End Time
-            </Text>
-          </GridItem>
-        </Grid>
-      </Flex>
-
       {segments.length > 0 &&
         segments.map((seg, idx) => (
           <Grid
@@ -72,7 +54,14 @@ export default function ClipGrid({
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
                 <Button variant={"waveformOutlined"}>Create</Button>
-                <Button variant={"waveformOutlined"}>Delete</Button>
+                <Button
+                  variant={"waveformOutlined"}
+                  onClick={() =>
+                    deleteSingleSegment(myPeaks, seg.id, segments, setSegments)
+                  }
+                >
+                  Delete
+                </Button>
               </Flex>
             </GridItem>
           </Grid>

@@ -1,17 +1,19 @@
+import { WaveformColor } from "peaks.js";
+
 export type AudioDataProps = {
   audioUrl: string;
   audioContentType: string;
   waveformDataUrl: string;
 };
 
-export type SelectAudioProps = (evt: string) => void;
-
-export type SegmentProps = {
-  id: string;
+export type TestSegmentProps = {
+  id: string | undefined;
   startTime: number;
   endTime: number;
-  color: string;
-  customAttribute: string;
+  duration: number;
+  color: WaveformColor | undefined;
+  labelText: string | undefined;
+  customAttribute: unknown;
 };
 
 export type OverviewOptionsConfigProps = (

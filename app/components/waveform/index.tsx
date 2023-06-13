@@ -10,8 +10,9 @@ import {
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
-import { TestSegmentProps } from "@/app/data/segmentData";
+import { TestSegmentProps } from "@/app/types";
 import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
+import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
   const data: AudioDataProps = {
@@ -62,7 +63,7 @@ export default function WaveForm() {
       //set instance of peaks to myPeaks state
       setMyPeaks(peaks);
 
-      //set the amplitude scale for the zoomview container
+      //set the amplitude scale for the zoomview  and overview container
       const zoomviewAmplitude = peaks?.views.getView("zoomview");
       const overviewAmplitude = peaks?.views.getView("overview");
       zoomviewAmplitude?.setAmplitudeScale(0.8);
@@ -82,12 +83,16 @@ export default function WaveForm() {
     }
   }, []);
 
+  //create the segments based on the pre-loaded cuts
+  //at the moment this is the segments state - which is assigned the testSegments array on component mount
   myPeaks?.segments.add(segments);
 
   useEffect(() => {
+    //create the segments based on the pre-loaded cuts
+    //at the moment this is the segments state - which is assigned the testSegments array on component mount
     // modifying the array of segment objects in segments state\
-    myPeaks?.segments.getSegments().length === 0 &&
-      myPeaks?.segments.add(segments);
+    myPeaks?.segments.removeAll();
+    myPeaks?.segments.add(segments);
   }, [segments]);
 
   return (
@@ -130,7 +135,12 @@ export default function WaveForm() {
           </Button>
         </Flex>
       </Flex>
-      <ClipGrid segments={segments} />
+      {segments.length != 0 ? <ClipGridHeader /> : "There are no clips loaded"}
+      <ClipGrid
+        segments={segments}
+        setSegments={setSegments}
+        myPeaks={myPeaks}
+      />
     </>
   );
 }
