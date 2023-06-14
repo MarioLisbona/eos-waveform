@@ -11,9 +11,9 @@ import {
   Box,
 } from "@chakra-ui/react";
 import format from "format-duration";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ChangeEvent } from "react";
 import { deleteSingleSegment } from "@/app/lib/waveform-utils";
-import { StartTimesProps } from "@/app/types";
+import { ClipDataProps } from "@/app/types";
 
 export default function ClipGrid({
   segments,
@@ -21,23 +21,37 @@ export default function ClipGrid({
   myPeaks,
 }: {
   segments: TestSegmentProps[];
-  myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
+  myPeaks: PeaksInstance | undefined;
 }) {
-  console.log("in ClipGrid", segments);
+  // console.log("in ClipGrid", segments[0].startTime, segments[0].endTime);
 
-  const [clipStartTimes, setClipStartTimes] = useState<StartTimesProps[]>([]);
+  // segments[0].startTime = 200;
+  // segments[0].endTime = 400;
 
-  useEffect(() => {
-    const startTimes = segments.map((seg, idx) => ({
-      idx: idx,
-      startTime: seg.startTime,
-    }));
+  // console.log(
+  //   "in ClipGrid, after edit",
+  //   segments[0].startTime,
+  //   segments[0].endTime
+  // );
 
-    setClipStartTimes(startTimes);
-  }, []);
+  const handleFilenameChange = (
+    idx: number,
+    evt: ChangeEvent<HTMLInputElement>
+  ) => {
+    const newState = segments.map((obj) => {
+      if (obj.id === segments[idx].id) {
+        return { ...obj, id: evt.target.value };
+      }
 
-  console.log("ClipGrid after useEffect", clipStartTimes);
+      return obj;
+    });
+
+    setSegments(newState);
+  };
+
+  console.log("inside ClipGrid", segments);
+
   return (
     <>
       {segments.length > 0 &&
@@ -50,19 +64,22 @@ export default function ClipGrid({
             mb={"1rem"}
           >
             <GridItem colStart={1} colEnd={3}>
-              <Input value={seg.id}></Input>
+              <Input
+                value={seg.id}
+                onChange={(evt) => handleFilenameChange(idx, evt)}
+              ></Input>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
-                value={format(seg.startTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
+              // value={format(seg.startTime * 1000, {
+              //   leading: true,
+              //   ms: true,
+              // })}
               ></Input>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
               <Input
-                value={format(seg.endTime * 1000, { leading: true, ms: true })}
+              // value={format(seg.endTime * 1000, { leading: true, ms: true })}
               ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>

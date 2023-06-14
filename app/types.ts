@@ -21,6 +21,13 @@ export type StartTimesProps = {
   startTime: number;
 };
 
+export type ClipDataProps = {
+  idx: number;
+  id: string | undefined;
+  startTime: number;
+  endTime: number;
+};
+
 export type OverviewOptionsConfigProps = (
   overviewWaveformRef: React.RefObject<HTMLDivElement>
 ) => {
