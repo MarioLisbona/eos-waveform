@@ -63,9 +63,19 @@ export const handleEndTimeChange = (
 ) => {
   //used for two way bind of filename input element to correct object in segments
   const newState = segments.map((obj) => {
-    //if current object id matches id for the filename input -> update the clips id
-    if (obj.id === segments[idx].id) {
-      return { ...obj, id: evt.target.value };
+    //if current object endTime matches endTime for the filename input -> update the clips endTime
+    if (obj.endTime === segments[idx].endTime) {
+      console.log(
+        parseInt(evt.target.value) < obj.endTime,
+        parseInt(evt.target.value)
+      );
+      return {
+        ...obj,
+        endTime:
+          parseInt(evt.target.value) > obj.startTime
+            ? parseInt(evt.target.value)
+            : segments[idx + 1].startTime - 1,
+      };
     }
 
     //otherwise return the object unchanged
@@ -76,14 +86,6 @@ export const handleEndTimeChange = (
   setSegments(newState);
 };
 
-export const deleteAllSegments = (
-  peaks: PeaksInstance | undefined,
-  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
-) => {
-  peaks?.segments.removeAll();
-  setSegments([]);
-};
-
 export const createAllSegments = (
   peaks: PeaksInstance | undefined,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
@@ -92,6 +94,14 @@ export const createAllSegments = (
   console.log("You created the following segments", segments);
   setSegments([]);
   peaks?.destroy();
+};
+
+export const deleteAllSegments = (
+  peaks: PeaksInstance | undefined,
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  peaks?.segments.removeAll();
+  setSegments([]);
 };
 
 export const deleteSingleSegment = (
