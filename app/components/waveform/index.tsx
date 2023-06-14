@@ -60,14 +60,14 @@ export default function WaveForm() {
         return;
       }
 
-      //set instance of peaks to myPeaks state
-      setMyPeaks(peaks);
-
       //set the amplitude scale for the zoomview  and overview container
       const zoomviewAmplitude = peaks?.views.getView("zoomview");
       const overviewAmplitude = peaks?.views.getView("overview");
       zoomviewAmplitude?.setAmplitudeScale(0.8);
       overviewAmplitude?.setAmplitudeScale(0.5);
+
+      //set instance of peaks to myPeaks state
+      setMyPeaks(peaks);
 
       //if there is no instance of peaks, return
       if (!peaks) {
