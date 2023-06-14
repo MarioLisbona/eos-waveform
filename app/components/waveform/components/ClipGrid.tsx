@@ -12,7 +12,10 @@ import {
 } from "@chakra-ui/react";
 import format from "format-duration";
 import { useEffect, useState, ChangeEvent } from "react";
-import { deleteSingleSegment } from "@/app/lib/waveform-utils";
+import {
+  deleteSingleSegment,
+  handleFilenameChange,
+} from "@/app/lib/waveform-utils";
 import { ClipDataProps } from "@/app/types";
 
 export default function ClipGrid({
@@ -24,32 +27,6 @@ export default function ClipGrid({
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
   myPeaks: PeaksInstance | undefined;
 }) {
-  // console.log("in ClipGrid", segments[0].startTime, segments[0].endTime);
-
-  // segments[0].startTime = 200;
-  // segments[0].endTime = 400;
-
-  // console.log(
-  //   "in ClipGrid, after edit",
-  //   segments[0].startTime,
-  //   segments[0].endTime
-  // );
-
-  const handleFilenameChange = (
-    idx: number,
-    evt: ChangeEvent<HTMLInputElement>
-  ) => {
-    const newState = segments.map((obj) => {
-      if (obj.id === segments[idx].id) {
-        return { ...obj, id: evt.target.value };
-      }
-
-      return obj;
-    });
-
-    setSegments(newState);
-  };
-
   console.log("inside ClipGrid", segments);
 
   return (
@@ -66,7 +43,9 @@ export default function ClipGrid({
             <GridItem colStart={1} colEnd={3}>
               <Input
                 value={seg.id}
-                onChange={(evt) => handleFilenameChange(idx, evt)}
+                onChange={(evt) =>
+                  handleFilenameChange(idx, evt, segments, setSegments)
+                }
               ></Input>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>

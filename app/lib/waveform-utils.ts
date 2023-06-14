@@ -1,9 +1,27 @@
 import { PeaksInstance, Segment } from "peaks.js";
 import { TestSegmentProps } from "../types";
+import { ChangeEvent } from "react";
 
-// export const handleFilenameChange = () => {
+export const handleFilenameChange = (
+  idx: number,
+  evt: ChangeEvent<HTMLInputElement>,
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  //used for two way bind of filename input element to correct object in segments
+  const newState = segments.map((obj) => {
+    //if current object id matches id for the filename input -> update the clips id
+    if (obj.id === segments[idx].id) {
+      return { ...obj, id: evt.target.value };
+    }
 
-// }
+    //otherwise return the object unchanged
+    return obj;
+  });
+
+  //set segments state with the updated state
+  setSegments(newState);
+};
 
 export const deleteAllSegments = (
   peaks: PeaksInstance | undefined,
