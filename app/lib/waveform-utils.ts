@@ -12,7 +12,7 @@ export const handleFilenameChange = (
   const newState = segments.map((obj) => {
     //if current object id matches id for the filename input -> update the clips id
     if (obj.id === segments[idx].id) {
-      return { ...obj, id: evt.target.value };
+      return { ...obj, id: evt.target.value, labelText: evt.target.value };
     }
 
     //otherwise return the object unchanged
