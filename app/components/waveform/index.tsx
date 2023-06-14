@@ -83,6 +83,11 @@ export default function WaveForm() {
     }
   }, []);
 
+  //call initPeaks on initial mount of WaveForm component
+  useEffect(() => {
+    myPeaks?.segments.add(segments);
+  }, [myPeaks]);
+
   useEffect(() => {
     //create the segments based on the pre-loaded cuts
     //at the moment this is the segments state - which is assigned the testSegments array on component mount

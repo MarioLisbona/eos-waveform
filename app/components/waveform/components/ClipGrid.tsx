@@ -15,6 +15,7 @@ import { useEffect, useState, ChangeEvent } from "react";
 import {
   deleteSingleSegment,
   handleFilenameChange,
+  handleStartTimeChange,
 } from "@/app/lib/waveform-utils";
 import { ClipDataProps } from "@/app/types";
 
@@ -50,16 +51,14 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
-              // value={format(seg.startTime * 1000, {
-              //   leading: true,
-              //   ms: true,
-              // })}
+                value={seg.startTime}
+                onChange={(evt) =>
+                  handleStartTimeChange(idx, evt, segments, setSegments)
+                }
               ></Input>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
-              <Input
-              // value={format(seg.endTime * 1000, { leading: true, ms: true })}
-              ></Input>
+              <Input value={seg.endTime}></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>

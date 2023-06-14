@@ -23,6 +23,59 @@ export const handleFilenameChange = (
   setSegments(newState);
 };
 
+export const handleStartTimeChange = (
+  idx: number,
+  evt: ChangeEvent<HTMLInputElement>,
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  //used for two way bind of filename input element to correct object in segments
+  const newState = segments.map((obj) => {
+    //if current object startTime matches startTime for the filename input -> update the clips startTime
+
+    if (obj.startTime === segments[idx].startTime) {
+      console.log(
+        parseInt(evt.target.value) < obj.endTime,
+        parseInt(evt.target.value)
+      );
+      return {
+        ...obj,
+        startTime:
+          parseInt(evt.target.value) < obj.endTime
+            ? parseInt(evt.target.value)
+            : 0,
+      };
+    }
+
+    //otherwise return the object unchanged
+    return obj;
+  });
+
+  //set segments state with the updated state
+  setSegments(newState);
+};
+
+export const handleEndTimeChange = (
+  idx: number,
+  evt: ChangeEvent<HTMLInputElement>,
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  //used for two way bind of filename input element to correct object in segments
+  const newState = segments.map((obj) => {
+    //if current object id matches id for the filename input -> update the clips id
+    if (obj.id === segments[idx].id) {
+      return { ...obj, id: evt.target.value };
+    }
+
+    //otherwise return the object unchanged
+    return obj;
+  });
+
+  //set segments state with the updated state
+  setSegments(newState);
+};
+
 export const deleteAllSegments = (
   peaks: PeaksInstance | undefined,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
