@@ -64,11 +64,6 @@ export default function ClipGrid({
                     )
                   }
                 />
-                {/* {!fileNameErrors[idx]?.isError ? (
-                  <FormHelperText>Enter a file name</FormHelperText>
-                ) : (
-                  <FormErrorMessage>File Name is required.</FormErrorMessage>
-                )} */}
                 {fileNameErrors[idx]?.isError && (
                   <FormErrorMessage>File Name is required.</FormErrorMessage>
                 )}
