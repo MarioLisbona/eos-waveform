@@ -11,8 +11,11 @@ import {
   Box,
 } from "@chakra-ui/react";
 import format from "format-duration";
-import { useState } from "react";
-import { deleteSingleSegment } from "@/app/lib/waveform-utils";
+import { useState, useEffect } from "react";
+import {
+  deleteSingleSegment,
+  createFileNameError,
+} from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
   segments,
@@ -23,7 +26,14 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
-  console.log("in ClipGrid", segments);
+  const [fileNameErrors, setFileNameErrors] = useState<FileNameErrorsProps[]>(
+    []
+  );
+
+  useEffect(() => {
+    createFileNameError(segments, setFileNameErrors);
+  }, []);
+
   return (
     <>
       {segments.length > 0 &&

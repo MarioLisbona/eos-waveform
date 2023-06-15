@@ -1,4 +1,3 @@
-import { AudioDataProps } from "@/app/types";
 import { Flex, Button, Text, Grid, GridItem, Input } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState, useMemo } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
@@ -10,7 +9,11 @@ import {
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
-import { TestSegmentProps } from "@/app/types";
+import {
+  AudioDataProps,
+  TestSegmentProps,
+  FileNameErrorsProps,
+} from "@/app/types";
 import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 

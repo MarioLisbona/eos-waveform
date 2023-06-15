@@ -1,5 +1,19 @@
 import { PeaksInstance, Segment } from "peaks.js";
-import { TestSegmentProps } from "../types";
+import { TestSegmentProps, FileNameErrorsProps } from "../types";
+
+export const createFileNameError = (
+  segments: TestSegmentProps[],
+  setFileNameErrors: React.Dispatch<React.SetStateAction<FileNameErrorsProps[]>>
+) => {
+  const errors = segments.map((seg, idx) => ({
+    idx: idx,
+    isError: seg.id == "",
+  }));
+
+  setFileNameErrors(errors);
+
+  console.log("inside fileerror function", errors);
+};
 
 export const deleteAllSegments = (
   peaks: PeaksInstance | undefined,

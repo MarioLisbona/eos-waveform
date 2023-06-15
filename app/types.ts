@@ -38,3 +38,8 @@ export type ZoomviewOptionsConfigProps = (
   showPlayheadTime: boolean;
   timeLabelPrecision: number;
 };
+
+export type FileNameErrorsProps = {
+  idx: number;
+  isError: boolean;
+};
