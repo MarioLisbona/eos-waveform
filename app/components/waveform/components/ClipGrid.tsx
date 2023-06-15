@@ -1,4 +1,4 @@
-import { TestSegmentProps } from "@/app/types";
+import { TestSegmentProps, FileNameErrorsProps } from "@/app/types";
 import { PeaksInstance, Segment } from "peaks.js";
 
 import {
@@ -9,10 +9,17 @@ import {
   Flex,
   Text,
   Box,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import format from "format-duration";
-import { useState } from "react";
-import { deleteSingleSegment } from "@/app/lib/waveform-utils";
+import { useState, useEffect } from "react";
+import {
+  deleteSingleSegment,
+  createFileNameError,
+  handleFileNameChange,
+} from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
   segments,
@@ -23,7 +30,14 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
-  console.log("in ClipGrid", segments);
+  const [fileNameErrors, setFileNameErrors] = useState<FileNameErrorsProps[]>(
+    []
+  );
+
+  useEffect(() => {
+    createFileNameError(segments, setFileNameErrors);
+  }, []);
+
   return (
     <>
       {segments.length > 0 &&
@@ -36,7 +50,24 @@ export default function ClipGrid({
             mb={"1rem"}
           >
             <GridItem colStart={1} colEnd={3}>
-              <Input value={seg.id}></Input>
+              <FormControl isInvalid={fileNameErrors[idx]?.isError}>
+                <Input
+                  value={seg.id}
+                  onChange={(evt) =>
+                    handleFileNameChange(
+                      idx,
+                      evt,
+                      segments,
+                      setSegments,
+                      fileNameErrors,
+                      setFileNameErrors
+                    )
+                  }
+                />
+                {fileNameErrors[idx]?.isError && (
+                  <FormErrorMessage>File Name is required.</FormErrorMessage>
+                )}
+              </FormControl>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
