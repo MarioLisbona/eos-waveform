@@ -2,6 +2,7 @@ import { PeaksInstance, Segment } from "peaks.js";
 import { TestSegmentProps, FileNameErrorsProps } from "../types";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
+//create an array of booleans that map to the file name input for each clip object
 export const createFileNameError = (
   segments: TestSegmentProps[],
   setFileNameErrors: React.Dispatch<React.SetStateAction<FileNameErrorsProps[]>>
