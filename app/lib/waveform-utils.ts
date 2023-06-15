@@ -1,6 +1,6 @@
 import { PeaksInstance, Segment } from "peaks.js";
 import { TestSegmentProps, FileNameErrorsProps } from "../types";
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 export const createFileNameError = (
   segments: TestSegmentProps[],
@@ -12,29 +12,52 @@ export const createFileNameError = (
   }));
 
   setFileNameErrors(errors);
-
-  console.log("inside fileerror function", errors);
 };
 
-export const handleFilenameChange = (
+export const handleFileNameChange = (
   idx: number,
   evt: ChangeEvent<HTMLInputElement>,
   segments: TestSegmentProps[],
-  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
+  fileNameErrors: FileNameErrorsProps[],
+  setFileNameErrors: Dispatch<SetStateAction<FileNameErrorsProps[]>>
 ) => {
-  //used for two way bind of filename input element to correct object in segments
-  const newState = segments.map((obj) => {
-    //if current object id matches id for the filename input -> update the clips id
-    if (obj.id === segments[idx].id) {
-      return { ...obj, id: evt.target.value, labelText: evt.target.value };
+  //used for two way bind of filename input element to correct segment in segments
+  const newSegState = segments.map((seg) => {
+    //if current segment id matches id for the filename input -> update the segments id with the input box value
+    if (seg.id === segments[idx].id) {
+      console.log(seg.id, evt.target.value);
+      return {
+        ...seg,
+        id: evt.target.value,
+        labelText: evt.target.value,
+      };
     }
 
-    //otherwise return the object unchanged
-    return obj;
+    //otherwise return the segment unchanged
+    return seg;
   });
 
+  //map over the errors to change the boolean for isError for that particular input element
+  const newErrorState = fileNameErrors.map((error) => {
+    //finding the corresponding element for the input box selected
+    //conditional to make isError true of the input element is empty
+    if (error.idx === idx) {
+      return {
+        ...error,
+        isError: evt.target.value == "" ? true : false,
+      };
+    }
+    return error;
+  });
+
+  console.log("array of edited booleans", newErrorState);
+
   //set segments state with the updated state
-  setSegments(newState);
+  setSegments(newSegState);
+
+  //set the state with the new array of booleans
+  setFileNameErrors(newErrorState);
 };
 
 export const deleteAllSegments = (

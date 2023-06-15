@@ -2,7 +2,7 @@ import { TestSegmentProps } from "../types";
 
 export const testSegments: TestSegmentProps[] = [
   {
-    id: "clip-1",
+    id: "456",
     startTime: 100.046625,
     endTime: 260.046625,
     duration: 5,
@@ -11,7 +11,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 1 for audio track EOS-test",
   },
   {
-    id: "clip-2",
+    id: "789",
     startTime: 366.837625,
     endTime: 371.837625,
     duration: 5,

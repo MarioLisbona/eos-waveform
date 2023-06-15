@@ -9,13 +9,16 @@ import {
   Flex,
   Text,
   Box,
+  FormControl,
+  FormHelperText,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import format from "format-duration";
 import { useState, useEffect } from "react";
 import {
   deleteSingleSegment,
   createFileNameError,
-  handleFilenameChange,
+  handleFileNameChange,
 } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
@@ -30,8 +33,6 @@ export default function ClipGrid({
   const [fileNameErrors, setFileNameErrors] = useState<FileNameErrorsProps[]>(
     []
   );
-
-  console.log(fileNameErrors);
 
   useEffect(() => {
     createFileNameError(segments, setFileNameErrors);
@@ -49,12 +50,29 @@ export default function ClipGrid({
             mb={"1rem"}
           >
             <GridItem colStart={1} colEnd={3}>
-              <Input
-                value={seg.id}
-                onChange={(evt) =>
-                  handleFilenameChange(idx, evt, segments, setSegments)
-                }
-              />
+              <FormControl isInvalid={fileNameErrors[idx]?.isError}>
+                <Input
+                  value={seg.id}
+                  onChange={(evt) =>
+                    handleFileNameChange(
+                      idx,
+                      evt,
+                      segments,
+                      setSegments,
+                      fileNameErrors,
+                      setFileNameErrors
+                    )
+                  }
+                />
+                {/* {!fileNameErrors[idx]?.isError ? (
+                  <FormHelperText>Enter a file name</FormHelperText>
+                ) : (
+                  <FormErrorMessage>File Name is required.</FormErrorMessage>
+                )} */}
+                {fileNameErrors[idx]?.isError && (
+                  <FormErrorMessage>File Name is required.</FormErrorMessage>
+                )}
+              </FormControl>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
