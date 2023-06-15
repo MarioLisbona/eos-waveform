@@ -54,7 +54,7 @@ export default function ClipGrid({
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={fileNameErrors[idx]?.isError}>
                 <Input
-                  value={seg.id}
+                  value={seg.fileName}
                   onChange={(evt) =>
                     handleFileNameChange(
                       idx,
