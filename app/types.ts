@@ -7,6 +7,7 @@ export type AudioDataProps = {
 };
 
 export type TestSegmentProps = {
+  idx: number;
   id: string | undefined;
   startTime: number;
   endTime: number;

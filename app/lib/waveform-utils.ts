@@ -25,8 +25,7 @@ export const handleFileNameChange = (
   //used for two way bind of filename input element to correct segment in segments
   const newSegState = segments.map((seg) => {
     //if current segment id matches id for the filename input -> update the segments id with the input box value
-    if (seg.id === segments[idx].id) {
-      console.log(seg.id, evt.target.value);
+    if (seg.idx === idx) {
       return {
         ...seg,
         id: evt.target.value,
@@ -51,8 +50,6 @@ export const handleFileNameChange = (
     return error;
   });
 
-  console.log("array of edited booleans", newErrorState);
-
   //set segments state with the updated state
   setSegments(newSegState);
 
@@ -73,7 +70,6 @@ export const createAllSegments = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   segments: TestSegmentProps[]
 ) => {
-  console.log("You created the following segments", segments);
   setSegments([]);
   peaks?.destroy();
 };
@@ -84,9 +80,9 @@ export const deleteSingleSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
-  console.log({ id });
   peaks?.segments.removeById(id!);
   const updatedSegments = peaks!.segments.getSegments().map((segment, idx) => ({
+    idx: idx,
     id: segment.id,
     startTime: segment.startTime,
     endTime: segment.endTime,
@@ -96,8 +92,6 @@ export const deleteSingleSegment = (
     customAttribute: segment.customAttribute,
   }));
   peaks?.segments.removeAll();
-
-  console.log(updatedSegments);
 
   setSegments(updatedSegments);
 };

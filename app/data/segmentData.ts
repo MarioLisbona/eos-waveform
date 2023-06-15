@@ -2,6 +2,7 @@ import { TestSegmentProps } from "../types";
 
 export const testSegments: TestSegmentProps[] = [
   {
+    idx: 0,
     id: "456",
     startTime: 100.046625,
     endTime: 260.046625,
@@ -11,6 +12,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 1 for audio track EOS-test",
   },
   {
+    idx: 1,
     id: "789",
     startTime: 366.837625,
     endTime: 371.837625,
@@ -20,6 +22,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 2 for audio track EOS-test",
   },
   {
+    idx: 2,
     id: "clip-3",
     startTime: 372.608,
     endTime: 377.608,
@@ -29,6 +32,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 3 for audio track EOS-test",
   },
   {
+    idx: 3,
     id: "clip-4",
     startTime: 528.023854,
     endTime: 750.023854,
@@ -38,6 +42,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 4 for audio track EOS-test",
   },
   {
+    idx: 4,
     id: "clip-5",
     startTime: 789.256708,
     endTime: 794.256708,
@@ -47,6 +52,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 5 for audio track EOS-test",
   },
   {
+    idx: 5,
     id: "clip-6",
     startTime: 1044.931415,
     endTime: 1200.931415,
@@ -56,6 +62,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 6 for audio track EOS-test",
   },
   {
+    idx: 6,
     id: "clip-7",
     startTime: 1484.024937,
     endTime: 1489.024937,
@@ -65,6 +72,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 7 for audio track EOS-test",
   },
   {
+    idx: 7,
     id: "clip-8",
     startTime: 1806.397395,
     endTime: 2500.397395,
@@ -74,6 +82,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 8 for audio track EOS-test",
   },
   {
+    idx: 8,
     id: "clip-9",
     startTime: 3101.445375,
     endTime: 3500.445375,
@@ -83,6 +92,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 9 for audio track EOS-test",
   },
   {
+    idx: 9,
     id: "clip-10",
     startTime: 3746.190291,
     endTime: 4300.190291,
@@ -92,6 +102,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 10 for audio track EOS-test",
   },
   {
+    idx: 10,
     id: "clip-11",
     startTime: 4618.819187,
     endTime: 5223.819187,
@@ -101,6 +112,7 @@ export const testSegments: TestSegmentProps[] = [
     customAttribute: "This is segment 11 for audio track EOS-test",
   },
   {
+    idx: 11,
     id: "clip-12",
     startTime: 5474.773645,
     endTime: 5600.773645,
