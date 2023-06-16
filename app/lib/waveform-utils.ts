@@ -59,8 +59,7 @@ export const deleteSingleSegment = (
 
   const updatedSegments: TestSegmentProps[] = peaks!.segments
     .getSegments()
-    .map((segment, idx) => ({
-      idx: idx,
+    .map((segment) => ({
       id: segment.id,
       fileName: segment.fileName,
       startTime: segment.startTime,
