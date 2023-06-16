@@ -3,7 +3,7 @@ import { TestSegmentProps } from "../types";
 export const testSegments: TestSegmentProps[] = [
   {
     id: "0",
-    fileName: "456",
+    fileName: "clip-1",
     startTime: 100.046625,
     endTime: 260.046625,
     duration: 5,
@@ -17,7 +17,7 @@ export const testSegments: TestSegmentProps[] = [
   },
   {
     id: "1",
-    fileName: "789",
+    fileName: "clip-2",
     startTime: 366.837625,
     endTime: 371.837625,
     duration: 5,
