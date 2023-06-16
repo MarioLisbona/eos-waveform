@@ -71,6 +71,7 @@ export const createAllSegments = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   segments: TestSegmentProps[]
 ) => {
+  console.log("Exporting clip data and destroying Peaks instance", segments);
   setSegments([]);
   peaks?.destroy();
 };

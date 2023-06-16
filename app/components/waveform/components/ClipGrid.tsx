@@ -38,8 +38,6 @@ export default function ClipGrid({
     createFileNameError(segments, setFileNameErrors);
   }, []);
 
-  console.log(segments);
-
   return (
     <>
       {segments.length > 0 &&
