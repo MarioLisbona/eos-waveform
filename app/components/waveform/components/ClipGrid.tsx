@@ -59,6 +59,7 @@ export default function ClipGrid({
                     handleFileNameChange(
                       idx,
                       evt,
+                      segments,
                       setSegments,
                       fileNameErrors,
                       setFileNameErrors
@@ -89,7 +90,7 @@ export default function ClipGrid({
                 <Button
                   variant={"waveformOutlined"}
                   onClick={() =>
-                    deleteSingleSegment(myPeaks, seg.id!, segments, setSegments)
+                    deleteSingleSegment(myPeaks, seg.id!, setSegments)
                   }
                 >
                   Delete
