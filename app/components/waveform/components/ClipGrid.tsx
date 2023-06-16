@@ -59,7 +59,6 @@ export default function ClipGrid({
                     handleFileNameChange(
                       idx,
                       evt,
-                      segments,
                       setSegments,
                       fileNameErrors,
                       setFileNameErrors

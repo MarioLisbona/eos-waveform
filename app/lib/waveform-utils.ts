@@ -78,7 +78,6 @@ export const createAllSegments = (
 export const deleteSingleSegment = (
   peaks: PeaksInstance | undefined,
   id: string,
-  segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
   peaks?.segments.removeById(id);
