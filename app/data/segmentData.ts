@@ -10,7 +10,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-1",
-    customAttribute: "This is segment 1 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 1,
@@ -21,7 +25,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-2",
-    customAttribute: "This is segment 2 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 2,
@@ -32,7 +40,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-3",
-    customAttribute: "This is segment 3 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 3,
@@ -43,7 +55,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-4",
-    customAttribute: "This is segment 4 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 4,
@@ -54,7 +70,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-5",
-    customAttribute: "This is segment 5 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 5,
@@ -65,7 +85,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-6",
-    customAttribute: "This is segment 6 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 6,
@@ -76,7 +100,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-7",
-    customAttribute: "This is segment 7 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 7,
@@ -87,7 +115,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-8",
-    customAttribute: "This is segment 8 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 8,
@@ -98,7 +130,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-9",
-    customAttribute: "This is segment 9 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 9,
@@ -109,7 +145,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-10",
-    customAttribute: "This is segment 10 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 10,
@@ -120,7 +160,11 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-11",
-    customAttribute: "This is segment 11 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
   {
     idx: 11,
@@ -131,6 +175,10 @@ export const testSegments: TestSegmentProps[] = [
     duration: 5,
     color: "#1E1541",
     labelText: "clip-12",
-    customAttribute: "This is segment 12 for audio track EOS-test",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
   },
 ];
