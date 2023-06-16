@@ -25,11 +25,11 @@ export const handleFileNameChange = (
 ) => {
   //used for two way bind of filename input element to correct segment in segments
   const newSegState = segments.map((seg) => {
-    //if current segment id matches id for the filename input -> update the segments id with the input box value
+    //if current segment index matches index for the filename input -> update the segments file name with the input box value
     if (seg.idx === idx) {
       return {
         ...seg,
-        id: evt.target.value,
+        fileName: evt.target.value,
         labelText: evt.target.value,
       };
     }
