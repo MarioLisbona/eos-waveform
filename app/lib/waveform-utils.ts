@@ -25,11 +25,11 @@ export const handleFileNameChange = (
 ) => {
   //used for two way bind of filename input element to correct segment in segments
   const newSegState = segments.map((seg) => {
-    //if current segment id matches id for the filename input -> update the segments id with the input box value
+    //if current segment index matches index for the filename input -> update the segments file name with the input box value
     if (seg.idx === idx) {
       return {
         ...seg,
-        id: evt.target.value,
+        fileName: evt.target.value,
         labelText: evt.target.value,
       };
     }
@@ -71,27 +71,31 @@ export const createAllSegments = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   segments: TestSegmentProps[]
 ) => {
+  console.log("Exporting clip data and destroying Peaks instance", segments);
   setSegments([]);
   peaks?.destroy();
 };
 
 export const deleteSingleSegment = (
   peaks: PeaksInstance | undefined,
-  id: string | undefined,
-  segments: TestSegmentProps[],
+  id: string,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
-  peaks?.segments.removeById(id!);
-  const updatedSegments = peaks!.segments.getSegments().map((segment, idx) => ({
-    idx: idx,
-    id: segment.id,
-    startTime: segment.startTime,
-    endTime: segment.endTime,
-    duration: segment.endTime - segment.startTime,
-    color: segment.color,
-    labelText: segment.labelText,
-    customAttribute: segment.customAttribute,
-  }));
+  peaks?.segments.removeById(id);
+
+  const updatedSegments: TestSegmentProps[] = peaks!.segments
+    .getSegments()
+    .map((segment, idx) => ({
+      idx: idx,
+      id: segment.id,
+      fileName: segment.fileName,
+      startTime: segment.startTime,
+      endTime: segment.endTime,
+      duration: segment.endTime - segment.startTime,
+      color: segment.color,
+      labelText: segment.labelText,
+      customAttribute: segment.customAttribute,
+    }));
   peaks?.segments.removeAll();
 
   setSegments(updatedSegments);

@@ -52,7 +52,7 @@ export default function ClipGrid({
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={fileNameErrors[idx]?.isError}>
                 <Input
-                  value={seg.id}
+                  value={seg.fileName} // Added unknown to types in index.d.ts
                   onChange={(evt) =>
                     handleFileNameChange(
                       idx,
@@ -88,7 +88,7 @@ export default function ClipGrid({
                 <Button
                   variant={"waveformOutlined"}
                   onClick={() =>
-                    deleteSingleSegment(myPeaks, seg.id, segments, setSegments)
+                    deleteSingleSegment(myPeaks, seg.id!, setSegments)
                   }
                 >
                   Delete

@@ -9,12 +9,13 @@ export type AudioDataProps = {
 export type TestSegmentProps = {
   idx: number;
   id: string | undefined;
+  fileName: string | unknown;
   startTime: number;
   endTime: number;
   duration: number;
   color: WaveformColor | undefined;
   labelText: string | undefined;
-  customAttribute: unknown;
+  customAttribute: string | unknown;
 };
 
 export type OverviewOptionsConfigProps = (
