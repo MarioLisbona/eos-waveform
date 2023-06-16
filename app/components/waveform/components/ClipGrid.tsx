@@ -37,7 +37,7 @@ export default function ClipGrid({
         segments.map((seg, idx) => (
           <Grid
             templateColumns="repeat(9, 1fr)"
-            gap={6}
+            gap={4}
             w={"100%"}
             key={idx}
             mb={"1rem"}
@@ -84,7 +84,10 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={7} colEnd={8}>
               <Input
-                value={format(seg.endTime * 1000, { ms: true, leading: true })}
+                value={format(seg.endTime * 1000, {
+                  ms: true,
+                  leading: true,
+                })}
               ></Input>
             </GridItem>
             <GridItem colStart={8} colEnd={10}>

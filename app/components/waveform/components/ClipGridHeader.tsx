@@ -8,7 +8,7 @@ export default function ClipGridHeader() {
       direction={"column"}
       align={"center"}
     >
-      <Grid templateColumns="repeat(9, 1fr)" gap={6} w={"100%"} mb={"1rem"}>
+      <Grid templateColumns="repeat(9, 1fr)" gap={4} w={"100%"} mb={"1rem"}>
         <GridItem colStart={1} colEnd={3}>
           <Text textStyle={"smBold"} fontSize={"16px"}>
             File Name
