@@ -77,21 +77,25 @@ export const createAllSegments = (
 
 export const deleteSingleSegment = (
   peaks: PeaksInstance | undefined,
-  id: string | undefined,
+  id: string,
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
-  peaks?.segments.removeById(id!);
-  const updatedSegments = peaks!.segments.getSegments().map((segment, idx) => ({
-    idx: idx,
-    id: segment.id,
-    startTime: segment.startTime,
-    endTime: segment.endTime,
-    duration: segment.endTime - segment.startTime,
-    color: segment.color,
-    labelText: segment.labelText,
-    customAttribute: segment.customAttribute,
-  }));
+  peaks?.segments.removeById(id);
+
+  const updatedSegments: TestSegmentProps[] = peaks!.segments
+    .getSegments()
+    .map((segment, idx) => ({
+      idx: idx,
+      id: segment.id,
+      fileName: segment.fileName,
+      startTime: segment.startTime,
+      endTime: segment.endTime,
+      duration: segment.endTime - segment.startTime,
+      color: segment.color,
+      labelText: segment.labelText,
+      customAttribute: segment.customAttribute,
+    }));
   peaks?.segments.removeAll();
 
   setSegments(updatedSegments);

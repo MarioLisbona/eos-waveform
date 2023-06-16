@@ -90,7 +90,7 @@ export default function ClipGrid({
                 <Button
                   variant={"waveformOutlined"}
                   onClick={() =>
-                    deleteSingleSegment(myPeaks, seg.id, segments, setSegments)
+                    deleteSingleSegment(myPeaks, seg.id!, segments, setSegments)
                   }
                 >
                   Delete
