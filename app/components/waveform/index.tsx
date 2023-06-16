@@ -1,7 +1,7 @@
-import { Flex, Button, Text, Grid, GridItem, Input } from "@chakra-ui/react";
-import React, { useCallback, useEffect, useState, useMemo } from "react";
+import { Flex, Button, Text } from "@chakra-ui/react";
+import React, { useCallback, useEffect, useState } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
-import Peaks, { PeaksInstance, PeaksOptions, Segment } from "peaks.js";
+import Peaks, { PeaksInstance, PeaksOptions } from "peaks.js";
 import {
   setPeaksConfig,
   overviewOptionsConfig,
@@ -9,11 +9,7 @@ import {
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
-import {
-  AudioDataProps,
-  TestSegmentProps,
-  FileNameErrorsProps,
-} from "@/app/types";
+import { AudioDataProps, TestSegmentProps } from "@/app/types";
 import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 

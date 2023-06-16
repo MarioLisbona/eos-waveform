@@ -15,7 +15,13 @@ export type TestSegmentProps = {
   duration: number;
   color: WaveformColor | undefined;
   labelText: string | undefined;
-  customAttribute: string | unknown;
+  formErrors: FormErrorsProps | unknown;
+};
+
+export type FormErrorsProps = {
+  fileNameError: boolean;
+  startTimeError: boolean;
+  endTimeError: boolean;
 };
 
 export type OverviewOptionsConfigProps = (

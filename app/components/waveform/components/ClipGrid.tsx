@@ -1,5 +1,5 @@
-import { TestSegmentProps, FileNameErrorsProps } from "@/app/types";
-import { PeaksInstance, Segment } from "peaks.js";
+import { TestSegmentProps } from "@/app/types";
+import { PeaksInstance } from "peaks.js";
 
 import {
   Grid,
@@ -7,17 +7,12 @@ import {
   Input,
   Button,
   Flex,
-  Text,
-  Box,
   FormControl,
-  FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import format from "format-duration";
-import { useState, useEffect } from "react";
 import {
   deleteSingleSegment,
-  createFileNameError,
   handleFileNameChange,
 } from "@/app/lib/waveform-utils";
 
@@ -30,14 +25,6 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
-  const [fileNameErrors, setFileNameErrors] = useState<FileNameErrorsProps[]>(
-    []
-  );
-
-  useEffect(() => {
-    createFileNameError(segments, setFileNameErrors);
-  }, []);
-
   return (
     <>
       {segments.length > 0 &&
@@ -50,21 +37,14 @@ export default function ClipGrid({
             mb={"1rem"}
           >
             <GridItem colStart={1} colEnd={3}>
-              <FormControl isInvalid={fileNameErrors[idx]?.isError}>
+              <FormControl isInvalid={seg.formErrors.fileNameError}>
                 <Input
                   value={seg.fileName} // Added unknown to types in index.d.ts
                   onChange={(evt) =>
-                    handleFileNameChange(
-                      idx,
-                      evt,
-                      segments,
-                      setSegments,
-                      fileNameErrors,
-                      setFileNameErrors
-                    )
+                    handleFileNameChange(idx, evt, segments, setSegments)
                   }
                 />
-                {fileNameErrors[idx]?.isError && (
+                {seg.formErrors.fileNameError && (
                   <FormErrorMessage>File Name is required.</FormErrorMessage>
                 )}
               </FormControl>
