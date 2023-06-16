@@ -34,10 +34,6 @@ export default function ClipGrid({
     []
   );
 
-  useEffect(() => {
-    createFileNameError(segments, setFileNameErrors);
-  }, []);
-
   return (
     <>
       {segments.length > 0 &&
