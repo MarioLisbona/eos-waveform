@@ -1,5 +1,5 @@
-import { TestSegmentProps, FileNameErrorsProps } from "@/app/types";
-import { PeaksInstance, Segment } from "peaks.js";
+import { TestSegmentProps } from "@/app/types";
+import { PeaksInstance } from "peaks.js";
 
 import {
   Grid,
@@ -7,17 +7,12 @@ import {
   Input,
   Button,
   Flex,
-  Text,
-  Box,
   FormControl,
-  FormHelperText,
   FormErrorMessage,
 } from "@chakra-ui/react";
 import format from "format-duration";
-import { useState, useEffect } from "react";
 import {
   deleteSingleSegment,
-  createFileNameError,
   handleFileNameChange,
 } from "@/app/lib/waveform-utils";
 

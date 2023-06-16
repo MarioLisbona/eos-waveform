@@ -1,6 +1,6 @@
-import { PeaksInstance, Segment } from "peaks.js";
-import { TestSegmentProps, FileNameErrorsProps } from "../types";
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { PeaksInstance } from "peaks.js";
+import { TestSegmentProps } from "../types";
+import { ChangeEvent } from "react";
 
 export const handleFileNameChange = (
   idx: number,
