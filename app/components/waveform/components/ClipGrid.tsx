@@ -59,7 +59,9 @@ export default function ClipGrid({
               <Flex height={"100%"} align={"center"}>
                 <RangeSlider
                   defaultValue={[seg.startTime, seg.endTime]}
-                  onChangeEnd={(val) => handleRangeSlider(seg.id, val, segments, setSegments)}
+                  onChangeEnd={(val) =>
+                    handleRangeSlider(seg.id, val, segments, setSegments)
+                  }
                   min={0}
                   max={myPeaks?.player.getDuration()}
                   step={1}
@@ -73,10 +75,17 @@ export default function ClipGrid({
               </Flex>
             </GridItem>
             <GridItem colStart={6} colEnd={7}>
-              <Input defaultValue={"Start"}></Input>
+              <Input
+                value={format(seg.startTime * 1000, {
+                  ms: true,
+                  leading: true,
+                })}
+              ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={8}>
-              <Input defaultValue={"End"}></Input>
+              <Input
+                value={format(seg.endTime * 1000, { ms: true, leading: true })}
+              ></Input>
             </GridItem>
             <GridItem colStart={8} colEnd={10}>
               <Flex w={"100%"} justify={"flex-end"}>
