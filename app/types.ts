@@ -7,7 +7,6 @@ export type AudioDataProps = {
 };
 
 export type TestSegmentProps = {
-  idx: number;
   id: string | undefined;
   fileName: string | unknown;
   startTime: number;
@@ -45,9 +44,4 @@ export type ZoomviewOptionsConfigProps = (
   playheadTextColor: string;
   showPlayheadTime: boolean;
   timeLabelPrecision: number;
-};
-
-export type FileNameErrorsProps = {
-  idx: number;
-  isError: boolean;
 };

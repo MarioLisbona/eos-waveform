@@ -42,7 +42,7 @@ export default function ClipGrid({
                 <Input
                   value={seg.fileName} // Added unknown to types in index.d.ts
                   onChange={(evt) =>
-                    handleFileNameChange(idx, evt, segments, setSegments)
+                    handleFileNameChange(seg.id!, evt, segments, setSegments)
                   }
                 />
                 {seg.formErrors.fileNameError && (

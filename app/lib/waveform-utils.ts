@@ -3,7 +3,7 @@ import { TestSegmentProps } from "../types";
 import { ChangeEvent } from "react";
 
 export const handleFileNameChange = (
-  idx: number,
+  id: string,
   evt: ChangeEvent<HTMLInputElement>,
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
@@ -11,9 +11,9 @@ export const handleFileNameChange = (
   //used for two way bind of filename input element to correct segment in segments
   //also used to track the the error boolean for the file name input
   const newSegState = segments.map((seg) => {
-    //if the current segment idx matches the idx passed from the segment then bind the new value entered to the segment object
+    //if the current segment id matches the id passed from the segment then bind the new value entered to the segment object
     //assign the fileNameError to true if the file name input is empty
-    if (seg.idx === idx) {
+    if (seg.id === id) {
       return {
         ...seg,
         fileName: evt.target.value,
@@ -59,8 +59,7 @@ export const deleteSingleSegment = (
 
   const updatedSegments: TestSegmentProps[] = peaks!.segments
     .getSegments()
-    .map((segment, idx) => ({
-      idx: idx,
+    .map((segment) => ({
       id: segment.id,
       fileName: segment.fileName,
       startTime: segment.startTime,

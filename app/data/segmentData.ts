@@ -2,7 +2,6 @@ import { TestSegmentProps } from "../types";
 
 export const testSegments: TestSegmentProps[] = [
   {
-    idx: 0,
     id: "0",
     fileName: "456",
     startTime: 100.046625,
@@ -17,7 +16,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 1,
     id: "1",
     fileName: "789",
     startTime: 366.837625,
@@ -32,7 +30,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 2,
     id: "2",
     fileName: "clip-3",
     startTime: 372.608,
@@ -47,7 +44,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 3,
     id: "3",
     fileName: "clip-4",
     startTime: 528.023854,
@@ -62,7 +58,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 4,
     id: "4",
     fileName: "clip-5",
     startTime: 789.256708,
@@ -77,7 +72,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 5,
     id: "5",
     fileName: "clip-6",
     startTime: 1044.931415,
@@ -92,7 +86,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 6,
     id: "6",
     fileName: "clip-7",
     startTime: 1484.024937,
@@ -107,7 +100,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 7,
     id: "7",
     fileName: "clip-8",
     startTime: 1806.397395,
@@ -122,7 +114,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 8,
     id: "8",
     fileName: "clip-9",
     startTime: 3101.445375,
@@ -137,7 +128,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 9,
     id: "9",
     fileName: "clip-10",
     startTime: 3746.190291,
@@ -152,7 +142,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 10,
     id: "10",
     fileName: "clip-11",
     startTime: 4618.819187,
@@ -167,7 +156,6 @@ export const testSegments: TestSegmentProps[] = [
     },
   },
   {
-    idx: 11,
     id: "11",
     fileName: "clip-12",
     startTime: 5474.773645,
