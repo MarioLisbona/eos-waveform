@@ -2,6 +2,7 @@ import { TestSegmentProps } from "@/app/types";
 import { PeaksInstance } from "peaks.js";
 
 import {
+  Box,
   Grid,
   GridItem,
   Input,
@@ -26,7 +27,7 @@ export default function ClipGrid({
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
   return (
-    <>
+    <Box display="block" overflowY="scroll" height={"35vh"}>
       {segments.length > 0 &&
         segments.map((seg, idx) => (
           <Grid
@@ -59,7 +60,10 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
               <Input
-                value={format(seg.endTime * 1000, { leading: true, ms: true })}
+                value={format(seg.endTime * 1000, {
+                  leading: true,
+                  ms: true,
+                })}
               ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
@@ -77,6 +81,6 @@ export default function ClipGrid({
             </GridItem>
           </Grid>
         ))}
-    </>
+    </Box>
   );
 }
