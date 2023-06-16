@@ -30,9 +30,7 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
-  const [fileNameErrors, setFileNameErrors] = useState<FileNameErrorsProps[]>(
-    []
-  );
+  const [formErrors, setFormErrors] = useState<FileNameErrorsProps[]>([]);
 
   return (
     <>
@@ -46,7 +44,7 @@ export default function ClipGrid({
             mb={"1rem"}
           >
             <GridItem colStart={1} colEnd={3}>
-              <FormControl isInvalid={fileNameErrors[idx]?.isError}>
+              <FormControl isInvalid={formErrors[idx]?.isError}>
                 <Input
                   value={seg.fileName} // Added unknown to types in index.d.ts
                   onChange={(evt) =>
@@ -55,12 +53,12 @@ export default function ClipGrid({
                       evt,
                       segments,
                       setSegments,
-                      fileNameErrors,
-                      setFileNameErrors
+                      formErrors,
+                      setFormErrors
                     )
                   }
                 />
-                {fileNameErrors[idx]?.isError && (
+                {formErrors[idx]?.isError && (
                   <FormErrorMessage>File Name is required.</FormErrorMessage>
                 )}
               </FormControl>
