@@ -10,6 +10,10 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
+  RangeSlider,
+  RangeSliderTrack,
+  RangeSliderFilledTrack,
+  RangeSliderThumb,
 } from "@chakra-ui/react";
 import format from "format-duration";
 import {
@@ -31,7 +35,7 @@ export default function ClipGrid({
       {segments.length > 0 &&
         segments.map((seg, idx) => (
           <Grid
-            templateColumns="repeat(8, 1fr)"
+            templateColumns="repeat(9, 1fr)"
             gap={6}
             w={"100%"}
             key={idx}
@@ -50,7 +54,7 @@ export default function ClipGrid({
                 )}
               </FormControl>
             </GridItem>
-            <GridItem colStart={3} colEnd={5}>
+            {/* <GridItem colStart={3} colEnd={5}>
               <Input
                 value={format(seg.startTime * 1000, {
                   leading: true,
@@ -65,8 +69,31 @@ export default function ClipGrid({
                   ms: true,
                 })}
               ></Input>
+            </GridItem> */}
+            <GridItem colStart={3} colEnd={6}>
+              <Flex height={"100%"} align={"center"}>
+                <RangeSlider
+                  defaultValue={[seg.startTime, seg.endTime]}
+                  onChangeEnd={(val) => console.log(seg.id, val)}
+                  min={0}
+                  max={myPeaks?.player.getDuration()}
+                  step={1}
+                >
+                  <RangeSliderTrack bg="#BEBBBB">
+                    <RangeSliderFilledTrack bg="brandBlue" />
+                  </RangeSliderTrack>
+                  <RangeSliderThumb boxSize={4} index={0} />
+                  <RangeSliderThumb boxSize={4} index={1} />
+                </RangeSlider>
+              </Flex>
             </GridItem>
-            <GridItem colStart={7} colEnd={9}>
+            <GridItem colStart={6} colEnd={7}>
+              <Input defaultValue={"Start"}></Input>
+            </GridItem>
+            <GridItem colStart={7} colEnd={8}>
+              <Input defaultValue={"End"}></Input>
+            </GridItem>
+            <GridItem colStart={8} colEnd={10}>
               <Flex w={"100%"} justify={"flex-end"}>
                 <Button variant={"waveformOutlined"}>Create</Button>
                 <Button
