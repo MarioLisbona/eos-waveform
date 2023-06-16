@@ -15,7 +15,7 @@ export type TestSegmentProps = {
   duration: number;
   color: WaveformColor | undefined;
   labelText: string | undefined;
-  formErrors: FormErrorsProps;
+  formErrors: FormErrorsProps | unknown;
 };
 
 export type FormErrorsProps = {

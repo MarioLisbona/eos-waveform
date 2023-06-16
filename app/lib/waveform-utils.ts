@@ -68,9 +68,11 @@ export const deleteSingleSegment = (
       duration: segment.endTime - segment.startTime,
       color: segment.color,
       labelText: segment.labelText,
-      customAttribute: segment.customAttribute,
+      formErrors: segment.formErrors,
     }));
   peaks?.segments.removeAll();
+
+  console.log(updatedSegments);
 
   setSegments(updatedSegments);
 };
