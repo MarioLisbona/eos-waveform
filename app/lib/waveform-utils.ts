@@ -32,6 +32,35 @@ export const handleFileNameChange = (
   setSegments(newSegState);
 };
 
+export const handleRangeSlider = (
+  id: string,
+  val: number[],
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  console.log("using the range slider", {
+    "Start Time": val[0],
+    "End Time": val[1],
+    id,
+  });
+
+  const newSegState = segments.map((seg) => {
+    //if the current segment id matches the id passed from the segment then bind the new value entered to the segment object
+    //assign the fileNameError to true if the file name input is empty
+    if (seg.id === id) {
+      return {
+        ...seg,
+        startTime: val[0],
+        endTime: val[1],
+      };
+    }
+    //otherwise return the segment unchanged
+    return seg;
+  });
+  //use the updated segment to update the segments state
+  setSegments(newSegState);
+};
+
 export const deleteAllSegments = (
   peaks: PeaksInstance | undefined,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>

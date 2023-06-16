@@ -19,6 +19,7 @@ import format from "format-duration";
 import {
   deleteSingleSegment,
   handleFileNameChange,
+  handleRangeSlider,
 } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
@@ -54,27 +55,11 @@ export default function ClipGrid({
                 )}
               </FormControl>
             </GridItem>
-            {/* <GridItem colStart={3} colEnd={5}>
-              <Input
-                value={format(seg.startTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
-              ></Input>
-            </GridItem>
-            <GridItem colStart={5} colEnd={7}>
-              <Input
-                value={format(seg.endTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
-              ></Input>
-            </GridItem> */}
             <GridItem colStart={3} colEnd={6}>
               <Flex height={"100%"} align={"center"}>
                 <RangeSlider
                   defaultValue={[seg.startTime, seg.endTime]}
-                  onChangeEnd={(val) => console.log(seg.id, val)}
+                  onChangeEnd={(val) => handleRangeSlider(seg.id, val, segments, setSegments)}
                   min={0}
                   max={myPeaks?.player.getDuration()}
                   step={1}
