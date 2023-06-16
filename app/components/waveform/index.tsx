@@ -33,6 +33,8 @@ export default function WaveForm() {
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
   const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
 
+  console.log("index", segments[0].customAttribute);
+
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
   // audio changes are implemented on this instance of peaks using hte .setSource method
