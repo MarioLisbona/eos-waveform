@@ -113,7 +113,7 @@ export default function WaveForm() {
           Your browser does not support the audio element.
         </audio>
       </Flex>
-      <Flex mb={"3rem"} px={"3rem"} w={"100%"} justify={"space-between"}>
+      <Flex mb={"1rem"} px={"3rem"} w={"100%"} justify={"space-between"}>
         <Flex>
           <Text textStyle={"subheading"} fontSize={"20px"}>
             Segments
@@ -136,11 +136,13 @@ export default function WaveForm() {
         </Flex>
       </Flex>
       {segments.length != 0 ? <ClipGridHeader /> : "There are no clips loaded"}
-      <ClipGrid
-        segments={segments}
-        setSegments={setSegments}
-        myPeaks={myPeaks}
-      />
+      {segments.length > 0 && (
+        <ClipGrid
+          segments={segments}
+          setSegments={setSegments}
+          myPeaks={myPeaks}
+        />
+      )}
     </>
   );
 }
