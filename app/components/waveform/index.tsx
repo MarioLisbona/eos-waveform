@@ -10,7 +10,13 @@ import {
 import ClipGrid from "./components/ClipGrid";
 import { testSegments } from "@/app/data/segmentData";
 import { AudioDataProps, TestSegmentProps } from "@/app/types";
-import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
+import {
+  deleteAllSegments,
+  createAllSegments,
+  handleDragClipStart,
+  handleDragClipEnd,
+  handleClipDragged,
+} from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
@@ -68,6 +74,11 @@ export default function WaveForm() {
       zoomviewAmplitude?.setAmplitudeScale(0.8);
       overviewAmplitude?.setAmplitudeScale(0.5);
 
+      // callback functions to handle events emitted from zoomview container
+      peaks?.on("segments.dragstart", handleDragClipStart);
+      peaks?.on("segments.dragend", handleDragClipEnd);
+      peaks?.on("segments.dragged", handleClipDragged);
+
       //if there is no instance of peaks, return
       if (!peaks) {
         return;
@@ -120,6 +131,7 @@ export default function WaveForm() {
           </Text>
         </Flex>
         <Flex>
+          <Button variant={"waveformBlue"}>Emitter events</Button>
           <Button
             variant={"waveformBlue"}
             me={"1rem"}
