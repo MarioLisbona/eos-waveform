@@ -59,7 +59,7 @@ export default function ClipGrid({
               <Flex height={"100%"} align={"center"}>
                 <RangeSlider
                   defaultValue={[seg.startTime, seg.endTime]}
-                  onChangeEnd={(val) =>
+                  onChange={(val) =>
                     handleRangeSlider(seg.id, val, segments, setSegments)
                   }
                   min={0}
