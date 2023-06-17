@@ -11,6 +11,7 @@ export type TestSegmentProps = {
   fileName: string | unknown;
   startTime: number;
   endTime: number;
+  editable: true;
   duration: number;
   color: WaveformColor | undefined;
   labelText: string | undefined;
