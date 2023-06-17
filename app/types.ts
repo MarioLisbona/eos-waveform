@@ -12,6 +12,7 @@ export type TestSegmentProps = {
   startTime: number;
   endTime: number;
   duration: number;
+  editable: boolean;
   color: WaveformColor | undefined;
   labelText: string | undefined;
   formErrors: FormErrorsProps | unknown;
