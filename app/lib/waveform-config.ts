@@ -89,6 +89,8 @@ export const setPeaksConfig = (
     keyboard: true,
     // Keyboard nudge increment in seconds (left arrow/right arrow)
     nudgeIncrement: 0.01,
+
+    emitCueEvents: true,
   };
 };
 
