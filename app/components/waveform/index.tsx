@@ -8,22 +8,21 @@ import {
   zoomviewOptionsConfig,
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
-import { testSegments } from "@/app/data/segmentData";
+import { testSegments, testSegmentsSmall } from "@/app/data/segmentData";
 import { AudioDataProps, TestSegmentProps } from "@/app/types";
-import {
-  deleteAllSegments,
-  createAllSegments,
-  handleDragClipStart,
-  handleDragClipEnd,
-  handleClipDragged,
-} from "@/app/lib/waveform-utils";
+import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
+  // const data: AudioDataProps = {
+  //   audioUrl: "EOS-test.mp3",
+  //   audioContentType: "audio/mpeg",
+  //   waveformDataUrl: "EOS-test.dat",
+  // };
   const data: AudioDataProps = {
-    audioUrl: "EOS-test.mp3",
+    audioUrl: "instrumental.mp3",
     audioContentType: "audio/mpeg",
-    waveformDataUrl: "EOS-test.dat",
+    waveformDataUrl: "instrumental.dat",
   };
 
   //create ref's to peaks.js containers
@@ -33,7 +32,8 @@ export default function WaveForm() {
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
-  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
+  const [segments, setSegments] =
+    useState<TestSegmentProps[]>(testSegmentsSmall);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
@@ -74,10 +74,33 @@ export default function WaveForm() {
       zoomviewAmplitude?.setAmplitudeScale(0.8);
       overviewAmplitude?.setAmplitudeScale(0.5);
 
+      const handleClipDragEnd = (evt) => {
+        console.log(evt);
+
+        const newSegState = segments.map((seg) => {
+          if (seg.id === evt.segment.id && evt.startMarker) {
+            console.log("moved start marker");
+            return {
+              ...seg,
+              startTime: evt.segment.startTime,
+            };
+          } else if (seg.id === evt.segment.id && !evt.startMarker) {
+            console.log("moved end marker");
+            return {
+              ...seg,
+              endTime: evt.segment.endTime,
+            };
+          }
+          // otherwise return the segment unchanged
+          return seg;
+        });
+        //use the updated segment to update the segments state
+        setSegments(newSegState);
+      };
+
       // callback functions to handle events emitted from zoomview container
-      peaks?.on("segments.dragstart", handleDragClipStart);
-      peaks?.on("segments.dragend", handleDragClipEnd);
-      peaks?.on("segments.dragged", handleClipDragged);
+      // peaks?.on("segments.dragged", handleClipDragged);
+      peaks?.on("segments.dragend", handleClipDragEnd);
 
       //if there is no instance of peaks, return
       if (!peaks) {

@@ -75,15 +75,3 @@ export const deleteSingleSegment = (
 
   setSegments(updatedSegments);
 };
-
-export const handleDragClipStart = (SegmentDragEvent, event) => {
-  console.log(SegmentDragEvent, event);
-};
-
-export const handleDragClipEnd = (SegmentDragEvent, event) => {
-  console.log(SegmentDragEvent, event);
-};
-
-export const handleClipDragged = (SegmentDragEvent, event) => {
-  console.log(SegmentDragEvent, event);
-};
