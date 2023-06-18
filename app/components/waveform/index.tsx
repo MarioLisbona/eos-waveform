@@ -74,34 +74,6 @@ export default function WaveForm() {
       zoomviewAmplitude?.setAmplitudeScale(0.8);
       overviewAmplitude?.setAmplitudeScale(0.5);
 
-      const handleClipDragEnd = (evt) => {
-        console.log(evt);
-
-        const newSegState = segments.map((seg) => {
-          if (seg.id === evt.segment.id && evt.startMarker) {
-            console.log("moved start marker");
-            return {
-              ...seg,
-              startTime: evt.segment.startTime,
-            };
-          } else if (seg.id === evt.segment.id && !evt.startMarker) {
-            console.log("moved end marker");
-            return {
-              ...seg,
-              endTime: evt.segment.endTime,
-            };
-          }
-          // otherwise return the segment unchanged
-          return seg;
-        });
-        //use the updated segment to update the segments state
-        setSegments(newSegState);
-      };
-
-      // callback functions to handle events emitted from zoomview container
-      // peaks?.on("segments.dragged", handleClipDragged);
-      peaks?.on("segments.dragend", handleClipDragEnd);
-
       //if there is no instance of peaks, return
       if (!peaks) {
         return;

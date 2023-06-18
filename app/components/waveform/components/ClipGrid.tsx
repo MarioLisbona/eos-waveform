@@ -26,6 +26,30 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
+  const handleClipDragEnd = (evt) => {
+    console.log(evt);
+
+    const newSegState = segments.map((seg) => {
+      if (seg.id === evt.segment.id && evt.startMarker) {
+        console.log("moved start marker");
+        return {
+          ...seg,
+          startTime: evt.segment.startTime,
+        };
+      } else if (seg.id === evt.segment.id && !evt.startMarker) {
+        console.log("moved end marker");
+        return {
+          ...seg,
+          endTime: evt.segment.endTime,
+        };
+      }
+      // otherwise return the segment unchanged
+      return seg;
+    });
+    //use the updated segment to update the segments state
+    setSegments(newSegState);
+  };
+
   return (
     <Box display="block" overflowY="scroll" height={"35vh"}>
       {segments.length > 0 &&
@@ -56,6 +80,7 @@ export default function ClipGrid({
                   leading: true,
                   ms: true,
                 })}
+                onChange={myPeaks?.on("segments.dragend", handleClipDragEnd)}
               ></Input>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
