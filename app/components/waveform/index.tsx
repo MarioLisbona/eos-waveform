@@ -149,7 +149,6 @@ export default function WaveForm() {
           </Text>
         </Flex>
         <Flex>
-          <Button variant={"waveformBlue"}>Emitter events</Button>
           <Button
             variant={"waveformBlue"}
             me={"1rem"}
