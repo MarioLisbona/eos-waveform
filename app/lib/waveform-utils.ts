@@ -69,8 +69,8 @@ export const createAllSegments = (
   segments: TestSegmentProps[]
 ) => {
   console.log("Exporting clip data and destroying Peaks instance", segments);
-  setSegments([]);
-  peaks?.destroy();
+  // setSegments([]);
+  // peaks?.destroy();
 };
 
 export const deleteSingleSegment = (

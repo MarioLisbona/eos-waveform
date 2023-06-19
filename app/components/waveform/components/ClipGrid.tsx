@@ -27,27 +27,27 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
-  // const handleClipDragEnd = (evt) => {
-  //   const newSegState = segments.map((seg) => {
-  //     if (seg.id === evt.segment.id && evt.startMarker) {
-  //       console.log("moved start marker");
-  //       return {
-  //         ...seg,
-  //         startTime: evt.segment.startTime,
-  //       };
-  //     } else if (seg.id === evt.segment.id && !evt.startMarker) {
-  //       console.log("moved end marker");
-  //       return {
-  //         ...seg,
-  //         endTime: evt.segment.endTime,
-  //       };
-  //     }
-  //     // otherwise return the segment unchanged
-  //     return seg;
-  //   });
-  //   //use the updated segment to update the segments state
-  //   setSegments(newSegState);
-  // };
+  const handleClipDragEnd = (evt) => {
+    const newSegState = segments.map((seg) => {
+      if (seg.id === evt.segment.id && evt.startMarker) {
+        console.log("moved start marker");
+        return {
+          ...seg,
+          startTime: evt.segment.startTime,
+        };
+      } else if (seg.id === evt.segment.id && !evt.startMarker) {
+        console.log("moved end marker");
+        return {
+          ...seg,
+          endTime: evt.segment.endTime,
+        };
+      }
+      // otherwise return the segment unchanged
+      return seg;
+    });
+    //use the updated segment to update the segments state
+    setSegments(newSegState);
+  };
 
   console.log("start time clip 1", segments[0].startTime);
 

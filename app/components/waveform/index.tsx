@@ -122,6 +122,7 @@ export default function WaveForm() {
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
+    myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [segments]);
 
   return (
