@@ -38,20 +38,29 @@ export const handleStartTimeChange = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
-  //used for two way bind of start time input element to correct segment in segments
   const newSegState = segments.map((seg) => {
     if (seg.id === id) {
+      let tempStartTimeInput = parseInt(evt.target.value);
+      if (parseInt(evt.target.value) < 0) {
+        tempStartTimeInput = 0;
+      }
+
+      if (parseInt(evt.target.value) > seg.endTime) {
+        tempStartTimeInput = seg.endTime - 0.5;
+      }
+
+      if (evt.target.value === "") {
+        tempStartTimeInput = 0;
+      }
       return {
         ...seg,
-        startTime:
-          parseInt(evt.target.value) < seg.endTime
-            ? parseInt(evt.target.value)
-            : 0,
+        startTime: tempStartTimeInput,
       };
     }
     //otherwise return the segment unchanged
     return seg;
   });
+
   //use the updated segment to update the segments state
   setSegments(newSegState);
 };
