@@ -63,19 +63,19 @@ export const handleEndTimeChange = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined
 ) => {
-  console.log(myPeaks!.player.getDuration());
   //used for two way bind of end time input element to correct segment in segments
   const newSegState = segments.map((seg, idx: number) => {
     if (seg.id === id) {
       return {
         ...seg,
-        endTime: parseInt(evt.target.value),
-        // parseInt(evt.target.value) > seg.startTime &&
-        // parseInt(evt.target.value) < segments[idx + 1].startTime
-        //   ? parseInt(evt.target.value)
-        //   : seg.startTime + 1,
+        endTime:
+          parseInt(evt.target.value) > seg.startTime &&
+          parseInt(evt.target.value) < segments[idx + 1].startTime
+            ? parseInt(evt.target.value)
+            : myPeaks?.player.getDuration(),
       };
     }
+
     //otherwise return the segment unchanged
     return seg;
   });
