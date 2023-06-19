@@ -27,8 +27,6 @@ export default function ClipGrid({
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
   const handleClipDragEnd = (evt) => {
-    console.log(evt);
-
     const newSegState = segments.map((seg) => {
       if (seg.id === evt.segment.id && evt.startMarker) {
         console.log("moved start marker");

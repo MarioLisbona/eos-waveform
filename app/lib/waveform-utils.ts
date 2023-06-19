@@ -64,14 +64,14 @@ export const deleteSingleSegment = (
       fileName: segment.fileName,
       startTime: segment.startTime,
       endTime: segment.endTime,
-      duration: segment.endTime - segment.startTime,
+      editable: segment.editable,
       color: segment.color,
       labelText: segment.labelText,
       formErrors: segment.formErrors,
     }));
   peaks?.segments.removeAll();
 
-  console.log(updatedSegments);
+  console.log("updated segments", updatedSegments);
 
   setSegments(updatedSegments);
 };
