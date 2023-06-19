@@ -15,6 +15,7 @@ import format from "format-duration";
 import {
   deleteSingleSegment,
   handleFileNameChange,
+  handleStartTimeChange,
 } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
@@ -26,27 +27,29 @@ export default function ClipGrid({
   myPeaks: PeaksInstance | undefined;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
-  const handleClipDragEnd = (evt) => {
-    const newSegState = segments.map((seg) => {
-      if (seg.id === evt.segment.id && evt.startMarker) {
-        console.log("moved start marker");
-        return {
-          ...seg,
-          startTime: evt.segment.startTime,
-        };
-      } else if (seg.id === evt.segment.id && !evt.startMarker) {
-        console.log("moved end marker");
-        return {
-          ...seg,
-          endTime: evt.segment.endTime,
-        };
-      }
-      // otherwise return the segment unchanged
-      return seg;
-    });
-    //use the updated segment to update the segments state
-    setSegments(newSegState);
-  };
+  // const handleClipDragEnd = (evt) => {
+  //   const newSegState = segments.map((seg) => {
+  //     if (seg.id === evt.segment.id && evt.startMarker) {
+  //       console.log("moved start marker");
+  //       return {
+  //         ...seg,
+  //         startTime: evt.segment.startTime,
+  //       };
+  //     } else if (seg.id === evt.segment.id && !evt.startMarker) {
+  //       console.log("moved end marker");
+  //       return {
+  //         ...seg,
+  //         endTime: evt.segment.endTime,
+  //       };
+  //     }
+  //     // otherwise return the segment unchanged
+  //     return seg;
+  //   });
+  //   //use the updated segment to update the segments state
+  //   setSegments(newSegState);
+  // };
+
+  console.log("start time clip 1", segments[0].startTime);
 
   return (
     <Box display="block" overflowY="scroll" height={"35vh"}>
@@ -74,11 +77,10 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
-                value={format(seg.startTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
-                onChange={myPeaks?.on("segments.dragend", handleClipDragEnd)}
+                value={seg.startTime}
+                onChange={(evt) =>
+                  handleStartTimeChange(seg.id!, evt, segments, setSegments)
+                }
               ></Input>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>

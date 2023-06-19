@@ -32,6 +32,29 @@ export const handleFileNameChange = (
   setSegments(newSegState);
 };
 
+export const handleStartTimeChange = (
+  id: string,
+  evt: ChangeEvent<HTMLInputElement>,
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  const newSegState = segments.map((seg) => {
+    if (seg.id === id) {
+      return {
+        ...seg,
+        startTime:
+          parseInt(evt.target.value) < seg.endTime
+            ? parseInt(evt.target.value)
+            : 0,
+      };
+    }
+    //otherwise return the segment unchanged
+    return seg;
+  });
+  //use the updated segment to update the segments state
+  setSegments(newSegState);
+};
+
 export const deleteAllSegments = (
   peaks: PeaksInstance | undefined,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
