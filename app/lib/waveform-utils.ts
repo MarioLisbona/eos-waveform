@@ -38,6 +38,7 @@ export const handleStartTimeChange = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
+  //used for two way bind of start time input element to correct segment in segments
   const newSegState = segments.map((seg) => {
     if (seg.id === id) {
       return {
@@ -63,6 +64,8 @@ export const deleteAllSegments = (
   setSegments([]);
 };
 
+// console logs the segments after all edits
+//set segments to empty array and destroy peaks instance to free resources
 export const createAllSegments = (
   peaks: PeaksInstance | undefined,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
@@ -78,8 +81,10 @@ export const deleteSingleSegment = (
   id: string,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
+  //removed the clip object related from the id prop passed to function
   peaks?.segments.removeById(id);
 
+  //return the updated array of segments with getSegments() and map over that to create the object structure we need
   const updatedSegments: TestSegmentProps[] = peaks!.segments
     .getSegments()
     .map((segment) => ({
@@ -92,9 +97,8 @@ export const deleteSingleSegment = (
       labelText: segment.labelText,
       formErrors: segment.formErrors,
     }));
+  //remove all the peaks segments to avoid duplicate id's
   peaks?.segments.removeAll();
-
-  console.log("updated segments", updatedSegments);
-
+  //update the date of segments with the new array
   setSegments(updatedSegments);
 };

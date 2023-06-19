@@ -25,7 +25,7 @@ export default function WaveForm() {
     waveformDataUrl: "instrumental.dat",
   };
 
-  //create ref's to peaks.js containers
+  //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
   const overviewWaveformRef = React.createRef<HTMLDivElement>();
   const audioElementRef = React.createRef<HTMLAudioElement>();
@@ -88,6 +88,10 @@ export default function WaveForm() {
     }
   }, []);
 
+  //function used for peaks instance.on event
+  //sets the new start time for a segment if the start point is dragged
+  //sets the new end time for a segment if the end point is dragged
+  //tried to factor this out to the waveform-utils component but I can pass any more arguments to the function
   const handleClipDragEnd = (evt) => {
     const newSegState = segments.map((seg) => {
       if (seg.id === evt.segment.id && evt.startMarker) {
@@ -110,7 +114,8 @@ export default function WaveForm() {
     setSegments(newSegState);
   };
 
-  //call initPeaks on initial mount of WaveForm component
+  //add the segment objects to the peaks instance, on mount and if myPeaks state changes
+  // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
     myPeaks?.segments.add(segments);
     myPeaks?.on("segments.dragend", handleClipDragEnd);
@@ -122,6 +127,8 @@ export default function WaveForm() {
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
+    // add peaks instance.on event for updating start and end points when a segment drag ha completed.
+    //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [segments]);
 
