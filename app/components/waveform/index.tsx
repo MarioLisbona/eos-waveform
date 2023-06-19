@@ -8,26 +8,32 @@ import {
   zoomviewOptionsConfig,
 } from "@/app/lib/waveform-config";
 import ClipGrid from "./components/ClipGrid";
-import { testSegments } from "@/app/data/segmentData";
+import { testSegments, testSegmentsSmall } from "@/app/data/segmentData";
 import { AudioDataProps, TestSegmentProps } from "@/app/types";
 import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
+  // const data: AudioDataProps = {
+  //   audioUrl: "EOS-test.mp3",
+  //   audioContentType: "audio/mpeg",
+  //   waveformDataUrl: "EOS-test.dat",
+  // };
   const data: AudioDataProps = {
-    audioUrl: "EOS-test.mp3",
+    audioUrl: "instrumental.mp3",
     audioContentType: "audio/mpeg",
-    waveformDataUrl: "EOS-test.dat",
+    waveformDataUrl: "instrumental.dat",
   };
 
-  //create ref's to peaks.js containers
+  //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
   const overviewWaveformRef = React.createRef<HTMLDivElement>();
   const audioElementRef = React.createRef<HTMLAudioElement>();
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
-  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
+  const [segments, setSegments] =
+    useState<TestSegmentProps[]>(testSegmentsSmall);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
@@ -82,9 +88,37 @@ export default function WaveForm() {
     }
   }, []);
 
-  //call initPeaks on initial mount of WaveForm component
+  //function used for peaks instance.on event
+  //sets the new start time for a segment if the start point is dragged
+  //sets the new end time for a segment if the end point is dragged
+  //tried to factor this out to the waveform-utils component but I can pass any more arguments to the function
+  const handleClipDragEnd = (evt) => {
+    const newSegState = segments.map((seg) => {
+      if (seg.id === evt.segment.id && evt.startMarker) {
+        console.log("moved start marker");
+        return {
+          ...seg,
+          startTime: evt.segment.startTime,
+        };
+      } else if (seg.id === evt.segment.id && !evt.startMarker) {
+        console.log("moved end marker");
+        return {
+          ...seg,
+          endTime: evt.segment.endTime,
+        };
+      }
+      // otherwise return the segment unchanged
+      return seg;
+    });
+    //use the updated segment to update the segments state
+    setSegments(newSegState);
+  };
+
+  //add the segment objects to the peaks instance, on mount and if myPeaks state changes
+  // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
     myPeaks?.segments.add(segments);
+    myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [myPeaks]);
 
   useEffect(() => {
@@ -93,6 +127,9 @@ export default function WaveForm() {
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
+    // add peaks instance.on event for updating start and end points when a segment drag ha completed.
+    //needed to add this here as well to use the updated segments state
+    myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [segments]);
 
   return (

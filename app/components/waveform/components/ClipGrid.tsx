@@ -15,6 +15,8 @@ import format from "format-duration";
 import {
   deleteSingleSegment,
   handleFileNameChange,
+  handleStartTimeChange,
+  handleEndTimeChange,
 } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
@@ -27,7 +29,7 @@ export default function ClipGrid({
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
   return (
-    <Box display="block" overflowY="scroll" height={"35vh"}>
+    <Box display="block" overflowY="scroll" maxH={"35vh"}>
       {segments.length > 0 &&
         segments.map((seg, idx) => (
           <Grid
@@ -52,18 +54,32 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
-                value={format(seg.startTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
+                // value={format(seg.startTime * 1000, {
+                //   leading: true,
+                //   ms: true,
+                // })}
+                value={seg.startTime}
+                onChange={(evt) =>
+                  handleStartTimeChange(seg.id!, evt, segments, setSegments)
+                }
               ></Input>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
               <Input
-                value={format(seg.endTime * 1000, {
-                  leading: true,
-                  ms: true,
-                })}
+                // value={format(seg.endTime * 1000, {
+                //   leading: true,
+                //   ms: true,
+                // })}
+                value={seg.endTime}
+                onChange={(evt) =>
+                  handleEndTimeChange(
+                    seg.id!,
+                    evt,
+                    segments,
+                    setSegments,
+                    myPeaks
+                  )
+                }
               ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
