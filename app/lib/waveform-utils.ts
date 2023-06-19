@@ -36,26 +36,31 @@ export const handleStartTimeChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,
   segments: TestSegmentProps[],
-  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
+  myPeaks: PeaksInstance
 ) => {
-  const newSegState = segments.map((seg) => {
+  const newSegState = segments.map((seg, idx) => {
     if (seg.id === id) {
       let tempStartTimeInput = parseInt(evt.target.value);
-      if (parseInt(evt.target.value) < 0) {
-        tempStartTimeInput = 0;
-      }
 
-      if (parseInt(evt.target.value) > seg.endTime) {
-        tempStartTimeInput = seg.endTime - 0.5;
-      }
+      if (idx == 0) {
+        // console.log("first index", segments[idx]);
+        if (parseInt(evt.target.value) < 0) {
+          tempStartTimeInput = 0;
+        }
 
-      if (evt.target.value === "") {
-        tempStartTimeInput = 0;
+        if (parseInt(evt.target.value) > seg.endTime) {
+          tempStartTimeInput = seg.endTime - 0.5;
+        }
+
+        if (evt.target.value === "") {
+          tempStartTimeInput = 0;
+        }
+        return {
+          ...seg,
+          startTime: tempStartTimeInput,
+        };
       }
-      return {
-        ...seg,
-        startTime: tempStartTimeInput,
-      };
     }
     //otherwise return the segment unchanged
     return seg;
