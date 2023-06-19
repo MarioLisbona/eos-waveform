@@ -16,6 +16,7 @@ import {
   deleteSingleSegment,
   handleFileNameChange,
   handleStartTimeChange,
+  handleEndTimeChange,
 } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
@@ -70,6 +71,15 @@ export default function ClipGrid({
                 //   ms: true,
                 // })}
                 value={seg.endTime}
+                onChange={(evt) =>
+                  handleEndTimeChange(
+                    seg.id!,
+                    evt,
+                    segments,
+                    setSegments,
+                    myPeaks
+                  )
+                }
               ></Input>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
