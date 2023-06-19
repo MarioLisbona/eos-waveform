@@ -88,14 +88,9 @@ export default function WaveForm() {
     }
   }, []);
 
-  const handleDragged = (evt) => {
-    console.log("handleDragged", evt);
-  };
-
   //call initPeaks on initial mount of WaveForm component
   useEffect(() => {
     myPeaks?.segments.add(segments);
-    myPeaks?.on("segments.dragged", handleDragged);
   }, [myPeaks]);
 
   useEffect(() => {
