@@ -90,7 +90,8 @@ export const setPeaksConfig = (
     // Keyboard nudge increment in seconds (left arrow/right arrow)
     nudgeIncrement: 0.01,
 
-    emitCueEvents: true,
+    //When the playhead reaches a point or segment boundary, a cue event is emitted.
+    emitCueEvents: false,
   };
 };
 
