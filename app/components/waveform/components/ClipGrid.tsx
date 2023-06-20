@@ -60,13 +60,7 @@ export default function ClipGrid({
                 // })}
                 value={seg.startTime}
                 onChange={(evt) =>
-                  handleStartTimeChange(
-                    seg.id!,
-                    evt,
-                    segments,
-                    setSegments,
-                    myPeaks
-                  )
+                  handleStartTimeChange(seg.id!, evt, segments, setSegments)
                 }
               ></Input>
             </GridItem>
