@@ -1,7 +1,7 @@
 import { Flex, Button, Text } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
-import Peaks, { PeaksInstance, PeaksOptions } from "peaks.js";
+import Peaks, { PeaksInstance, PeaksOptions, SegmentDragEvent } from "peaks.js";
 import {
   setPeaksConfig,
   overviewOptionsConfig,
@@ -95,7 +95,7 @@ export default function WaveForm() {
   //sets the new start time for a segment if the start point is dragged
   //sets the new end time for a segment if the end point is dragged
   //tried to factor this out to the waveform-utils component but I can pass any more arguments to the function
-  const handleClipDragEnd = (evt) => {
+  const handleClipDragEnd = (evt: SegmentDragEvent) => {
     const newSegState = segments.map((seg) => {
       if (seg.id === evt.segment.id && evt.startMarker) {
         console.log("moved start marker");
@@ -131,7 +131,7 @@ export default function WaveForm() {
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
-    // add peaks instance.on event for updating start and end points when a segment drag ha completed.
+    // add peaks instance.on event for updating start and end points when a segment drag has completed.
     //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [segments]);
