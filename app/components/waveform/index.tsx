@@ -92,7 +92,7 @@ export default function WaveForm() {
   //sets the new start time for a segment if the start point is dragged
   //sets the new end time for a segment if the end point is dragged
   //tried to factor this out to the waveform-utils component but I can pass any more arguments to the function
-  const handleClipDragEnd = (evt) => {
+  const handleClipDragEnd = (evt: SegmentDragEvent) => {
     const newSegState = segments.map((seg) => {
       if (seg.id === evt.segment.id && evt.startMarker) {
         console.log("moved start marker");
