@@ -2,6 +2,16 @@ import { PeaksInstance } from "peaks.js";
 import { TestSegmentProps } from "../types";
 import { ChangeEvent } from "react";
 
+export const handlePlayheadSeek = (
+  id: string,
+  myPeaks: PeaksInstance | undefined,
+  segments: TestSegmentProps[]
+) => {
+  const selectedSegment = segments.find((seg) => seg.id === id);
+  console.log(selectedSegment);
+  myPeaks?.player.seek(selectedSegment!.startTime);
+};
+
 export const handleAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
