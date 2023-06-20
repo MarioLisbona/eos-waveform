@@ -49,8 +49,8 @@ export const handleStartTimeChange = (
           tempStartTimeInput = 0;
         }
 
-        if (parseInt(evt.target.value) > seg.endTime) {
-          tempStartTimeInput = seg.endTime - 0.5;
+        if (parseInt(evt.target.value) > seg.endTime!) {
+          tempStartTimeInput = seg.endTime! - 0.5;
         }
 
         if (evt.target.value === "") {
