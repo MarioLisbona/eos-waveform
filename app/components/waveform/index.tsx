@@ -1,7 +1,7 @@
 import { Flex, Button, Text } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
-import Peaks, { PeaksInstance, PeaksOptions } from "peaks.js";
+import Peaks, { PeaksInstance, PeaksOptions, SegmentDragEvent } from "peaks.js";
 import {
   setPeaksConfig,
   overviewOptionsConfig,
