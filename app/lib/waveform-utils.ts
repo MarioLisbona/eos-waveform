@@ -17,10 +17,12 @@ export const handleAddSegment = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined
 ) => {
-  //finding the first gap between endTime and next startTime that is greater than 10
+  //finding the first gap between [x].endTime and  [x + 1].startTime that is greater than 10 seconds
   const segmentGap = segments.find(
     (seg, idx) => segments[idx + 1].startTime - seg.endTime >= 10
   );
+
+  const segmentGapIdx = segments.findIndex((seg) => seg.id === segmentGap.id);
 
   const newSegment: TestSegmentProps = {
     id: segments.length.toString(),
@@ -37,7 +39,17 @@ export const handleAddSegment = (
     },
   };
 
-  setSegments([...segments, newSegment]);
+  console.log(segmentGap, segmentGapIdx, newSegment);
+
+  const updatedSegments: TestSegmentProps[] = [
+    ...segments.slice(0, segmentGapIdx + 1),
+    newSegment,
+    ...segments.slice(segmentGapIdx + 1),
+  ];
+
+  console.log("updatedSegments", updatedSegments);
+
+  setSegments(updatedSegments);
 
   myPeaks?.player.seek(newSegment.startTime);
 };
