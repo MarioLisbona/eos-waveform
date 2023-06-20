@@ -2,6 +2,17 @@ import { PeaksInstance } from "peaks.js";
 import { TestSegmentProps } from "../types";
 import { ChangeEvent } from "react";
 
+export const handleAddSegment = (
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  const segmentGap = segments.find(
+    (seg, idx) => segments[idx + 1].startTime - seg.endTime > 10
+  );
+
+  console.log(segmentGap);
+};
+
 export const handleFileNameChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,

@@ -10,7 +10,11 @@ import {
 import ClipGrid from "./components/ClipGrid";
 import { testSegments, testSegmentsSmall } from "@/app/data/segmentData";
 import { AudioDataProps, TestSegmentProps } from "@/app/types";
-import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
+import {
+  deleteAllSegments,
+  createAllSegments,
+  handleAddSegment,
+} from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
@@ -27,6 +31,8 @@ export default function WaveForm() {
 
   //sort the data in chronological order by startTime
   testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
+
+  console.log(testSegmentsSmall);
 
   //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -156,7 +162,12 @@ export default function WaveForm() {
       </Flex>
       <Flex mb={"1rem"} px={"3rem"} w={"100%"} justify={"space-between"}>
         <Flex>
-          <Button variant={"waveformBlue"}>Add Segment</Button>
+          <Button
+            variant={"waveformBlue"}
+            onClick={() => handleAddSegment(segments, setSegments)}
+          >
+            Add Segment
+          </Button>
         </Flex>
         <Flex>
           <Button
