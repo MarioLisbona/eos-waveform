@@ -36,8 +36,7 @@ export const handleStartTimeChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,
   segments: TestSegmentProps[],
-  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
-  myPeaks: PeaksInstance
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
   const newSegState = segments.map((seg, idx) => {
     if (seg.id === id) {
