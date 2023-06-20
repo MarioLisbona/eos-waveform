@@ -25,6 +25,9 @@ export default function WaveForm() {
     waveformDataUrl: "instrumental.dat",
   };
 
+  //sort the data in chronological order by startTime
+  testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
+
   //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
   const overviewWaveformRef = React.createRef<HTMLDivElement>();
