@@ -120,6 +120,7 @@ export default function WaveForm() {
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
   // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
+    myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
     myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [myPeaks]);
