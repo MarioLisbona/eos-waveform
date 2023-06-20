@@ -2,6 +2,20 @@ import { TestSegmentProps } from "../types";
 
 export const testSegmentsSmall: TestSegmentProps[] = [
   {
+    id: "2",
+    fileName: "clip-3",
+    startTime: 55,
+    endTime: 70,
+    editable: true,
+    color: "#1E1541",
+    labelText: "clip-3",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
+  },
+  {
     id: "0",
     fileName: "clip-1",
     startTime: 10,
@@ -23,20 +37,6 @@ export const testSegmentsSmall: TestSegmentProps[] = [
     editable: true,
     color: "#1E1541",
     labelText: "clip-2",
-    formErrors: {
-      fileNameError: false,
-      startTimeError: false,
-      endTimeError: false,
-    },
-  },
-  {
-    id: "2",
-    fileName: "clip-3",
-    startTime: 55,
-    endTime: 70,
-    editable: true,
-    color: "#1E1541",
-    labelText: "clip-3",
     formErrors: {
       fileNameError: false,
       startTimeError: false,
