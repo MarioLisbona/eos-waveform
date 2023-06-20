@@ -152,9 +152,7 @@ export default function WaveForm() {
       </Flex>
       <Flex mb={"1rem"} px={"3rem"} w={"100%"} justify={"space-between"}>
         <Flex>
-          <Text textStyle={"subheading"} fontSize={"20px"}>
-            Segments
-          </Text>
+          <Button variant={"waveformBlue"}>Add Segment</Button>
         </Flex>
         <Flex>
           <Button
