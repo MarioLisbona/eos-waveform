@@ -18,8 +18,8 @@ export const testSegmentsSmall: TestSegmentProps[] = [
   {
     id: "2",
     fileName: "clip-3",
-    startTime: 55,
-    endTime: 70,
+    startTime: 45,
+    endTime: 60,
     editable: true,
     color: "#1E1541",
     labelText: "clip-3",
@@ -61,7 +61,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
     id: "0",
     fileName: "clip-1",
     startTime: 10,
-    endTime: 20,
+    endTime: 15,
     editable: true,
     color: "#1E1541",
     labelText: "clip-1",
@@ -74,7 +74,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
   {
     id: "1",
     fileName: "clip-2",
-    startTime: 35,
+    startTime: 20,
     endTime: 40,
     editable: true,
     color: "#1E1541",

@@ -6,11 +6,31 @@ export const handleAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
+  //finding the first gap between endTime and next startTime that is greater than 10
   const segmentGap = segments.find(
-    (seg, idx) => segments[idx + 1].startTime - seg.endTime > 10
+    (seg, idx) => segments[idx + 1].startTime - seg.endTime >= 10
   );
+  //finding the index with the id returned
+  const segIdx = segments.findIndex((seg) => seg.id === segmentGap!.id);
 
-  console.log(segmentGap);
+  const newSegment: TestSegmentProps = {
+    id: segments.length.toString(),
+    fileName: "",
+    startTime: segmentGap!.endTime + 0.5,
+    endTime: segmentGap!.endTime + 8.5,
+    editable: true,
+    color: "#1E1541",
+    labelText: "new clip",
+    formErrors: {
+      fileNameError: false,
+      startTimeError: false,
+      endTimeError: false,
+    },
+  };
+
+  segments.splice(2, 0, newSegment);
+
+  setSegments((current) => [...current, newSegment]);
 };
 
 export const handleFileNameChange = (

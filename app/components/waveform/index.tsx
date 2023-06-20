@@ -32,8 +32,6 @@ export default function WaveForm() {
   //sort the data in chronological order by startTime
   testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
 
-  console.log(testSegmentsSmall);
-
   //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
   const overviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -132,14 +130,20 @@ export default function WaveForm() {
   }, [myPeaks]);
 
   useEffect(() => {
+    console.log("start of segments useEffect -segments", segments);
     //create the segments based on the pre-loaded cuts
     //at the moment this is the segments state - which is assigned the testSegments array on component mount
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
+
+    //sort the data in chronological order by startTime
+    testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
+
     myPeaks?.segments.add(segments);
     // add peaks instance.on event for updating start and end points when a segment drag has completed.
     //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
+    console.log("end of segments useEffect -segments", segments);
   }, [segments]);
 
   return (
@@ -164,7 +168,7 @@ export default function WaveForm() {
         <Flex>
           <Button
             variant={"waveformBlue"}
-            onClick={() => handleAddSegment(segments, setSegments)}
+            onClick={() => handleAddSegment(segments, setSegments, myPeaks)}
           >
             Add Segment
           </Button>
