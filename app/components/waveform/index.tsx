@@ -172,7 +172,7 @@ export default function WaveForm() {
         <Flex>
           <Button
             variant={"waveformBlue"}
-            onClick={() => handleAddSegment(segments, setSegments)}
+            onClick={() => handleAddSegment(segments, setSegments, myPeaks)}
           >
             Add Segment
           </Button>

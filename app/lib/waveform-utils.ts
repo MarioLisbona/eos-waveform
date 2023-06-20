@@ -4,14 +4,13 @@ import { ChangeEvent } from "react";
 
 export const handleAddSegment = (
   segments: TestSegmentProps[],
-  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
+  myPeaks: PeaksInstance | undefined
 ) => {
   //finding the first gap between endTime and next startTime that is greater than 10
   const segmentGap = segments.find(
     (seg, idx) => segments[idx + 1].startTime - seg.endTime >= 10
   );
-  //finding the index with the id returned
-  const segIdx = segments.findIndex((seg) => seg.id === segmentGap!.id);
 
   const newSegment: TestSegmentProps = {
     id: segments.length.toString(),
@@ -29,6 +28,8 @@ export const handleAddSegment = (
   };
 
   setSegments([...segments, newSegment]);
+
+  myPeaks?.player.seek(newSegment.startTime);
 };
 
 export const handleFileNameChange = (
