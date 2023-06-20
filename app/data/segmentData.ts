@@ -32,7 +32,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
   {
     id: "5",
     fileName: "clip-6",
-    startTime: 95,
+    startTime: 100,
     endTime: 105,
     editable: true,
     color: "#1E1541",

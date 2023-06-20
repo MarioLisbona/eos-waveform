@@ -124,26 +124,30 @@ export default function WaveForm() {
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
   // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
+    // //sort the data in chronological order by startTime
+    segments.sort((a, b) => a.startTime - b.startTime);
+
     myPeaks?.segments.removeAll();
+
     myPeaks?.segments.add(segments);
     myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [myPeaks]);
 
   useEffect(() => {
-    console.log("start of segments useEffect -segments", segments);
+    // //sort the data in chronological order by startTime
+    segments.sort((a, b) => a.startTime - b.startTime);
+
     //create the segments based on the pre-loaded cuts
     //at the moment this is the segments state - which is assigned the testSegments array on component mount
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
 
-    //sort the data in chronological order by startTime
-    testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
+    console.log("segments before add", segments);
 
     myPeaks?.segments.add(segments);
     // add peaks instance.on event for updating start and end points when a segment drag has completed.
     //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
-    console.log("end of segments useEffect -segments", segments);
   }, [segments]);
 
   return (
@@ -168,7 +172,7 @@ export default function WaveForm() {
         <Flex>
           <Button
             variant={"waveformBlue"}
-            onClick={() => handleAddSegment(segments, setSegments, myPeaks)}
+            onClick={() => handleAddSegment(segments, setSegments)}
           >
             Add Segment
           </Button>

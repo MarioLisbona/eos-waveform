@@ -28,9 +28,7 @@ export const handleAddSegment = (
     },
   };
 
-  segments.splice(2, 0, newSegment);
-
-  setSegments((current) => [...current, newSegment]);
+  setSegments([...segments, newSegment]);
 };
 
 export const handleFileNameChange = (
