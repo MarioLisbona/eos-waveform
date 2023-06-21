@@ -8,7 +8,7 @@ import {
 } from "./general-utils";
 
 export const handlePlayheadSeek = (
-  id: string,
+  id: string | undefined,
   myPeaks: PeaksInstance | undefined,
   segments: TestSegmentProps[]
 ) => {
@@ -141,7 +141,7 @@ export const handleEndTimeChange = (
           parseInt(evt.target.value) > seg.startTime &&
           parseInt(evt.target.value) < segments[idx + 1].startTime
             ? parseInt(evt.target.value)
-            : myPeaks?.player.getDuration(),
+            : myPeaks?.player.getDuration()!,
       };
     }
 
