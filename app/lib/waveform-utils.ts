@@ -28,7 +28,7 @@ export const handleAddSegment = (
     //create a new 8 second segment between 2 segments with a large enough gap
     const newSegment: TestSegmentProps = {
       id: segments.length.toString(),
-      fileName: "",
+      fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
       startTime: segments[tenSecondGapIdx].endTime + 0.5,
       endTime: segments[tenSecondGapIdx].endTime + 8.5,
       editable: true,
@@ -67,7 +67,7 @@ export const handleAddSegment = (
       //create a new 4 second segment between 2 segments with a large enough gap
       const newSegment: TestSegmentProps = {
         id: segments.length.toString(),
-        fileName: "",
+        fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
         startTime: segments[fiveSecondGapIdx].endTime + 0.5,
         endTime: segments[fiveSecondGapIdx].endTime + 4.5,
         editable: true,
