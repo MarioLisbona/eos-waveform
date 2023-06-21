@@ -4,7 +4,7 @@ import { TestSegmentProps } from "../types";
 export const findGap = (segments: TestSegmentProps[], gapDuration: number) => {
   return segments.findIndex((seg, idx, arr) => {
     if (idx + 1 < arr.length) {
-      return arr[idx + 1].startTime - arr[idx].endTime >= gapDuration;
+      return arr[idx + 1].startTime - arr[idx].endTime! >= gapDuration;
     }
   });
 };
@@ -16,8 +16,8 @@ export const createNewSegmentObject = (
   return {
     id: segments.length.toString(),
     fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
-    startTime: segments[gapIdx].endTime + 0.5,
-    endTime: segments[gapIdx].endTime + 8.5,
+    startTime: segments[gapIdx].endTime! + 0.5,
+    endTime: segments[gapIdx].endTime! + 8.5,
     editable: true,
     color: "#1E1541",
     labelText: "new clip",
