@@ -18,40 +18,86 @@ export const handleAddSegment = (
   myPeaks: PeaksInstance | undefined
 ) => {
   //find a gap greater or equal to 10 seconds between existing clip segments
-  const segmentGapIdx = segments.findIndex((seg, idx, arr) => {
+  const tenSecondGapIdx = segments.findIndex((seg, idx, arr) => {
     if (idx + 1 < arr.length) {
       return arr[idx + 1].startTime - arr[idx].endTime >= 10;
     }
   });
 
-  //create a new 8 second segment between 2 segments with a large enough gap
-  const newSegment: TestSegmentProps = {
-    id: segments.length.toString(),
-    fileName: "",
-    startTime: segments[segmentGapIdx].endTime + 0.5,
-    endTime: segments[segmentGapIdx].endTime + 8.5,
-    editable: true,
-    color: "#1E1541",
-    labelText: "new clip",
-    formErrors: {
-      fileNameError: false,
-      startTimeError: false,
-      endTimeError: false,
-    },
-  };
+  if (tenSecondGapIdx != -1) {
+    //create a new 8 second segment between 2 segments with a large enough gap
+    const newSegment: TestSegmentProps = {
+      id: segments.length.toString(),
+      fileName: "",
+      startTime: segments[tenSecondGapIdx].endTime + 0.5,
+      endTime: segments[tenSecondGapIdx].endTime + 8.5,
+      editable: true,
+      color: "#1E1541",
+      labelText: "new clip",
+      formErrors: {
+        fileNameError: false,
+        startTimeError: false,
+        endTimeError: false,
+      },
+    };
 
-  //slice the new segment into the existing segments array at the correct index
-  const updatedSegments: TestSegmentProps[] = [
-    ...segments.slice(0, segmentGapIdx + 1),
-    newSegment,
-    ...segments.slice(segmentGapIdx + 1),
-  ];
+    //slice the new segment into the existing segments array at the correct index
+    const updatedSegments: TestSegmentProps[] = [
+      ...segments.slice(0, tenSecondGapIdx + 1),
+      newSegment,
+      ...segments.slice(tenSecondGapIdx + 1),
+    ];
 
-  //update the segments state
-  setSegments(updatedSegments);
+    //update the segments state
+    setSegments(updatedSegments);
 
-  //move the playhead to the start of the new segment
-  myPeaks?.player.seek(newSegment.startTime);
+    //move the playhead to the start of the new segment
+    myPeaks?.player.seek(newSegment.startTime);
+  } else if (tenSecondGapIdx == -1) {
+    alert("No 10 second gaps, finding a 5 second gap...");
+
+    //find a gap greater or equal to 5 seconds between existing clip segments
+    const fiveSecondGapIdx = segments.findIndex((seg, idx, arr) => {
+      if (idx + 1 < arr.length) {
+        return arr[idx + 1].startTime - arr[idx].endTime >= 5;
+      }
+    });
+
+    if (fiveSecondGapIdx != -1) {
+      //create a new 4 second segment between 2 segments with a large enough gap
+      const newSegment: TestSegmentProps = {
+        id: segments.length.toString(),
+        fileName: "",
+        startTime: segments[fiveSecondGapIdx].endTime + 0.5,
+        endTime: segments[fiveSecondGapIdx].endTime + 4.5,
+        editable: true,
+        color: "#1E1541",
+        labelText: "new clip",
+        formErrors: {
+          fileNameError: false,
+          startTimeError: false,
+          endTimeError: false,
+        },
+      };
+
+      //slice the new segment into the existing segments array at the correct index
+      const updatedSegments: TestSegmentProps[] = [
+        ...segments.slice(0, fiveSecondGapIdx + 1),
+        newSegment,
+        ...segments.slice(fiveSecondGapIdx + 1),
+      ];
+
+      //update the segments state
+      setSegments(updatedSegments);
+
+      //move the playhead to the start of the new segment
+      myPeaks?.player.seek(newSegment.startTime);
+    } else if (fiveSecondGapIdx == -1) {
+      alert(
+        "There are no gaps available for a new clip. You will need to delete one"
+      );
+    }
+  }
 };
 
 export const handleFileNameChange = (
