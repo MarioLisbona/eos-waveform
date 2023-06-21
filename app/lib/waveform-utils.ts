@@ -12,8 +12,8 @@ export const handlePlayheadSeek = (
   myPeaks: PeaksInstance | undefined,
   segments: TestSegmentProps[]
 ) => {
+  //find selected segment and move playhead to that segments start time
   const selectedSegment = segments.find((seg) => seg.id === id);
-  console.log(selectedSegment);
   myPeaks?.player.seek(selectedSegment!.startTime);
 };
 
