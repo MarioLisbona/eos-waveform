@@ -24,6 +24,7 @@ export const handleAddSegment = (
     }
   });
 
+  //create a new 8 second segment between 2 segments with a large enough gap
   const newSegment: TestSegmentProps = {
     id: segments.length.toString(),
     fileName: "",
@@ -39,14 +40,17 @@ export const handleAddSegment = (
     },
   };
 
+  //slice the new segment into the existing segments array at the correct index
   const updatedSegments: TestSegmentProps[] = [
     ...segments.slice(0, segmentGapIdx + 1),
     newSegment,
     ...segments.slice(segmentGapIdx + 1),
   ];
 
+  //update the segments state
   setSegments(updatedSegments);
 
+  //move the playhead to the start of the new segment
   myPeaks?.player.seek(newSegment.startTime);
 };
 
