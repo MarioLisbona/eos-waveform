@@ -12,17 +12,30 @@ export const handlePlayheadSeek = (
   myPeaks?.player.seek(selectedSegment!.startTime);
 };
 
+//function to find gap with a specific duration
+const findGap = (segments: TestSegmentProps[], gapDuration: number) => {
+  return segments.findIndex((seg, idx, arr) => {
+    if (idx + 1 < arr.length) {
+      return arr[idx + 1].startTime - arr[idx].endTime >= gapDuration;
+    }
+  });
+};
+
 export const handleAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined
 ) => {
   //find a gap greater or equal to 10 seconds between existing clip segments
-  const tenSecondGapIdx = segments.findIndex((seg, idx, arr) => {
-    if (idx + 1 < arr.length) {
-      return arr[idx + 1].startTime - arr[idx].endTime >= 10;
-    }
-  });
+  // const tenSecondGapIdx = segments.findIndex((seg, idx, arr) => {
+  //   if (idx + 1 < arr.length) {
+  //     return arr[idx + 1].startTime - arr[idx].endTime >= 10;
+  //   }
+  // });
+
+  const tenSecondGapIdx = findGap(segments, 10);
+
+  console.log({ tenSecondGapIdx });
 
   if (tenSecondGapIdx != -1) {
     //create a new 8 second segment between 2 segments with a large enough gap
