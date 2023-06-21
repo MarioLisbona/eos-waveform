@@ -18,16 +18,16 @@ import {
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
-  // const data: AudioDataProps = {
-  //   audioUrl: "EOS-test.mp3",
-  //   audioContentType: "audio/mpeg",
-  //   waveformDataUrl: "EOS-test.dat",
-  // };
   const data: AudioDataProps = {
-    audioUrl: "instrumental.mp3",
+    audioUrl: "EOS-test.mp3",
     audioContentType: "audio/mpeg",
-    waveformDataUrl: "instrumental.dat",
+    waveformDataUrl: "EOS-test.dat",
   };
+  // const data: AudioDataProps = {
+  //   audioUrl: "instrumental.mp3",
+  //   audioContentType: "audio/mpeg",
+  //   waveformDataUrl: "instrumental.dat",
+  // };
 
   //sort the data in chronological order by startTime
   testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
@@ -39,8 +39,7 @@ export default function WaveForm() {
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
-  const [segments, setSegments] =
-    useState<TestSegmentProps[]>(testSegmentsSmall);
+  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
