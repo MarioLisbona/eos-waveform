@@ -17,18 +17,18 @@ export const handleAddSegment = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined
 ) => {
-  //finding the first gap between [x].endTime and  [x + 1].startTime that is greater than 10 seconds
-  const segmentGap = segments.find(
-    (seg, idx) => segments[idx + 1].startTime - seg.endTime >= 10
-  );
-
-  const segmentGapIdx = segments.findIndex((seg) => seg.id === segmentGap.id);
+  //find a gap greater or equal to 10 seconds between existing clip segments
+  const segmentGapIdx = segments.findIndex((seg, idx, arr) => {
+    if (idx + 1 < arr.length) {
+      return arr[idx + 1].startTime - arr[idx].endTime >= 10;
+    }
+  });
 
   const newSegment: TestSegmentProps = {
     id: segments.length.toString(),
     fileName: "",
-    startTime: segmentGap!.endTime + 0.5,
-    endTime: segmentGap!.endTime + 8.5,
+    startTime: segments[segmentGapIdx].endTime + 0.5,
+    endTime: segments[segmentGapIdx].endTime + 8.5,
     editable: true,
     color: "#1E1541",
     labelText: "new clip",
@@ -39,15 +39,11 @@ export const handleAddSegment = (
     },
   };
 
-  console.log(segmentGap, segmentGapIdx, newSegment);
-
   const updatedSegments: TestSegmentProps[] = [
     ...segments.slice(0, segmentGapIdx + 1),
     newSegment,
     ...segments.slice(segmentGapIdx + 1),
   ];
-
-  console.log("updatedSegments", updatedSegments);
 
   setSegments(updatedSegments);
 
