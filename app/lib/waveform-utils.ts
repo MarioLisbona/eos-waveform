@@ -113,7 +113,7 @@ export const handleStartTimeChange = (
       return {
         ...seg,
         startTime:
-          parseInt(evt.target.value) < seg.endTime
+          parseInt(evt.target.value) < seg.endTime!
             ? parseInt(evt.target.value)
             : 0,
       };
