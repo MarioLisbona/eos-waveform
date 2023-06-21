@@ -7,14 +7,14 @@ export type AudioDataProps = {
 };
 
 export type TestSegmentProps = {
-  id: string | undefined;
-  fileName: string | unknown;
+  id?: string;
+  fileName: string;
   startTime: number;
   endTime: number;
-  editable: boolean | undefined;
-  color: WaveformColor | undefined;
-  labelText: string | undefined;
-  formErrors: FormErrorsProps | unknown;
+  editable?: boolean;
+  color?: WaveformColor;
+  labelText?: string;
+  formErrors: FormErrorsProps;
 };
 
 export type FormErrorsProps = {

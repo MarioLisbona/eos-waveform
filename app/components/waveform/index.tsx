@@ -1,7 +1,7 @@
 import { Flex, Button, Text } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
-import Peaks, { PeaksInstance, PeaksOptions } from "peaks.js";
+import Peaks, { PeaksInstance, PeaksOptions, SegmentDragEvent } from "peaks.js";
 import {
   setPeaksConfig,
   overviewOptionsConfig,
@@ -10,20 +10,27 @@ import {
 import ClipGrid from "./components/ClipGrid";
 import { testSegments, testSegmentsSmall } from "@/app/data/segmentData";
 import { AudioDataProps, TestSegmentProps } from "@/app/types";
-import { deleteAllSegments, createAllSegments } from "@/app/lib/waveform-utils";
+import {
+  deleteAllSegments,
+  createAllSegments,
+  handleAddSegment,
+} from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
-  // const data: AudioDataProps = {
-  //   audioUrl: "EOS-test.mp3",
-  //   audioContentType: "audio/mpeg",
-  //   waveformDataUrl: "EOS-test.dat",
-  // };
   const data: AudioDataProps = {
-    audioUrl: "instrumental.mp3",
+    audioUrl: "EOS-test.mp3",
     audioContentType: "audio/mpeg",
-    waveformDataUrl: "instrumental.dat",
+    waveformDataUrl: "EOS-test.dat",
   };
+  // const data: AudioDataProps = {
+  //   audioUrl: "instrumental.mp3",
+  //   audioContentType: "audio/mpeg",
+  //   waveformDataUrl: "instrumental.dat",
+  // };
+
+  //sort the data in chronological order by startTime
+  testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
 
   //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -32,8 +39,7 @@ export default function WaveForm() {
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
-  const [segments, setSegments] =
-    useState<TestSegmentProps[]>(testSegmentsSmall);
+  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
@@ -92,7 +98,7 @@ export default function WaveForm() {
   //sets the new start time for a segment if the start point is dragged
   //sets the new end time for a segment if the end point is dragged
   //tried to factor this out to the waveform-utils component but I can pass any more arguments to the function
-  const handleClipDragEnd = (evt) => {
+  const handleClipDragEnd = (evt: SegmentDragEvent) => {
     const newSegState = segments.map((seg) => {
       if (seg.id === evt.segment.id && evt.startMarker) {
         console.log("moved start marker");
@@ -117,17 +123,28 @@ export default function WaveForm() {
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
   // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
+    // //sort the data in chronological order by startTime
+    segments.sort((a, b) => a.startTime - b.startTime);
+
+    myPeaks?.segments.removeAll();
+
     myPeaks?.segments.add(segments);
     myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [myPeaks]);
 
   useEffect(() => {
+    // //sort the data in chronological order by startTime
+    segments.sort((a, b) => a.startTime - b.startTime);
+
     //create the segments based on the pre-loaded cuts
     //at the moment this is the segments state - which is assigned the testSegments array on component mount
     // modifying the array of segment objects in segments state\
     myPeaks?.segments.removeAll();
+
+    console.log("segments before add", segments);
+
     myPeaks?.segments.add(segments);
-    // add peaks instance.on event for updating start and end points when a segment drag ha completed.
+    // add peaks instance.on event for updating start and end points when a segment drag has completed.
     //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
   }, [segments]);
@@ -152,9 +169,12 @@ export default function WaveForm() {
       </Flex>
       <Flex mb={"1rem"} px={"3rem"} w={"100%"} justify={"space-between"}>
         <Flex>
-          <Text textStyle={"subheading"} fontSize={"20px"}>
-            Segments
-          </Text>
+          <Button
+            variant={"waveformBlue"}
+            onClick={() => handleAddSegment(segments, setSegments, myPeaks)}
+          >
+            Add Segment
+          </Button>
         </Flex>
         <Flex>
           <Button

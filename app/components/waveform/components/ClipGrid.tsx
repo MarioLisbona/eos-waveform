@@ -17,6 +17,7 @@ import {
   handleFileNameChange,
   handleStartTimeChange,
   handleEndTimeChange,
+  handlePlayheadSeek,
 } from "@/app/lib/waveform-utils";
 
 export default function ClipGrid({
@@ -38,6 +39,7 @@ export default function ClipGrid({
             w={"100%"}
             key={idx}
             mb={"1rem"}
+            onClick={(evt) => handlePlayheadSeek(seg.id, myPeaks, segments)}
           >
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={seg.formErrors.fileNameError}>
