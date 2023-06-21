@@ -2,6 +2,7 @@ import { Flex, Button, Text } from "@chakra-ui/react";
 import React, { useCallback, useEffect, useState } from "react";
 import { OverviewContainer, ZoomviewContainer } from "./styled";
 import Peaks, { PeaksInstance, PeaksOptions, SegmentDragEvent } from "peaks.js";
+import WaveformViewClickEvent from "peaks.js";
 import {
   setPeaksConfig,
   overviewOptionsConfig,
@@ -120,6 +121,15 @@ export default function WaveForm() {
     setSegments(newSegState);
   };
 
+  const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
+    console.log({ evt, msg: "double clicking overview container", ondblclick });
+    handleAddSegment(segments, setSegments, myPeaks);
+  };
+  const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
+    console.log({ evt, msg: "double clicking Zoomview container" });
+    handleAddSegment(segments, setSegments, myPeaks);
+  };
+
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
   // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
@@ -130,6 +140,8 @@ export default function WaveForm() {
 
     myPeaks?.segments.add(segments);
     myPeaks?.on("segments.dragend", handleClipDragEnd);
+    myPeaks?.on("overview.dblclick", handleOverviewDblClick);
+    myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
   }, [myPeaks]);
 
   useEffect(() => {
@@ -147,6 +159,8 @@ export default function WaveForm() {
     // add peaks instance.on event for updating start and end points when a segment drag has completed.
     //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
+    myPeaks?.on("overview.dblclick", handleOverviewDblClick);
+    myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
   }, [segments]);
 
   return (
