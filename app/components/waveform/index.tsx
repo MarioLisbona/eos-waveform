@@ -27,17 +27,18 @@ export default function WaveForm() {
   //              Two audio files for testing
   //
   //
-  // const data: AudioDataProps = {       //------> use testSegments data to set segment state
-  //   audioUrl: "EOS-test.mp3",
-  //   audioContentType: "audio/mpeg",
-  //   waveformDataUrl: "EOS-test.dat",
-  // };
   const data: AudioDataProps = {
-    //------> use testSegmentsSmall data set to set segment state
-    audioUrl: "instrumental.mp3",
+    //------> use testSegments data to set segment state
+    audioUrl: "EOS-test.mp3",
     audioContentType: "audio/mpeg",
-    waveformDataUrl: "instrumental.dat",
+    waveformDataUrl: "EOS-test.dat",
   };
+  // const data: AudioDataProps = {
+  //   //------> use testSegmentsSmall data set to set segment state
+  //   audioUrl: "instrumental.mp3",
+  //   audioContentType: "audio/mpeg",
+  //   waveformDataUrl: "instrumental.dat",
+  // };
   //////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////////
@@ -53,8 +54,7 @@ export default function WaveForm() {
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
-  const [segments, setSegments] =
-    useState<TestSegmentProps[]>(testSegmentsSmall);
+  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
