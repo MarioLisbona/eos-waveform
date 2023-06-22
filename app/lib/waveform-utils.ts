@@ -71,6 +71,14 @@ export const handleAddSegment = (
   }
 };
 
+export const clickToAddSegment = (
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
+  myPeaks: PeaksInstance | undefined
+) => {
+  console.log("adding segment with click");
+};
+
 export const handleFileNameChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,

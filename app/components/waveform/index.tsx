@@ -15,6 +15,7 @@ import {
   deleteAllSegments,
   createAllSegments,
   handleAddSegment,
+  clickToAddSegment,
 } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
@@ -122,12 +123,12 @@ export default function WaveForm() {
   };
 
   const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
-    console.log({ evt, msg: "double clicking overview container" });
-    handleAddSegment(segments, setSegments, myPeaks);
+    console.log("double clicking overview container, playhead at:", evt.time);
+    clickToAddSegment(segments, setSegments, myPeaks);
   };
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
-    console.log({ evt, msg: "double clicking Zoomview container" });
-    handleAddSegment(segments, setSegments, myPeaks);
+    console.log("double clicking zoomview container, playhead at:", evt.time);
+    clickToAddSegment(segments, setSegments, myPeaks);
   };
 
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
