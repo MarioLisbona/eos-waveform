@@ -74,9 +74,26 @@ export const handleAddSegment = (
 export const clickToAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
-  myPeaks: PeaksInstance | undefined
+  myPeaks: PeaksInstance | undefined,
+  playheadTime: number
 ) => {
-  console.log("adding segment with click");
+  console.log("adding segment with click, playhead at:", playheadTime);
+  const segUpperBound = playheadTime + 5;
+  const segLowerBound = playheadTime - 5;
+
+  const gapIdx = segments.findIndex((seg, idx, arr) => {
+    if (idx + 1 < arr.length) {
+      return (
+        arr[idx + 1].startTime > segUpperBound &&
+        arr[idx].endTime < segLowerBound
+      );
+    }
+  });
+
+  if (gapIdx != -1) {
+    const newSegment = createNewSegmentObject(segments, gapIdx);
+    console.log(newSegment);
+  }
 };
 
 export const handleFileNameChange = (

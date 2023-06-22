@@ -124,11 +124,11 @@ export default function WaveForm() {
 
   const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
     console.log("double clicking overview container, playhead at:", evt.time);
-    clickToAddSegment(segments, setSegments, myPeaks);
+    clickToAddSegment(segments, setSegments, myPeaks, evt.time);
   };
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
     console.log("double clicking zoomview container, playhead at:", evt.time);
-    clickToAddSegment(segments, setSegments, myPeaks);
+    clickToAddSegment(segments, setSegments, myPeaks, evt.time);
   };
 
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
