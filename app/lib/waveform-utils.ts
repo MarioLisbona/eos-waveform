@@ -77,10 +77,12 @@ export const clickToAddSegment = (
   myPeaks: PeaksInstance | undefined,
   playheadPos: number
 ) => {
-  console.log("adding segment with click, playhead at:", playheadPos);
+  //create upper and lower boundaries based on playhead position
   const segUpperBound = playheadPos + 5;
   const segLowerBound = playheadPos - 5;
 
+  //asses whether the upper and lower booundaries fit in the gap between clips
+  //clip idx is returned
   const gapIdx = segments.findIndex((seg, idx, arr) => {
     if (idx + 1 < arr.length) {
       return (
@@ -90,6 +92,8 @@ export const clickToAddSegment = (
     }
   });
 
+  //if the reutrn value is not -1 a gap has been found
+  //create a new segment
   if (gapIdx != -1) {
     const newSegment = {
       id: segments.length.toString(),
@@ -105,10 +109,13 @@ export const clickToAddSegment = (
         endTimeError: false,
       },
     };
-    console.log(newSegment);
+    //slice the new segment into the existing segments array at the correct index
     const updatedSegments = insertNewSegment(segments, gapIdx, newSegment);
 
+    //update the segments
     setSegments(updatedSegments);
+
+    //move the playhead to the start of the new segment
     myPeaks?.player.seek(newSegment.startTime);
   }
 };
