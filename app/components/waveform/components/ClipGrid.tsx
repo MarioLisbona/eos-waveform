@@ -44,7 +44,7 @@ export default function ClipGrid({
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={seg.formErrors.fileNameError}>
                 <Input
-                  value={seg.fileName} // Added unknown to types in index.d.ts
+                  value={seg.fileName}
                   onChange={(evt) =>
                     handleFileNameChange(seg.id!, evt, segments, setSegments)
                   }
