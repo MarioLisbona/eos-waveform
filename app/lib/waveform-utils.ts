@@ -8,6 +8,13 @@ import {
   insertNewSegment,
 } from "./general-utils";
 
+//////////////////////////////////////////////////////////////////////
+//
+//
+//              Playhead seeks to the stat time of the clip
+//              when a clip element is clicked in the list
+//
+//
 export const handlePlayheadSeek = (
   id: string | undefined,
   myPeaks: PeaksInstance | undefined,
@@ -17,7 +24,16 @@ export const handlePlayheadSeek = (
   const selectedSegment = segments.find((seg) => seg.id === id);
   myPeaks?.player.seek(selectedSegment!.startTime);
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             Edit segment start and end points
+//
+//             Handles a clip start or end point being dragged
+//             to a new position on the zoomview window
+//
+//
 export const editClipStartEndPoints = (
   evt: SegmentDragEvent,
   segments: TestSegmentProps[],
@@ -43,7 +59,19 @@ export const editClipStartEndPoints = (
   //use the updated segment to update the segments state
   setSegments(newSegState);
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             Add Segment Button
+//
+//             Handles a adding a new segment when the Add Segment
+//             button is clicked. A search is implemented and a 8 second
+//             clip is created where the first 10 second gap is found.
+//             If there are no 10 second gaps, a 4 second clip is created
+//             if a 5 second gap is found.
+//
+//
 export const handleAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
@@ -54,7 +82,7 @@ export const handleAddSegment = (
 
   if (tenSecondGapIdx != -1) {
     //create a new 8 second segment between 2 segments with a large enough gap
-    const newSegment = createNewSegmentObject(segments, tenSecondGapIdx);
+    const newSegment = createNewSegmentObject(segments, tenSecondGapIdx, 8);
 
     //slice the new segment into the existing segments array at the correct index
     const updatedSegments = insertNewSegment(
@@ -76,7 +104,7 @@ export const handleAddSegment = (
 
     if (fiveSecondGapIdx != -1) {
       //create a new 4 second segment between 2 segments with a large enough gap
-      const newSegment = createNewSegmentObject(segments, fiveSecondGapIdx);
+      const newSegment = createNewSegmentObject(segments, fiveSecondGapIdx, 4);
 
       //slice the new segment into the existing segments array at the correct index
       const updatedSegments = insertNewSegment(
@@ -97,7 +125,18 @@ export const handleAddSegment = (
     }
   }
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             Create new segment on double click
+//
+//             Handles a adding a new segment when the zoomview window
+//             is double clicked. A new 8 second clip will be created
+//             where the user has double clicked. The double click location
+//             will be the center point of the new 8 second segment
+//
+//
 export const clickToAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
@@ -149,7 +188,17 @@ export const clickToAddSegment = (
     myPeaks?.player.seek(newSegment.startTime);
   }
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             handles file name error checking
+//
+//             returns true if the clips filename is empty
+//             this boolean is used by chakra-UI <FormControl>
+//             to display an error message and red highlight the input field
+//
+//
 export const handleFileNameChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,
@@ -179,7 +228,17 @@ export const handleFileNameChange = (
   //use the updated segment to update the segments state
   setSegments(newSegState);
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             handles start time error checking
+//
+//             start time needs to be greater than previous segments end time
+//
+//             !!This needs some more work!!
+//
+//
 export const handleStartTimeChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,
@@ -203,7 +262,17 @@ export const handleStartTimeChange = (
   //use the updated segment to update the segments state
   setSegments(newSegState);
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             handles end time error checking
+//
+//             end time needs to be less than next segments start time
+//
+//             !!This needs some more work!!
+//
+//
 export const handleEndTimeChange = (
   id: string,
   evt: ChangeEvent<HTMLInputElement>,
@@ -231,7 +300,13 @@ export const handleEndTimeChange = (
 
   setSegments(newSegState);
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             Delete all segments
+//
+//
 export const deleteAllSegments = (
   peaks: PeaksInstance | undefined,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
@@ -251,7 +326,13 @@ export const createAllSegments = (
   // setSegments([]);
   // peaks?.destroy();
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             Delete a single segment
+//
+//
 export const deleteSingleSegment = (
   peaks: PeaksInstance | undefined,
   id: string,
@@ -278,3 +359,10 @@ export const deleteSingleSegment = (
   //update the date of segments with the new array
   setSegments(updatedSegments);
 };
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+//
+//
+//
+//

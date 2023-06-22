@@ -21,27 +21,31 @@ import {
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
-  ////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////
   //
   //
-  // Two audio files for testing
+  //              Two audio files for testing
   //
   //
-  const data: AudioDataProps = {
-    audioUrl: "EOS-test.mp3",
-    audioContentType: "audio/mpeg",
-    waveformDataUrl: "EOS-test.dat",
-  };
-  // const data: AudioDataProps = {
-  //   audioUrl: "instrumental.mp3",
+  // const data: AudioDataProps = {       //------> use testSegments data to set segment state
+  //   audioUrl: "EOS-test.mp3",
   //   audioContentType: "audio/mpeg",
-  //   waveformDataUrl: "instrumental.dat",
+  //   waveformDataUrl: "EOS-test.dat",
   // };
-  ////////////////////////////////////////////////////////////////
+  const data: AudioDataProps = {
+    //------> use testSegmentsSmall data set to set segment state
+    audioUrl: "instrumental.mp3",
+    audioContentType: "audio/mpeg",
+    waveformDataUrl: "instrumental.dat",
+  };
+  //////////////////////////////////////////////////////////////////////
 
-  // //sort the data in chronological order by startTime
-  // testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
-
+  //////////////////////////////////////////////////////////////////////
+  //
+  //
+  //               Initialising peaks
+  //
+  //
   //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
   const overviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -49,7 +53,8 @@ export default function WaveForm() {
 
   // state for peaks instance
   const [myPeaks, setMyPeaks] = useState<PeaksInstance | undefined>();
-  const [segments, setSegments] = useState<TestSegmentProps[]>(testSegments);
+  const [segments, setSegments] =
+    useState<TestSegmentProps[]>(testSegmentsSmall);
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
@@ -67,7 +72,8 @@ export default function WaveForm() {
     //assigning the source for the audio element
     audioElementRef.current!.src = data.audioUrl;
 
-    //If there is an existing peaks instance, call destroy method and set undefined for myPeaks
+    //If there is an existing peaks instance,
+    //call destroy method and set undefined for myPeaks
     if (myPeaks) {
       myPeaks.destroy();
       setMyPeaks(undefined);
@@ -102,54 +108,37 @@ export default function WaveForm() {
       initPeaks();
     }
   }, []);
+  //////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////////////////////////////////
   //
   //
-  //function used for peaks instance.on event
+  //         functions used for peaks instance.on events
+  //
+  //
   //sets the new start time for a segment if the start point is dragged
   //sets the new end time for a segment if the end point is dragged
-  //tried to factor this out to the waveform-utils component
-  //but I can pass any more arguments to the function
-  //
-  //
   const handleClipDragEnd = (evt: SegmentDragEvent) => {
     editClipStartEndPoints(evt, segments, setSegments);
-    // const newSegState = segments.map((seg) => {
-    //   if (seg.id === evt.segment.id && evt.startMarker) {
-    //     console.log("moved start marker");
-    //     return {
-    //       ...seg,
-    //       startTime: evt.segment.startTime,
-    //     };
-    //   } else if (seg.id === evt.segment.id && !evt.startMarker) {
-    //     console.log("moved end marker");
-    //     return {
-    //       ...seg,
-    //       endTime: evt.segment.endTime,
-    //     };
-    //   }
-    //   // otherwise return the segment unchanged
-    //   return seg;
-    // });
-    // //use the updated segment to update the segments state
-    // setSegments(newSegState);
   };
-  //
-  //
-  //////////////////////////////////////////////////////////////////////
 
-  //callback for when zoomview dblclick event
+  //Adds a new segment to the zoomview on double clicked
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
     clickToAddSegment(segments, setSegments, myPeaks, evt);
   };
+  //////////////////////////////////////////////////////////////////////
 
-  //add the segment objects to the peaks instance, on mount and if myPeaks state changes
+  //////////////////////////////////////////////////////////////////////
+  //
+  //
+  //         useEffect to handle updates to peaks and segments states
+  //
+  //
   useEffect(() => {
     // //sort the data in chronological order by startTime
     segments.sort((a, b) => a.startTime - b.startTime);
 
-    //remove all peaks segmments then add with new segments state - avoids duplicates
+    //remove all peaks segments then add with new segments state - avoids duplicates
     myPeaks?.segments.removeAll();
     myPeaks?.segments.add(segments);
 
@@ -157,24 +146,6 @@ export default function WaveForm() {
     myPeaks?.on("segments.dragend", handleClipDragEnd);
     myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
   }, [myPeaks, segments]);
-
-  // useEffect(() => {
-  //   // //sort the data in chronological order by startTime
-  //   segments.sort((a, b) => a.startTime - b.startTime);
-
-  //   //create the segments based on the pre-loaded cuts
-  //   //at the moment this is the segments state - which is assigned the testSegments array on component mount
-  //   // modifying the array of segment objects in segments state\
-  //   myPeaks?.segments.removeAll();
-
-  //   console.log("segments before add", segments);
-
-  //   myPeaks?.segments.add(segments);
-  //   // add peaks instance.on event for updating start and end points when a segment drag has completed.
-  //   //needed to add this here as well to use the updated segments state
-  //   myPeaks?.on("segments.dragend", handleClipDragEnd);
-  //   myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
-  // }, [segments]);
 
   return (
     <>
