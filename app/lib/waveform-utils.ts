@@ -1,4 +1,5 @@
 import { PeaksInstance } from "peaks.js";
+import WaveformViewClickEvent from "peaks.js";
 import { TestSegmentProps } from "../types";
 import { ChangeEvent } from "react";
 import {
@@ -75,23 +76,12 @@ export const clickToAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined,
-  playheadPos: number
+  evt: WaveformViewClickEvent
 ) => {
-  //create upper and lower boundaries based on playhead position
-  const segUpperBound = playheadPos + 5;
-  const segLowerBound = playheadPos - 5;
-
-  // const findClosestSegToPlayhead = (
-  //   segments: TestSegmentProps[],
-  //   target: number
-  // ) =>
-  //   segments.reduce((acc, obj) =>
-  //     Math.abs(target - obj.startTime) < Math.abs(target - acc.startTime)
-  //       ? obj
-  //       : acc
-  //   );
-
-  // console.log(findClosestSegToPlayhead(segments, playheadPos));
+  //create playhead and upper and lower boundaries based on playhead position
+  const playheadPosition = evt.time;
+  const segUpperBound = playheadPosition + 5;
+  const segLowerBound = playheadPosition - 5;
 
   //asses whether the upper and lower boundaries of the playhead fit in the gap between clips
   //clip idx is returned
@@ -112,8 +102,8 @@ export const clickToAddSegment = (
     const newSegment = {
       id: segments.length.toString(),
       fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
-      startTime: playheadPos,
-      endTime: playheadPos + 8,
+      startTime: playheadPosition,
+      endTime: playheadPosition + 8,
       editable: true,
       color: "#1E1541",
       labelText: "new clip",

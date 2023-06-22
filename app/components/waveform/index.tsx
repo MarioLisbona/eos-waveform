@@ -20,6 +20,12 @@ import {
 import ClipGridHeader from "./components/ClipGridHeader";
 
 export default function WaveForm() {
+  ////////////////////////////////////////////////////////////////
+  //
+  //
+  // Two audio files for testing
+  //
+  //
   const data: AudioDataProps = {
     audioUrl: "EOS-test.mp3",
     audioContentType: "audio/mpeg",
@@ -30,9 +36,10 @@ export default function WaveForm() {
   //   audioContentType: "audio/mpeg",
   //   waveformDataUrl: "instrumental.dat",
   // };
+  ////////////////////////////////////////////////////////////////
 
-  //sort the data in chronological order by startTime
-  testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
+  // //sort the data in chronological order by startTime
+  // testSegmentsSmall.sort((a, b) => a.startTime - b.startTime);
 
   //create references to peaks.js containers
   const zoomviewWaveformRef = React.createRef<HTMLDivElement>();
@@ -45,7 +52,6 @@ export default function WaveForm() {
 
   // create function to create instance of peaks
   // useCallback means this will only render a single instance of peaks
-  // audio changes are implemented on this instance of peaks using hte .setSource method
   const initPeaks = useCallback(() => {
     //setting options here by invoking setPeaksConfig()
     const options: PeaksOptions = setPeaksConfig(
@@ -96,10 +102,16 @@ export default function WaveForm() {
     }
   }, []);
 
+  //////////////////////////////////////////////////////////////////////
+  //
+  //
   //function used for peaks instance.on event
   //sets the new start time for a segment if the start point is dragged
   //sets the new end time for a segment if the end point is dragged
-  //tried to factor this out to the waveform-utils component but I can pass any more arguments to the function
+  //tried to factor this out to the waveform-utils component
+  //but I can pass any more arguments to the function
+  //
+  //
   const handleClipDragEnd = (evt: SegmentDragEvent) => {
     const newSegState = segments.map((seg) => {
       if (seg.id === evt.segment.id && evt.startMarker) {
@@ -121,48 +133,46 @@ export default function WaveForm() {
     //use the updated segment to update the segments state
     setSegments(newSegState);
   };
+  //
+  //
+  //////////////////////////////////////////////////////////////////////
 
-  // const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
-  //   console.log("double clicking overview container, playhead at:", evt.time);
-  //   clickToAddSegment(segments, setSegments, myPeaks, evt.time);
-  // };
+  //callback for when zoomview dblclick event
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
-    console.log("double clicking zoomview container, playhead at:", evt.time);
-    clickToAddSegment(segments, setSegments, myPeaks, evt.time);
+    clickToAddSegment(segments, setSegments, myPeaks, evt);
   };
 
   //add the segment objects to the peaks instance, on mount and if myPeaks state changes
-  // add peaks instance.on event for updating start and end points when a segment drag ha completed.
   useEffect(() => {
     // //sort the data in chronological order by startTime
     segments.sort((a, b) => a.startTime - b.startTime);
 
+    //remove all peaks segmments then add with new segments state - avoids duplicates
     myPeaks?.segments.removeAll();
-
     myPeaks?.segments.add(segments);
+
+    //event handlers
     myPeaks?.on("segments.dragend", handleClipDragEnd);
-    // myPeaks?.on("overview.dblclick", handleOverviewDblClick);
     myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
-  }, [myPeaks]);
+  }, [myPeaks, segments]);
 
-  useEffect(() => {
-    // //sort the data in chronological order by startTime
-    segments.sort((a, b) => a.startTime - b.startTime);
+  // useEffect(() => {
+  //   // //sort the data in chronological order by startTime
+  //   segments.sort((a, b) => a.startTime - b.startTime);
 
-    //create the segments based on the pre-loaded cuts
-    //at the moment this is the segments state - which is assigned the testSegments array on component mount
-    // modifying the array of segment objects in segments state\
-    myPeaks?.segments.removeAll();
+  //   //create the segments based on the pre-loaded cuts
+  //   //at the moment this is the segments state - which is assigned the testSegments array on component mount
+  //   // modifying the array of segment objects in segments state\
+  //   myPeaks?.segments.removeAll();
 
-    console.log("segments before add", segments);
+  //   console.log("segments before add", segments);
 
-    myPeaks?.segments.add(segments);
-    // add peaks instance.on event for updating start and end points when a segment drag has completed.
-    //needed to add this here as well to use the updated segments state
-    myPeaks?.on("segments.dragend", handleClipDragEnd);
-    // myPeaks?.on("overview.dblclick", handleOverviewDblClick);
-    myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
-  }, [segments]);
+  //   myPeaks?.segments.add(segments);
+  //   // add peaks instance.on event for updating start and end points when a segment drag has completed.
+  //   //needed to add this here as well to use the updated segments state
+  //   myPeaks?.on("segments.dragend", handleClipDragEnd);
+  //   myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
+  // }, [segments]);
 
   return (
     <>
