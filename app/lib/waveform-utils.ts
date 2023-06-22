@@ -1,4 +1,4 @@
-import { PeaksInstance, SegmentDragEvent, Segment } from "peaks.js";
+import { PeaksInstance, SegmentDragEvent } from "peaks.js";
 import WaveformViewClickEvent from "peaks.js";
 import { TestSegmentProps } from "../types";
 import { ChangeEvent } from "react";
@@ -342,22 +342,18 @@ export const deleteSingleSegment = (
   peaks?.segments.removeById(id);
 
   //return the updated array of segments with getSegments() and map over that to create the object structure we need
-
-  //updated interface SegmentAddOptions in peaks.js.d.ts
-  const updatedSegments: TestSegmentProps[] = peaks!.segments.getSegments();
-
-  updatedSegments.map((segment) => ({
-    id: segment.id,
-    fileName: segment.fileName,
-    startTime: segment.startTime,
-    endTime: segment.endTime,
-    editable: segment.editable,
-    color: segment.color,
-    labelText: segment.labelText,
-    formErrors: segment.formErrors,
-  }));
-
-  console.log(updatedSegments);
+  const updatedSegments: TestSegmentProps[] = peaks!.segments
+    .getSegments()
+    .map((segment) => ({
+      id: segment.id,
+      fileName: segment.fileName,
+      startTime: segment.startTime,
+      endTime: segment.endTime,
+      editable: segment.editable,
+      color: segment.color,
+      labelText: segment.labelText,
+      formErrors: segment.formErrors,
+    }));
   //remove all the peaks segments to avoid duplicate id's
   peaks?.segments.removeAll();
   //update the date of segments with the new array
