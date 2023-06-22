@@ -122,7 +122,7 @@ export default function WaveForm() {
   };
 
   const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
-    console.log({ evt, msg: "double clicking overview container", ondblclick });
+    console.log({ evt, msg: "double clicking overview container" });
     handleAddSegment(segments, setSegments, myPeaks);
   };
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
