@@ -40,7 +40,12 @@ export const createNewSegmentObject = (
     },
   };
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             slice new segment into correct index of segments
+//
 export const insertNewSegment = (
   segments: TestSegmentProps[],
   gapIdx: number,
@@ -52,3 +57,4 @@ export const insertNewSegment = (
     ...segments.slice(gapIdx + 1),
   ];
 };
+//////////////////////////////////////////////////////////////////////
