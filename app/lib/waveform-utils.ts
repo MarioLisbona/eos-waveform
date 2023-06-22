@@ -83,41 +83,43 @@ export const clickToAddSegment = (
 
   //asses whether the upper and lower booundaries fit in the gap between clips
   //clip idx is returned
-  const gapIdx = segments.findIndex((seg, idx, arr) => {
-    if (idx + 1 < arr.length) {
-      return (
-        arr[idx + 1].startTime > segUpperBound &&
-        arr[idx].endTime < segLowerBound
-      );
-    }
-  });
+  // const gapIdx = segments.findIndex((seg, idx, arr) => {
+  //   if (idx + 1 < arr.length) {
+  //     return (
+  //       arr[idx + 1].startTime > segUpperBound &&
+  //       arr[idx].endTime < segLowerBound
+  //     );
+  //   }
+  // });
 
-  //if the reutrn value is not -1 a gap has been found
-  //create a new segment
-  if (gapIdx != -1) {
-    const newSegment = {
-      id: segments.length.toString(),
-      fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
-      startTime: playheadPos,
-      endTime: playheadPos + 8,
-      editable: true,
-      color: "#1E1541",
-      labelText: "new clip",
-      formErrors: {
-        fileNameError: false,
-        startTimeError: false,
-        endTimeError: false,
-      },
-    };
-    //slice the new segment into the existing segments array at the correct index
-    const updatedSegments = insertNewSegment(segments, gapIdx, newSegment);
+  // console.log(gapIdx);
 
-    //update the segments
-    setSegments(updatedSegments);
+  // //if the return value is not -1 a gap has been found
+  // //create a new segment
+  // if (gapIdx != -1) {
+  //   const newSegment = {
+  //     id: segments.length.toString(),
+  //     fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
+  //     startTime: playheadPos,
+  //     endTime: playheadPos + 8,
+  //     editable: true,
+  //     color: "#1E1541",
+  //     labelText: "new clip",
+  //     formErrors: {
+  //       fileNameError: false,
+  //       startTimeError: false,
+  //       endTimeError: false,
+  //     },
+  //   };
+  //   //slice the new segment into the existing segments array at the correct index
+  //   const updatedSegments = insertNewSegment(segments, gapIdx, newSegment);
 
-    //move the playhead to the start of the new segment
-    myPeaks?.player.seek(newSegment.startTime);
-  }
+  //   //update the segments
+  //   setSegments(updatedSegments);
+
+  //   //move the playhead to the start of the new segment
+  //   myPeaks?.player.seek(newSegment.startTime);
+  // }
 };
 
 export const handleFileNameChange = (

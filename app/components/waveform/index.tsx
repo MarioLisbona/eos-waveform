@@ -123,10 +123,10 @@ export default function WaveForm() {
     setSegments(newSegState);
   };
 
-  const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
-    console.log("double clicking overview container, playhead at:", evt.time);
-    clickToAddSegment(segments, setSegments, myPeaks, evt.time);
-  };
+  // const handleOverviewDblClick = (evt: WaveformViewClickEvent) => {
+  //   console.log("double clicking overview container, playhead at:", evt.time);
+  //   clickToAddSegment(segments, setSegments, myPeaks, evt.time);
+  // };
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
     console.log("double clicking zoomview container, playhead at:", evt.time);
     clickToAddSegment(segments, setSegments, myPeaks, evt.time);
@@ -142,7 +142,7 @@ export default function WaveForm() {
 
     myPeaks?.segments.add(segments);
     myPeaks?.on("segments.dragend", handleClipDragEnd);
-    myPeaks?.on("overview.dblclick", handleOverviewDblClick);
+    // myPeaks?.on("overview.dblclick", handleOverviewDblClick);
     myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
   }, [myPeaks]);
 
@@ -161,7 +161,7 @@ export default function WaveForm() {
     // add peaks instance.on event for updating start and end points when a segment drag has completed.
     //needed to add this here as well to use the updated segments state
     myPeaks?.on("segments.dragend", handleClipDragEnd);
-    myPeaks?.on("overview.dblclick", handleOverviewDblClick);
+    // myPeaks?.on("overview.dblclick", handleOverviewDblClick);
     myPeaks?.on("zoomview.dblclick", handleZoomviewDblClick);
   }, [segments]);
 
