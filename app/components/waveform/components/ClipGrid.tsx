@@ -11,7 +11,6 @@ import {
   FormControl,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import format from "format-duration";
 import {
   deleteSingleSegment,
   handleFileNameChange,
@@ -56,10 +55,6 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
               <Input
-                // value={format(seg.startTime * 1000, {
-                //   leading: true,
-                //   ms: true,
-                // })}
                 value={seg.startTime}
                 onChange={(evt) =>
                   handleStartTimeChange(seg.id!, evt, segments, setSegments)
@@ -68,10 +63,6 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
               <Input
-                // value={format(seg.endTime * 1000, {
-                //   leading: true,
-                //   ms: true,
-                // })}
                 value={seg.endTime}
                 onChange={(evt) =>
                   handleEndTimeChange(
