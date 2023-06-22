@@ -10,6 +10,7 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
+  FormHelperText,
 } from "@chakra-ui/react";
 import {
   deleteSingleSegment,
@@ -18,6 +19,7 @@ import {
   handleEndTimeChange,
   handlePlayheadSeek,
 } from "@/app/lib/waveform-utils";
+import Timecode from "react-timecode";
 
 export default function ClipGrid({
   segments,
@@ -48,21 +50,35 @@ export default function ClipGrid({
                     handleFileNameChange(seg.id!, evt, segments, setSegments)
                   }
                 />
-                {seg.formErrors.fileNameError && (
+                {/* {seg.formErrors.fileNameError && (
                   <FormErrorMessage>File Name is required.</FormErrorMessage>
+                )} */}
+                {!seg.formErrors.fileNameError ? (
+                  <FormHelperText>Enter a filename</FormHelperText>
+                ) : (
+                  <FormErrorMessage>Filename is required.</FormErrorMessage>
                 )}
               </FormControl>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
-              <Input
+              {/* <Input
                 value={seg.startTime}
                 onChange={(evt) =>
                   handleStartTimeChange(seg.id!, evt, segments, setSegments)
                 }
-              ></Input>
+              ></Input> */}
+              <Flex
+                ps={"1rem"}
+                borderRadius={"0.3rem"}
+                height={"40px"}
+                border={"1px solid black"}
+                align={"center"}
+              >
+                <Timecode format="HH:mm:ss.SSS" time={seg.startTime * 1000} />
+              </Flex>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
-              <Input
+              {/* <Input
                 value={seg.endTime}
                 onChange={(evt) =>
                   handleEndTimeChange(
@@ -73,7 +89,16 @@ export default function ClipGrid({
                     myPeaks
                   )
                 }
-              ></Input>
+              ></Input> */}
+              <Flex
+                ps={"1rem"}
+                borderRadius={"0.3rem"}
+                height={"40px"}
+                border={"1px solid black"}
+                align={"center"}
+              >
+                <Timecode format="HH:mm:ss.SSS" time={seg.endTime * 1000} />
+              </Flex>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
