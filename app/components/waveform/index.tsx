@@ -16,6 +16,7 @@ import {
   createAllSegments,
   handleAddSegment,
   clickToAddSegment,
+  editClipStartEndPoints,
 } from "@/app/lib/waveform-utils";
 import ClipGridHeader from "./components/ClipGridHeader";
 
@@ -113,25 +114,26 @@ export default function WaveForm() {
   //
   //
   const handleClipDragEnd = (evt: SegmentDragEvent) => {
-    const newSegState = segments.map((seg) => {
-      if (seg.id === evt.segment.id && evt.startMarker) {
-        console.log("moved start marker");
-        return {
-          ...seg,
-          startTime: evt.segment.startTime,
-        };
-      } else if (seg.id === evt.segment.id && !evt.startMarker) {
-        console.log("moved end marker");
-        return {
-          ...seg,
-          endTime: evt.segment.endTime,
-        };
-      }
-      // otherwise return the segment unchanged
-      return seg;
-    });
-    //use the updated segment to update the segments state
-    setSegments(newSegState);
+    editClipStartEndPoints(evt, segments, setSegments);
+    // const newSegState = segments.map((seg) => {
+    //   if (seg.id === evt.segment.id && evt.startMarker) {
+    //     console.log("moved start marker");
+    //     return {
+    //       ...seg,
+    //       startTime: evt.segment.startTime,
+    //     };
+    //   } else if (seg.id === evt.segment.id && !evt.startMarker) {
+    //     console.log("moved end marker");
+    //     return {
+    //       ...seg,
+    //       endTime: evt.segment.endTime,
+    //     };
+    //   }
+    //   // otherwise return the segment unchanged
+    //   return seg;
+    // });
+    // //use the updated segment to update the segments state
+    // setSegments(newSegState);
   };
   //
   //

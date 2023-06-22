@@ -1,4 +1,4 @@
-import { PeaksInstance } from "peaks.js";
+import { PeaksInstance, SegmentDragEvent } from "peaks.js";
 import WaveformViewClickEvent from "peaks.js";
 import { TestSegmentProps } from "../types";
 import { ChangeEvent } from "react";
@@ -16,6 +16,32 @@ export const handlePlayheadSeek = (
   //find selected segment and move playhead to that segments start time
   const selectedSegment = segments.find((seg) => seg.id === id);
   myPeaks?.player.seek(selectedSegment!.startTime);
+};
+
+export const editClipStartEndPoints = (
+  evt: SegmentDragEvent,
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  const newSegState = segments.map((seg) => {
+    if (seg.id === evt.segment.id && evt.startMarker) {
+      console.log("moved start marker");
+      return {
+        ...seg,
+        startTime: evt.segment.startTime,
+      };
+    } else if (seg.id === evt.segment.id && !evt.startMarker) {
+      console.log("moved end marker");
+      return {
+        ...seg,
+        endTime: evt.segment.endTime,
+      };
+    }
+    // otherwise return the segment unchanged
+    return seg;
+  });
+  //use the updated segment to update the segments state
+  setSegments(newSegState);
 };
 
 export const handleAddSegment = (
