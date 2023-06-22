@@ -1,6 +1,10 @@
 import { TestSegmentProps } from "../types";
 
-//function to find gap with a specific duration
+//////////////////////////////////////////////////////////////////////
+//
+//             find a gap in the segments of a specific duration
+//
+//
 export const findGap = (segments: TestSegmentProps[], gapDuration: number) => {
   return segments.findIndex((seg, idx, arr) => {
     if (idx + 1 < arr.length) {
@@ -8,16 +12,24 @@ export const findGap = (segments: TestSegmentProps[], gapDuration: number) => {
     }
   });
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             Create a new segment 8 seconds long at a predetermined
+//             location on the time line - uses the gapIdx returned from
+//             the search for 10 / 5 second gap search and segment length
+//
 export const createNewSegmentObject = (
   segments: TestSegmentProps[],
-  gapIdx: number
+  gapIdx: number,
+  clipLength: number
 ) => {
   return {
     id: segments.length.toString(),
     fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
     startTime: segments[gapIdx].endTime! + 0.5,
-    endTime: segments[gapIdx].endTime! + 8.5,
+    endTime: segments[gapIdx].endTime! + clipLength + 0.5,
     editable: true,
     color: "#1E1541",
     labelText: "new clip",
@@ -28,7 +40,12 @@ export const createNewSegmentObject = (
     },
   };
 };
+//////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////
+//
+//             slice new segment into correct index of segments
+//
 export const insertNewSegment = (
   segments: TestSegmentProps[],
   gapIdx: number,
@@ -40,3 +57,4 @@ export const insertNewSegment = (
     ...segments.slice(gapIdx + 1),
   ];
 };
+//////////////////////////////////////////////////////////////////////
