@@ -8,7 +8,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
     endTime: 90,
     editable: true,
     color: "#1E1541",
-    labelText: "clip-3",
+    labelText: "clip-5",
     formErrors: {
       fileNameError: false,
       startTimeError: false,
@@ -36,7 +36,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
     endTime: 110,
     editable: true,
     color: "#1E1541",
-    labelText: "clip-3",
+    labelText: "clip-6",
     formErrors: {
       fileNameError: false,
       startTimeError: false,
@@ -50,7 +50,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
     endTime: 75,
     editable: true,
     color: "#1E1541",
-    labelText: "clip-2",
+    labelText: "clip-4",
     formErrors: {
       fileNameError: false,
       startTimeError: false,

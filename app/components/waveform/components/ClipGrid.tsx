@@ -1,6 +1,6 @@
 import { TestSegmentProps } from "@/app/types";
 import { PeaksInstance } from "peaks.js";
-
+import Timecode from "react-timecode";
 import {
   Box,
   Grid,
@@ -54,15 +54,24 @@ export default function ClipGrid({
               </FormControl>
             </GridItem>
             <GridItem colStart={3} colEnd={5}>
-              <Input
+              {/* <Input
                 value={seg.startTime}
                 onChange={(evt) =>
                   handleStartTimeChange(seg.id!, evt, segments, setSegments)
                 }
-              ></Input>
+              ></Input> */}
+              <Flex
+                ps={"1rem"}
+                borderRadius={"0.3rem"}
+                height={"40px"}
+                border={"1px solid black"}
+                align={"center"}
+              >
+                <Timecode format="HH:mm:ss.SSS" time={seg.startTime * 1000} />
+              </Flex>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
-              <Input
+              {/* <Input
                 value={seg.endTime}
                 onChange={(evt) =>
                   handleEndTimeChange(
@@ -73,7 +82,16 @@ export default function ClipGrid({
                     myPeaks
                   )
                 }
-              ></Input>
+              ></Input> */}
+              <Flex
+                ps={"1rem"}
+                borderRadius={"0.3rem"}
+                height={"40px"}
+                border={"1px solid black"}
+                align={"center"}
+              >
+                <Timecode format="HH:mm:ss.SSS" time={seg.endTime * 1000} />
+              </Flex>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
