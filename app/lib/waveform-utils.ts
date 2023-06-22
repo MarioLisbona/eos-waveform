@@ -75,11 +75,11 @@ export const clickToAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined,
-  playheadTime: number
+  playheadPos: number
 ) => {
-  console.log("adding segment with click, playhead at:", playheadTime);
-  const segUpperBound = playheadTime + 5;
-  const segLowerBound = playheadTime - 5;
+  console.log("adding segment with click, playhead at:", playheadPos);
+  const segUpperBound = playheadPos + 5;
+  const segLowerBound = playheadPos - 5;
 
   const gapIdx = segments.findIndex((seg, idx, arr) => {
     if (idx + 1 < arr.length) {
@@ -91,8 +91,25 @@ export const clickToAddSegment = (
   });
 
   if (gapIdx != -1) {
-    const newSegment = createNewSegmentObject(segments, gapIdx);
+    const newSegment = {
+      id: segments.length.toString(),
+      fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
+      startTime: playheadPos,
+      endTime: playheadPos + 8,
+      editable: true,
+      color: "#1E1541",
+      labelText: "new clip",
+      formErrors: {
+        fileNameError: false,
+        startTimeError: false,
+        endTimeError: false,
+      },
+    };
     console.log(newSegment);
+    const updatedSegments = insertNewSegment(segments, gapIdx, newSegment);
+
+    setSegments(updatedSegments);
+    myPeaks?.player.seek(newSegment.startTime);
   }
 };
 
