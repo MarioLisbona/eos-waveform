@@ -1,7 +1,7 @@
 import { PeaksInstance, SegmentDragEvent } from "peaks.js";
 import WaveformViewClickEvent from "peaks.js";
 import { TestSegmentProps } from "../types";
-import { ChangeEvent } from "react";
+import { ChangeEvent, MouseEvent } from "react";
 import {
   createNewSegmentObject,
   findGap,
@@ -18,11 +18,14 @@ import {
 export const handlePlayheadSeek = (
   id: string | undefined,
   myPeaks: PeaksInstance | undefined,
-  segments: TestSegmentProps[]
+  segments: TestSegmentProps[],
+  seekStart?: boolean
 ) => {
   //find selected segment and move playhead to that segments start time
   const selectedSegment = segments.find((seg) => seg.id === id);
-  myPeaks?.player.seek(selectedSegment!.startTime);
+  seekStart
+    ? myPeaks?.player.seek(selectedSegment!.startTime)
+    : myPeaks?.player.seek(selectedSegment!.endTime);
 };
 //////////////////////////////////////////////////////////////////////
 

@@ -38,11 +38,13 @@ export default function ClipGrid({
             w={"100%"}
             key={idx}
             mb={"1rem"}
-            onClick={(evt) => handlePlayheadSeek(seg.id, myPeaks, segments)}
           >
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={seg.formErrors.fileNameError}>
                 <Input
+                  onClick={() =>
+                    handlePlayheadSeek(seg.id, myPeaks, segments, true)
+                  }
                   value={seg.fileName}
                   onChange={(evt) =>
                     handleFileNameChange(seg.id!, evt, segments, setSegments)
@@ -61,6 +63,10 @@ export default function ClipGrid({
                 }
               ></Input> */}
               <Flex
+                onClick={() =>
+                  handlePlayheadSeek(seg.id, myPeaks, segments, true)
+                }
+                cursor={"pointer"}
                 ps={"1rem"}
                 borderRadius={"0.3rem"}
                 height={"40px"}
@@ -84,6 +90,8 @@ export default function ClipGrid({
                 }
               ></Input> */}
               <Flex
+                onClick={() => handlePlayheadSeek(seg.id, myPeaks, segments)}
+                cursor={"pointer"}
                 ps={"1rem"}
                 borderRadius={"0.3rem"}
                 height={"40px"}
