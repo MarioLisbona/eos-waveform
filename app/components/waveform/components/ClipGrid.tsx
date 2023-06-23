@@ -38,7 +38,13 @@ export default function ClipGrid({
             gap={6}
             w={"100%"}
             key={idx}
-            mb={"1rem"}
+            mb={".5rem"}
+            p={".5rem"}
+            borderRadius={".3rem"}
+            _hover={{
+              bgColor: "rgba(0, 0, 0, 0.04)",
+              outline: "1px solid rgba(0, 0, 0, 0.1)",
+            }}
           >
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={seg.formErrors.fileNameError}>
