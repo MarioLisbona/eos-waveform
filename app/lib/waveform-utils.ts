@@ -148,8 +148,8 @@ export const clickToAddSegment = (
 ) => {
   //create playhead and upper and lower boundaries based on playhead position
   const playheadPosition = evt.time;
-  const segUpperBound = playheadPosition + 5;
-  const segLowerBound = playheadPosition - 5;
+  const segUpperBound = playheadPosition + 8;
+  const segLowerBound = playheadPosition;
 
   //asses whether the upper and lower boundaries of the playhead fit in the gap between clips
   //clip idx is returned
