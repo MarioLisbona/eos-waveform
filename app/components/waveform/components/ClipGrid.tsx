@@ -68,7 +68,7 @@ export default function ClipGrid({
                 placement="left"
                 openDelay={250}
                 closeDelay={50}
-                label="Click to seek start"
+                label="Click for clip start"
                 bg="#D92027"
               >
                 <Flex
@@ -104,7 +104,7 @@ export default function ClipGrid({
                 placement="left"
                 openDelay={250}
                 closeDelay={50}
-                label="Click to seek end"
+                label="Click for clip end"
                 bg="#D92027"
               >
                 <Flex
