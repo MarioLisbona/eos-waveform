@@ -10,6 +10,7 @@ import {
   Flex,
   FormControl,
   FormErrorMessage,
+  Tooltip,
 } from "@chakra-ui/react";
 import {
   deleteSingleSegment,
@@ -62,19 +63,28 @@ export default function ClipGrid({
                   handleStartTimeChange(seg.id!, evt, segments, setSegments)
                 }
               ></Input> */}
-              <Flex
-                onClick={() =>
-                  handlePlayheadSeek(seg.id, myPeaks, segments, true)
-                }
-                cursor={"pointer"}
-                ps={"1rem"}
-                borderRadius={"0.3rem"}
-                height={"40px"}
-                border={"1px solid black"}
-                align={"center"}
+              <Tooltip
+                hasArrow
+                placement="left"
+                openDelay={250}
+                closeDelay={50}
+                label="Click to seek start"
+                bg="#D92027"
               >
-                <Timecode format="HH:mm:ss.SSS" time={seg.startTime * 1000} />
-              </Flex>
+                <Flex
+                  onClick={() =>
+                    handlePlayheadSeek(seg.id, myPeaks, segments, true)
+                  }
+                  cursor={"pointer"}
+                  ps={"1rem"}
+                  borderRadius={"0.3rem"}
+                  height={"40px"}
+                  border={"1px solid black"}
+                  align={"center"}
+                >
+                  <Timecode format="HH:mm:ss.SSS" time={seg.startTime * 1000} />
+                </Flex>
+              </Tooltip>
             </GridItem>
             <GridItem colStart={5} colEnd={7}>
               {/* <Input
@@ -89,17 +99,26 @@ export default function ClipGrid({
                   )
                 }
               ></Input> */}
-              <Flex
-                onClick={() => handlePlayheadSeek(seg.id, myPeaks, segments)}
-                cursor={"pointer"}
-                ps={"1rem"}
-                borderRadius={"0.3rem"}
-                height={"40px"}
-                border={"1px solid black"}
-                align={"center"}
+              <Tooltip
+                hasArrow
+                placement="left"
+                openDelay={250}
+                closeDelay={50}
+                label="Click to seek end"
+                bg="#D92027"
               >
-                <Timecode format="HH:mm:ss.SSS" time={seg.endTime * 1000} />
-              </Flex>
+                <Flex
+                  onClick={() => handlePlayheadSeek(seg.id, myPeaks, segments)}
+                  cursor={"pointer"}
+                  ps={"1rem"}
+                  borderRadius={"0.3rem"}
+                  height={"40px"}
+                  border={"1px solid black"}
+                  align={"center"}
+                >
+                  <Timecode format="HH:mm:ss.SSS" time={seg.endTime * 1000} />
+                </Flex>
+              </Tooltip>
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
