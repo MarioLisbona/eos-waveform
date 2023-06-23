@@ -150,10 +150,19 @@ export const clickToAddSegment = (
   const playheadPosition = evt.time;
   const segUpperBound = playheadPosition + 8;
   const segLowerBound = playheadPosition;
+  const mediaEndTime = myPeaks.player.getDuration();
 
   //asses whether the upper and lower boundaries of the playhead fit in the gap between clips
   //clip idx is returned
   const gapIdx = segments.findIndex((seg, idx, arr) => {
+    if (idx === 0) {
+      return playheadPosition > 0 && segUpperBound < arr[idx].startTime;
+    }
+    if (idx === arr.length - 1) {
+      return (
+        playheadPosition > arr[idx].endTime && segUpperBound < mediaEndTime
+      );
+    }
     if (idx + 1 < arr.length) {
       return (
         arr[idx + 1].startTime > segUpperBound &&
