@@ -79,7 +79,7 @@ export default function ClipGrid({
                   ps={"1rem"}
                   borderRadius={"0.3rem"}
                   height={"40px"}
-                  border={"1px solid black"}
+                  border={"1px solid lightgray"}
                   align={"center"}
                 >
                   <Timecode format="HH:mm:ss.SSS" time={seg.startTime * 1000} />
@@ -113,7 +113,7 @@ export default function ClipGrid({
                   ps={"1rem"}
                   borderRadius={"0.3rem"}
                   height={"40px"}
-                  border={"1px solid black"}
+                  border={"1px solid lightgray"}
                   align={"center"}
                 >
                   <Timecode format="HH:mm:ss.SSS" time={seg.endTime * 1000} />
