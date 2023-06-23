@@ -32,7 +32,7 @@ export const createNewSegmentObject = (
     endTime: segments[gapIdx].endTime! + clipLength + 0.5,
     editable: true,
     color: "#1E1541",
-    labelText: "new clip",
+    labelText: `clip-${parseInt(segments.length.toString()) + 1}`,
     formErrors: {
       fileNameError: false,
       startTimeError: false,
