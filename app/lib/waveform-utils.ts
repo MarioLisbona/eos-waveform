@@ -171,8 +171,6 @@ export const clickToAddSegment = (
     }
   });
 
-  console.log({ gapIdx });
-
   //if the return value is not -1 a gap has been found
   //create a new segment
   if (gapIdx != -1) {
