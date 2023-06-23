@@ -75,7 +75,7 @@ export default function ClipGrid({
                 openDelay={250}
                 closeDelay={50}
                 label="Click for clip start"
-                bg="#D92027"
+                bg="#191C43"
               >
                 <Flex
                   onClick={() =>
@@ -111,7 +111,7 @@ export default function ClipGrid({
                 openDelay={250}
                 closeDelay={50}
                 label="Click for clip end"
-                bg="#D92027"
+                bg="#191C43"
               >
                 <Flex
                   onClick={() => handlePlayheadSeek(seg.id, myPeaks, segments)}
