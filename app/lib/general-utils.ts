@@ -22,11 +22,11 @@ export const findGap = (segments: TestSegmentProps[], gapDuration: number) => {
 //
 export const createNewSegmentObject = (
   segments: TestSegmentProps[],
-  gapIdx?: number,
-  clipLength?: number,
   firstClip: boolean,
   secondClip: boolean,
-  mediaLength: number
+  mediaLength: number,
+  gapIdx?: number,
+  clipLength?: number
 ) => {
   if (firstClip) {
     return {

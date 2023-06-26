@@ -26,7 +26,7 @@ export default function ClipGrid({
   myPeaks,
 }: {
   segments: TestSegmentProps[];
-  myPeaks: PeaksInstance | undefined;
+  myPeaks: PeaksInstance;
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>;
 }) {
   return (

@@ -124,7 +124,7 @@ export default function WaveForm() {
 
   //Adds a new segment to the zoomview on double clicked
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
-    clickToAddSegment(segments, setSegments, myPeaks, evt);
+    clickToAddSegment(segments, setSegments, myPeaks!, evt);
   };
   //////////////////////////////////////////////////////////////////////
 
@@ -169,7 +169,7 @@ export default function WaveForm() {
         <Flex>
           <Button
             variant={"waveformBlue"}
-            onClick={() => handleAddSegment(segments, setSegments, myPeaks)}
+            onClick={() => handleAddSegment(segments, setSegments, myPeaks!)}
           >
             Add Segment
           </Button>
@@ -184,7 +184,7 @@ export default function WaveForm() {
           </Button>
           <Button
             variant={"waveformBlue"}
-            onClick={() => deleteAllSegments(myPeaks, setSegments)}
+            onClick={() => deleteAllSegments(myPeaks!, setSegments)}
           >
             Delete All
           </Button>
@@ -195,7 +195,7 @@ export default function WaveForm() {
         <ClipGrid
           segments={segments}
           setSegments={setSegments}
-          myPeaks={myPeaks}
+          myPeaks={myPeaks!}
         />
       )}
     </>

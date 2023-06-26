@@ -17,15 +17,15 @@ import {
 //
 export const handlePlayheadSeek = (
   id: string | undefined,
-  myPeaks: PeaksInstance | undefined,
+  myPeaks: PeaksInstance,
   segments: TestSegmentProps[],
   seekStart?: boolean
 ) => {
   //find selected segment and move playhead to that segments start time
   const selectedSegment = segments.find((seg) => seg.id === id);
   seekStart
-    ? myPeaks?.player.seek(selectedSegment!.startTime)
-    : myPeaks?.player.seek(selectedSegment!.endTime);
+    ? myPeaks.player.seek(selectedSegment!.startTime)
+    : myPeaks.player.seek(selectedSegment!.endTime);
 };
 //////////////////////////////////////////////////////////////////////
 
@@ -78,42 +78,42 @@ export const editClipStartEndPoints = (
 export const handleAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
-  myPeaks: PeaksInstance | undefined
+  myPeaks: PeaksInstance
 ) => {
   const firstClip = segments.length === 0;
   const secondClip = segments.length === 1;
-  const mediaLength = myPeaks?.player.getDuration()!;
+  const mediaLength = myPeaks.player.getDuration()!;
 
   if (firstClip) {
     const newSegment = createNewSegmentObject(
       segments,
-      undefined,
-      undefined,
       firstClip,
       secondClip,
-      mediaLength
+      mediaLength,
+      undefined,
+      undefined
     );
     console.log("no clips - creating first clip", { newSegment });
     //update the segments state
     setSegments([newSegment]);
 
     //move the playhead to the start of the new segment
-    myPeaks?.player.seek(newSegment.startTime);
+    myPeaks.player.seek(newSegment.startTime);
   } else if (secondClip) {
     const newSegment = createNewSegmentObject(
       segments,
-      undefined,
-      undefined,
       firstClip,
       secondClip,
-      mediaLength
+      mediaLength,
+      undefined,
+      undefined
     );
     console.log("1 clip - creating second clip", { newSegment });
     //update the segments state
     setSegments([...segments, newSegment]);
 
     //move the playhead to the start of the new segment
-    myPeaks?.player.seek(newSegment.startTime);
+    myPeaks.player.seek(newSegment.startTime);
   } else {
     //find a gap greater or equal to 10 seconds between existing clip segments
     const tenSecondGapIdx = findGap(segments, 10);
@@ -122,11 +122,11 @@ export const handleAddSegment = (
       //create a new 8 second segment between 2 segments with a large enough gap
       const newSegment = createNewSegmentObject(
         segments,
-        tenSecondGapIdx,
-        8,
         firstClip,
         secondClip,
-        mediaLength
+        mediaLength,
+        tenSecondGapIdx,
+        8
       );
 
       //slice the new segment into the existing segments array at the correct index
@@ -140,7 +140,7 @@ export const handleAddSegment = (
       setSegments(updatedSegments);
 
       //move the playhead to the start of the new segment
-      myPeaks?.player.seek(newSegment.startTime);
+      myPeaks.player.seek(newSegment.startTime);
     } else if (tenSecondGapIdx == -1) {
       alert("No 10 second gaps, finding a 5 second gap...");
 
@@ -151,11 +151,11 @@ export const handleAddSegment = (
         //create a new 4 second segment between 2 segments with a large enough gap
         const newSegment = createNewSegmentObject(
           segments,
-          fiveSecondGapIdx,
-          4,
           firstClip,
           secondClip,
-          mediaLength
+          mediaLength,
+          fiveSecondGapIdx,
+          4
         );
 
         //slice the new segment into the existing segments array at the correct index
@@ -169,7 +169,7 @@ export const handleAddSegment = (
         setSegments(updatedSegments);
 
         //move the playhead to the start of the new segment
-        myPeaks?.player.seek(newSegment.startTime);
+        myPeaks.player.seek(newSegment.startTime);
       } else if (fiveSecondGapIdx == -1) {
         alert(
           "There are no gaps available for a new clip. You will need to delete one"
@@ -193,7 +193,7 @@ export const handleAddSegment = (
 export const clickToAddSegment = (
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
-  myPeaks: PeaksInstance | undefined,
+  myPeaks: PeaksInstance,
   evt: WaveformViewClickEvent
 ) => {
   //create playhead and upper and lower boundaries based on playhead position
@@ -245,7 +245,7 @@ export const clickToAddSegment = (
     setSegments(updatedSegments);
 
     //move the playhead to the start of the new segment
-    myPeaks?.player.seek(newSegment.startTime);
+    myPeaks.player.seek(newSegment.startTime);
   }
 };
 //////////////////////////////////////////////////////////////////////
@@ -338,7 +338,7 @@ export const handleEndTimeChange = (
   evt: ChangeEvent<HTMLInputElement>,
   segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
-  myPeaks: PeaksInstance | undefined
+  myPeaks: PeaksInstance
 ) => {
   //used for two way bind of end time input element to correct segment in segments
   const newSegState = segments.map((seg, idx: number) => {
@@ -349,7 +349,7 @@ export const handleEndTimeChange = (
           parseInt(evt.target.value) > seg.startTime &&
           parseInt(evt.target.value) < segments[idx + 1].startTime
             ? parseInt(evt.target.value)
-            : myPeaks?.player.getDuration()!,
+            : myPeaks.player.getDuration()!,
       };
     }
 
@@ -368,10 +368,10 @@ export const handleEndTimeChange = (
 //
 //
 export const deleteAllSegments = (
-  peaks: PeaksInstance | undefined,
+  peaks: PeaksInstance,
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
-  peaks?.segments.removeAll();
+  peaks.segments.removeAll();
   setSegments([]);
 };
 
