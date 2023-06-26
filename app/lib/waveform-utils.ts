@@ -411,6 +411,7 @@ export const createSingleSegment = (
           isCreated: seg.formErrors.isCreated ? false : true,
         },
         editable: seg.editable ? false : true,
+        color: seg.color === "#1E1541" ? "#384115" : "#1E1541",
       };
     }
     //otherwise return the segment unchanged
