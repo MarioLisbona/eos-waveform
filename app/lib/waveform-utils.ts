@@ -236,6 +236,7 @@ export const clickToAddSegment = (
         fileNameError: false,
         startTimeError: false,
         endTimeError: false,
+        isCreated: false,
       },
     };
     //slice the new segment into the existing segments array at the correct index
@@ -279,6 +280,7 @@ export const handleFileNameChange = (
           fileNameError: evt.target.value == "" ? true : false,
           startTimeError: false,
           endTimeError: false,
+          isCreated: false,
         },
       };
     }
@@ -357,7 +359,6 @@ export const handleEndTimeChange = (
     return seg;
   });
   //use the updated segment to update the segments state
-
   setSegments(newSegState);
 };
 //////////////////////////////////////////////////////////////////////
@@ -390,6 +391,38 @@ export const createAllSegments = (
 
 //////////////////////////////////////////////////////////////////////
 //
+//             Create a single segment
+//
+//
+export const createSingleSegment = (
+  peaks: PeaksInstance | undefined,
+  id: string,
+  segments: TestSegmentProps[],
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  const newSegState = segments.map((seg, idx: number) => {
+    if (seg.id === id) {
+      return {
+        ...seg,
+        formErrors: {
+          fileNameError: seg.formErrors.fileNameError,
+          startTimeError: false,
+          endTimeError: false,
+          isCreated: seg.formErrors.isCreated ? false : true,
+        },
+        editable: seg.editable ? false : true,
+      };
+    }
+    //otherwise return the segment unchanged
+    return seg;
+  });
+  //use the updated segment to update the segments state
+  setSegments(newSegState);
+};
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+//
 //             Delete a single segment
 //
 //
@@ -414,6 +447,7 @@ export const deleteSingleSegment = (
       labelText: segment.labelText,
       formErrors: segment.formErrors,
     }));
+
   //remove all the peaks segments to avoid duplicate id's
   peaks?.segments.removeAll();
   //update the date of segments with the new array

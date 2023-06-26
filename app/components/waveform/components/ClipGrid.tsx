@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import {
   deleteSingleSegment,
+  createSingleSegment,
   handleFileNameChange,
   handleStartTimeChange,
   handleEndTimeChange,
@@ -49,6 +50,7 @@ export default function ClipGrid({
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={seg.formErrors.fileNameError}>
                 <Input
+                  isDisabled={seg.formErrors.isCreated}
                   onClick={() =>
                     handlePlayheadSeek(seg.id, myPeaks, segments, true)
                   }
@@ -128,7 +130,14 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
-                <Button variant={"waveformOutlined"}>Create</Button>
+                <Button
+                  variant={"waveformOutlined"}
+                  onClick={() =>
+                    createSingleSegment(myPeaks, seg.id!, segments, setSegments)
+                  }
+                >
+                  {seg.formErrors.isCreated ? "Edit" : "Create"}
+                </Button>
                 <Button
                   variant={"waveformOutlined"}
                   onClick={() =>
