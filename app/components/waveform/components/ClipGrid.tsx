@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import {
   deleteSingleSegment,
+  createSingleSegment,
   handleFileNameChange,
   handleStartTimeChange,
   handleEndTimeChange,
@@ -128,7 +129,14 @@ export default function ClipGrid({
             </GridItem>
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
-                <Button variant={"waveformOutlined"}>Create</Button>
+                <Button
+                  variant={"waveformOutlined"}
+                  onClick={() =>
+                    createSingleSegment(myPeaks, seg.id!, setSegments)
+                  }
+                >
+                  Create
+                </Button>
                 <Button
                   variant={"waveformOutlined"}
                   onClick={() =>

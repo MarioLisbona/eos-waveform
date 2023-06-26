@@ -390,6 +390,20 @@ export const createAllSegments = (
 
 //////////////////////////////////////////////////////////////////////
 //
+//             Create a single segment
+//
+//
+export const createSingleSegment = (
+  peaks: PeaksInstance | undefined,
+  id: string,
+  setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
+) => {
+  console.log("creating a single segment", id);
+};
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+//
 //             Delete a single segment
 //
 //
