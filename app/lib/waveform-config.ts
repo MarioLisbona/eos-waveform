@@ -52,11 +52,11 @@ export const zoomviewOptionsConfig = (
     fontFamily: "Roboto",
 
     // Font size for axis labels, playhead, and point and segment markers
-    fontSize: 11,
+    fontSize: 16,
 
     // Font style for axis labels, playhead, and point and segment markers
     // (either 'normal', 'bold', or 'italic')
-    fontStyle: "normal",
+    fontStyle: "bold",
 
     // Mouse-wheel mode: either 'none' or 'scroll'
     wheelMode: "scroll",
@@ -157,10 +157,10 @@ export const overviewOptionsConfig = (
     fontFamily: "Roboto",
 
     // Font size for axis labels, playhead, and point and segment markers
-    fontSize: 10,
+    fontSize: 12,
 
     // Font style for axis labels, playhead, and point and segment markers
     // (either 'normal', 'bold', or 'italic')
-    fontStyle: "normal",
+    fontStyle: "bold",
   };
 };
