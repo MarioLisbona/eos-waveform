@@ -410,6 +410,7 @@ export const createSingleSegment = (
           endTimeError: false,
           isCreated: seg.formErrors.isCreated ? false : true,
         },
+        editable: seg.editable ? false : true,
       };
     }
     //otherwise return the segment unchanged
