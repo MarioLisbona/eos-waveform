@@ -80,39 +80,59 @@ export const handleAddSegment = (
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>,
   myPeaks: PeaksInstance | undefined
 ) => {
-  //find a gap greater or equal to 10 seconds between existing clip segments
-  const tenSecondGapIdx = findGap(segments, 10);
+  const firstClip = segments.length === 0;
+  const secondClip = segments.length === 1;
+  const mediaLength = myPeaks?.player.getDuration()!;
 
-  if (tenSecondGapIdx != -1) {
-    //create a new 8 second segment between 2 segments with a large enough gap
-    const newSegment = createNewSegmentObject(segments, tenSecondGapIdx, 8);
-
-    //slice the new segment into the existing segments array at the correct index
-    const updatedSegments = insertNewSegment(
+  if (firstClip) {
+    const newSegment = createNewSegmentObject(
       segments,
-      tenSecondGapIdx,
-      newSegment
+      undefined,
+      undefined,
+      firstClip,
+      secondClip,
+      mediaLength
     );
-
+    console.log("no clips - creating first clip", { newSegment });
     //update the segments state
-    setSegments(updatedSegments);
+    setSegments([newSegment]);
 
     //move the playhead to the start of the new segment
     myPeaks?.player.seek(newSegment.startTime);
-  } else if (tenSecondGapIdx == -1) {
-    alert("No 10 second gaps, finding a 5 second gap...");
+  } else if (secondClip) {
+    const newSegment = createNewSegmentObject(
+      segments,
+      undefined,
+      undefined,
+      firstClip,
+      secondClip,
+      mediaLength
+    );
+    console.log("1 clip - creating second clip", { newSegment });
+    //update the segments state
+    setSegments([...segments, newSegment]);
 
-    //find a gap greater or equal to 5 seconds between existing clip segments
-    const fiveSecondGapIdx = findGap(segments, 5);
+    //move the playhead to the start of the new segment
+    myPeaks?.player.seek(newSegment.startTime);
+  } else {
+    //find a gap greater or equal to 10 seconds between existing clip segments
+    const tenSecondGapIdx = findGap(segments, 10);
 
-    if (fiveSecondGapIdx != -1) {
-      //create a new 4 second segment between 2 segments with a large enough gap
-      const newSegment = createNewSegmentObject(segments, fiveSecondGapIdx, 4);
+    if (tenSecondGapIdx != -1) {
+      //create a new 8 second segment between 2 segments with a large enough gap
+      const newSegment = createNewSegmentObject(
+        segments,
+        tenSecondGapIdx,
+        8,
+        firstClip,
+        secondClip,
+        mediaLength
+      );
 
       //slice the new segment into the existing segments array at the correct index
       const updatedSegments = insertNewSegment(
         segments,
-        fiveSecondGapIdx,
+        tenSecondGapIdx,
         newSegment
       );
 
@@ -121,10 +141,40 @@ export const handleAddSegment = (
 
       //move the playhead to the start of the new segment
       myPeaks?.player.seek(newSegment.startTime);
-    } else if (fiveSecondGapIdx == -1) {
-      alert(
-        "There are no gaps available for a new clip. You will need to delete one"
-      );
+    } else if (tenSecondGapIdx == -1) {
+      alert("No 10 second gaps, finding a 5 second gap...");
+
+      //find a gap greater or equal to 5 seconds between existing clip segments
+      const fiveSecondGapIdx = findGap(segments, 5);
+
+      if (fiveSecondGapIdx != -1) {
+        //create a new 4 second segment between 2 segments with a large enough gap
+        const newSegment = createNewSegmentObject(
+          segments,
+          fiveSecondGapIdx,
+          4,
+          firstClip,
+          secondClip,
+          mediaLength
+        );
+
+        //slice the new segment into the existing segments array at the correct index
+        const updatedSegments = insertNewSegment(
+          segments,
+          fiveSecondGapIdx,
+          newSegment
+        );
+
+        //update the segments state
+        setSegments(updatedSegments);
+
+        //move the playhead to the start of the new segment
+        myPeaks?.player.seek(newSegment.startTime);
+      } else if (fiveSecondGapIdx == -1) {
+        alert(
+          "There are no gaps available for a new clip. You will need to delete one"
+        );
+      }
     }
   }
 };
