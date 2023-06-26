@@ -50,6 +50,7 @@ export default function ClipGrid({
             <GridItem colStart={1} colEnd={3}>
               <FormControl isInvalid={seg.formErrors.fileNameError}>
                 <Input
+                  isDisabled={seg.formErrors.isCreated}
                   onClick={() =>
                     handlePlayheadSeek(seg.id, myPeaks, segments, true)
                   }
@@ -130,9 +131,10 @@ export default function ClipGrid({
             <GridItem colStart={7} colEnd={9}>
               <Flex w={"100%"} justify={"flex-end"}>
                 <Button
+                  isDisabled={seg.formErrors.isCreated}
                   variant={"waveformOutlined"}
                   onClick={() =>
-                    createSingleSegment(myPeaks, seg.id!, setSegments)
+                    createSingleSegment(myPeaks, seg.id!, segments, setSegments)
                   }
                 >
                   Create

@@ -21,6 +21,7 @@ export type FormErrorsProps = {
   fileNameError: boolean;
   startTimeError: boolean;
   endTimeError: boolean;
+  isCreated: boolean;
 };
 
 export type OverviewOptionsConfigProps = (

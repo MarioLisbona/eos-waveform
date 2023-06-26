@@ -13,6 +13,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -27,6 +28,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -41,6 +43,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -55,6 +58,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -69,6 +73,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -83,6 +88,7 @@ export const testSegmentsSmall: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
 ];
@@ -100,6 +106,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -114,6 +121,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -128,6 +136,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -142,6 +151,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -156,6 +166,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -170,6 +181,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -184,6 +196,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -198,6 +211,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -212,6 +226,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -226,6 +241,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -240,6 +256,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
   {
@@ -254,6 +271,7 @@ export const testSegments: TestSegmentProps[] = [
       fileNameError: false,
       startTimeError: false,
       endTimeError: false,
+      isCreated: false,
     },
   },
 ];

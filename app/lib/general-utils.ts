@@ -41,6 +41,7 @@ export const createNewSegmentObject = (
         fileNameError: false,
         startTimeError: false,
         endTimeError: false,
+        isCreated: false,
       },
     };
   } else if (secondClip) {
@@ -56,6 +57,7 @@ export const createNewSegmentObject = (
         fileNameError: false,
         startTimeError: false,
         endTimeError: false,
+        isCreated: false,
       },
     };
   } else {
@@ -71,6 +73,7 @@ export const createNewSegmentObject = (
         fileNameError: false,
         startTimeError: false,
         endTimeError: false,
+        isCreated: false,
       },
     };
   }
