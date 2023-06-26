@@ -428,31 +428,22 @@ export const createSingleSegment = (
 //
 //
 export const deleteSingleSegment = (
-  peaks: PeaksInstance | undefined,
   id: string,
+  segments: TestSegmentProps[],
   setSegments: React.Dispatch<React.SetStateAction<TestSegmentProps[]>>
 ) => {
-  //removed the clip object related from the id prop passed to function
-  peaks?.segments.removeById(id);
+  //search for the segment to delete based on id passed into function
+  const segmentToDelete = segments.find((seg) => {
+    return seg.id === id;
+  });
 
-  //return the updated array of segments with getSegments() and map over that to create the object structure we need
-  const updatedSegments: TestSegmentProps[] = peaks!.segments
-    .getSegments()
-    .map((segment) => ({
-      id: segment.id,
-      fileName: segment.fileName,
-      startTime: segment.startTime,
-      endTime: segment.endTime,
-      editable: segment.editable,
-      color: segment.color,
-      labelText: segment.labelText,
-      formErrors: segment.formErrors,
-    }));
+  //filter segments to create a new array with all segments that dont match id
+  const upatedSegments = segments.filter((seg) => {
+    return seg.id != segmentToDelete!.id;
+  });
 
-  //remove all the peaks segments to avoid duplicate id's
-  peaks?.segments.removeAll();
   //update the date of segments with the new array
-  setSegments(updatedSegments);
+  setSegments(upatedSegments);
 };
 //////////////////////////////////////////////////////////////////////
 
