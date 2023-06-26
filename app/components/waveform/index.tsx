@@ -90,10 +90,10 @@ export default function WaveForm() {
       setMyPeaks(peaks);
 
       //set the amplitude scale for the zoomview  and overview container
-      const zoomviewAmplitude = peaks?.views.getView("zoomview");
-      const overviewAmplitude = peaks?.views.getView("overview");
-      zoomviewAmplitude?.setAmplitudeScale(0.8);
-      overviewAmplitude?.setAmplitudeScale(0.5);
+      const zoomview = peaks?.views.getView("zoomview");
+      const overview = peaks?.views.getView("overview");
+      zoomview?.setAmplitudeScale(0.8);
+      overview?.setAmplitudeScale(0.5);
 
       //if there is no instance of peaks, return
       if (!peaks) {
@@ -124,7 +124,7 @@ export default function WaveForm() {
 
   //Adds a new segment to the zoomview on double clicked
   const handleZoomviewDblClick = (evt: WaveformViewClickEvent) => {
-    clickToAddSegment(segments, setSegments, myPeaks, evt);
+    clickToAddSegment(segments, setSegments, myPeaks!, evt);
   };
   //////////////////////////////////////////////////////////////////////
 
@@ -169,7 +169,7 @@ export default function WaveForm() {
         <Flex>
           <Button
             variant={"waveformBlue"}
-            onClick={() => handleAddSegment(segments, setSegments, myPeaks)}
+            onClick={() => handleAddSegment(segments, setSegments, myPeaks!)}
           >
             Add Segment
           </Button>
@@ -184,7 +184,7 @@ export default function WaveForm() {
           </Button>
           <Button
             variant={"waveformBlue"}
-            onClick={() => deleteAllSegments(myPeaks, setSegments)}
+            onClick={() => deleteAllSegments(myPeaks!, setSegments)}
           >
             Delete All
           </Button>
@@ -195,7 +195,7 @@ export default function WaveForm() {
         <ClipGrid
           segments={segments}
           setSegments={setSegments}
-          myPeaks={myPeaks}
+          myPeaks={myPeaks!}
         />
       )}
     </>

@@ -22,23 +22,58 @@ export const findGap = (segments: TestSegmentProps[], gapDuration: number) => {
 //
 export const createNewSegmentObject = (
   segments: TestSegmentProps[],
-  gapIdx: number,
-  clipLength: number
+  firstClip: boolean,
+  secondClip: boolean,
+  mediaLength: number,
+  gapIdx?: number,
+  clipLength?: number
 ) => {
-  return {
-    id: segments.length.toString(),
-    fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
-    startTime: segments[gapIdx].endTime! + 0.5,
-    endTime: segments[gapIdx].endTime! + clipLength + 0.5,
-    editable: true,
-    color: "#1E1541",
-    labelText: `clip-${parseInt(segments.length.toString()) + 1}`,
-    formErrors: {
-      fileNameError: false,
-      startTimeError: false,
-      endTimeError: false,
-    },
-  };
+  if (firstClip) {
+    return {
+      id: segments.length.toString(),
+      fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
+      startTime: 0,
+      endTime: mediaLength * 0.03,
+      editable: true,
+      color: "#1E1541",
+      labelText: `clip-${parseInt(segments.length.toString()) + 1}`,
+      formErrors: {
+        fileNameError: false,
+        startTimeError: false,
+        endTimeError: false,
+      },
+    };
+  } else if (secondClip) {
+    return {
+      id: segments.length.toString(),
+      fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
+      startTime: mediaLength * 0.97,
+      endTime: mediaLength,
+      editable: true,
+      color: "#1E1541",
+      labelText: `clip-${parseInt(segments.length.toString()) + 1}`,
+      formErrors: {
+        fileNameError: false,
+        startTimeError: false,
+        endTimeError: false,
+      },
+    };
+  } else {
+    return {
+      id: segments.length.toString(),
+      fileName: `clip-${parseInt(segments.length.toString()) + 1}`,
+      startTime: segments[gapIdx!].endTime + 0.5,
+      endTime: segments[gapIdx!].endTime! + clipLength! + 0.5,
+      editable: true,
+      color: "#1E1541",
+      labelText: `clip-${parseInt(segments.length.toString()) + 1}`,
+      formErrors: {
+        fileNameError: false,
+        startTimeError: false,
+        endTimeError: false,
+      },
+    };
+  }
 };
 //////////////////////////////////////////////////////////////////////
 
